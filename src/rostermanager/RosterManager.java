@@ -1,7 +1,8 @@
-import student.Major;
+package rostermanager;
 import student.Profile;
 import student.Student;
 import java.util.Scanner;
+import student.Major;
 
 /**
  * Roster manager class is the class that takes commands from the user and performs the necessary action on the roster

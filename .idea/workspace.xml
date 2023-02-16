@@ -4,8 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="Added files from project 1">
+    <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="Added files from project 1 again">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rostermanager/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rostermanager/Date.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rostermanager/DateTestCases.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rostermanager/Project1Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rostermanager/Project1Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rostermanager/Roster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rostermanager/Roster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rostermanager/RosterManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rostermanager/RosterManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/Major.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Major.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/StudentTestCases.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +25,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -69,12 +79,20 @@
       <option name="project" value="LOCAL" />
       <updated>1676520609591</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added files from project 1 again">
+      <created>1676520897895</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1676520897895</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Project2 project files" />
     <MESSAGE value="Added files from project 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added files from project 1" />
+    <MESSAGE value="Added files from project 1 again" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added files from project 1 again" />
   </component>
 </project>

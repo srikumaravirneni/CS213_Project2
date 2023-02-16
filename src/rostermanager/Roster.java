@@ -1,6 +1,7 @@
-import student.Major;
+package rostermanager;
 import student.Profile;
 import student.Student;
+import student.Major;
 
 /**
  * Creates a Student roster object and implements all the major functionalities like add, remove, modify and sorting.

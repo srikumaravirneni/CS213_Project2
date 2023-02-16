@@ -1,4 +1,5 @@
-import Date;
+package student;
+import rostermanager.Date;
 
 /**
  * This class handles the Profile object which contains first name, last name and dob from date object.

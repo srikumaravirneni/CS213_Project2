@@ -1,4 +1,5 @@
-import Date;
+package student;
+import rostermanager.Date;
 
 /**
  * Handles the Student object which contains profile object, major enum and credit completed.
