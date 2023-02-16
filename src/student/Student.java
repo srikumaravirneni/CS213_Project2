@@ -1,4 +1,4 @@
-import Date;
+package student;
 
 /**
  * Handles the Student object which contains profile object, major enum and credit completed.
@@ -7,7 +7,7 @@ import Date;
  * @author Raghunandan Wable
  * @author Srikumar Avirneni
  */
-public class Student implements Comparable<Student> {
+public abstract class Student implements Comparable<Student> {
     private static final int ZERO = 0;
     private static final int ONE = 1;
     private static final int NEGATIVE_ONE = -1;
@@ -33,6 +33,7 @@ public class Student implements Comparable<Student> {
      *
      * @param args
      */
+    /*
     public static void main(String[] args) {
         Profile profile1, profile2 = null;
         System.out.println("Student compareTo() Testbed running... \n");
@@ -72,7 +73,8 @@ public class Student implements Comparable<Student> {
         Student sStudentTest6 = new Student(profile2, Major.BAIT, 150);
         studentTestResult(fStudentTest6, sStudentTest6, ONE);
     }
-
+    */
+    /*
     /**
      * A helper method for testing the student test bed main method.
      * Checks if expected and actual output are same or not.
@@ -81,6 +83,7 @@ public class Student implements Comparable<Student> {
      * @param student2       student2 that is bing used for comparison in a test case.
      * @param expectedOutput the output that is being compared with the actual output the test case returns.
      */
+
     private static void studentTestResult(Student student1, Student student2, int expectedOutput) {
         int actualOutput = student1.compareTo(student2);
 
@@ -108,6 +111,9 @@ public class Student implements Comparable<Student> {
             }
         }
     }
+    /*
+     */
+
 
     /**
      * Returns the year parameter for the object.

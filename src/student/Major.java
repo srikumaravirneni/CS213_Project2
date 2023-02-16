@@ -1,3 +1,5 @@
+package student;
+
 /**
  * Enum class that stores major, major code and school name.
  *

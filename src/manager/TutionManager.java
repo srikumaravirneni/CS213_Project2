@@ -1,7 +1,8 @@
-import student.Major;
+package manager;
 import student.Profile;
 import student.Student;
 import java.util.Scanner;
+import student.Major;
 
 /**
  * Roster manager class is the class that takes commands from the user and performs the necessary action on the roster
@@ -11,7 +12,7 @@ import java.util.Scanner;
  * @author Raghunandan Wable
  * @author Srikumar Avirneni
  */
-public class RosterManager {
+public class TutionManager {
     private Roster studentRoster = new Roster(); //creating a Roster object to pass the student input to Roster class.
     private static final int ZERO = 0;
     private static final int NEGATIVE_ONE = -1;

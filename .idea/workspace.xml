@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="Added files from project 1">
+    <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="Fixed project 1 import errors">
+      <change afterPath="$PROJECT_DIR$/src/rostermanager/EnrollStudent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/rostermanager/Enrollment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/student/International.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/student/NonResident.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/student/Resident.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/student/TriState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Student.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +22,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -31,13 +39,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/srikumaravirneni/IdeaProjects/Project2_CS211/src"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/srikumaravirneni/IdeaProjects/Project2_CS211/src&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -69,12 +77,28 @@
       <option name="project" value="LOCAL" />
       <updated>1676520609591</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added files from project 1 again">
+      <created>1676520897895</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1676520897895</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fixed project 1 import errors">
+      <created>1676521829428</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1676521829428</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Project2 project files" />
     <MESSAGE value="Added files from project 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added files from project 1" />
+    <MESSAGE value="Added files from project 1 again" />
+    <MESSAGE value="Fixed project 1 import errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed project 1 import errors" />
   </component>
 </project>
