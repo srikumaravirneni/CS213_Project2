@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="Fixed project 1 import errors">
-      <change afterPath="$PROJECT_DIR$/src/rostermanager/EnrollStudent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rostermanager/Enrollment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/student/International.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/student/NonResident.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/student/Resident.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/student/TriState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/TutionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TutionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Resident.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Student.java" afterDir="false" />
+    </list>
+    <list id="9ef76fca-2f20-4472-a93e-d81279b1a739" name="Changes by srikumaravirneni" comment="">
+      <change beforePath="$PROJECT_DIR$/src/student/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Resident.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +29,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/student/Resident.java">
+      <ranges>
+        <range start1="2" end1="2" start2="2" end2="3" changelist="9ef76fca-2f20-4472-a93e-d81279b1a739" />
+        <range start1="12" end1="13" start2="13" end2="17" changelist="9ef76fca-2f20-4472-a93e-d81279b1a739" />
+        <range start1="14" end1="14" start2="18" end2="20" changelist="295bd0f1-267f-424b-95be-ded08e7e91b6" />
+        <range start1="15" end1="15" start2="21" end2="44" changelist="9ef76fca-2f20-4472-a93e-d81279b1a739" />
+      </ranges>
+    </file>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -39,13 +48,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/srikumaravirneni/IdeaProjects/Project2_CS211/src&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "last_opened_file_path": "/Users/srikumaravirneni/IdeaProjects/Project2_CS211/src"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />

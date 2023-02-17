@@ -28,12 +28,22 @@ public abstract class Student implements Comparable<Student> {
         this.creditCompleted = creditCompleted;
     }
 
+    public boolean isValid(int creditEnrolled) {
+        if ( this.creditCompleted < 3 || this.creditCompleted > 24 ){
+            return false;
+        }
+        return true;
+    }
+
+    public abstract double tuitionDue(int creditsEnrolled);
+
+    public abstract boolean isResident(); //polymorphism
+    /*
     /**
      * testbed main method for testing if Student compare to method is working as expected.
      *
      * @param args
-     */
-    /*
+
     public static void main(String[] args) {
         Profile profile1, profile2 = null;
         System.out.println("Student compareTo() Testbed running... \n");
@@ -82,7 +92,7 @@ public abstract class Student implements Comparable<Student> {
      * @param student1       student1 that is being used for comparison in a test case.
      * @param student2       student2 that is bing used for comparison in a test case.
      * @param expectedOutput the output that is being compared with the actual output the test case returns.
-     */
+
 
     private static void studentTestResult(Student student1, Student student2, int expectedOutput) {
         int actualOutput = student1.compareTo(student2);
@@ -111,7 +121,7 @@ public abstract class Student implements Comparable<Student> {
             }
         }
     }
-    /*
+
      */
 
 

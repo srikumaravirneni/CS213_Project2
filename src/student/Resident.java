@@ -12,5 +12,7 @@ public class Resident extends Student{
      */
     public Resident(Profile profile, Major major, int creditCompleted) {
         super(profile, major, creditCompleted);
+        this.scholarship = scholarship;
+
     }
 }
