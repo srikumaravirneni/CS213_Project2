@@ -10,8 +10,9 @@ public class TriState extends Student {
      * @param major           major enum object that contains major, school and major code.
      * @param creditCompleted integer number of credits completed by student.
      */
-    public TriState(Profile profile, Major major, int creditCompleted) {
+    public TriState(Profile profile, Major major, int creditCompleted, String state) {
         super(profile, major, creditCompleted);
+        this.state = state;
     }
 
 

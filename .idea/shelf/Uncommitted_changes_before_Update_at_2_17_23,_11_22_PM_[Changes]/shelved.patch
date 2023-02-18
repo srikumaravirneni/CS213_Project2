@@ -1,0 +1,82 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"295bd0f1-267f-424b-95be-ded08e7e91b6\" name=\"Changes\" comment=\"Fixed project 1 import errors\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/manager/TutionManager.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/manager/TutionManager.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/student/Resident.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/student/Resident.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/student/Student.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/student/Student.java\" afterDir=\"false\" />\n    </list>\n    <list id=\"9ef76fca-2f20-4472-a93e-d81279b1a739\" name=\"Changes by srikumaravirneni\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/src/student/Resident.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/student/Resident.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Enum\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"LineStatusTrackerManager\">\n    <file path=\"$PROJECT_DIR$/src/student/Resident.java\">\n      <ranges>\n        <range start1=\"2\" end1=\"2\" start2=\"2\" end2=\"3\" changelist=\"9ef76fca-2f20-4472-a93e-d81279b1a739\" />\n        <range start1=\"12\" end1=\"13\" start2=\"13\" end2=\"17\" changelist=\"9ef76fca-2f20-4472-a93e-d81279b1a739\" />\n        <range start1=\"14\" end1=\"14\" start2=\"18\" end2=\"20\" changelist=\"295bd0f1-267f-424b-95be-ded08e7e91b6\" />\n        <range start1=\"15\" end1=\"15\" start2=\"21\" end2=\"44\" changelist=\"9ef76fca-2f20-4472-a93e-d81279b1a739\" />\n      </ranges>\n    </file>\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2LnvYdze3F3YBf8XEeNGXXJvMi2\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"codeWithMe.voiceChat.enabledByDefault\": \"false\",\n    \"last_opened_file_path\": \"/Users/srikumaravirneni/IdeaProjects/Project2_CS211/src\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/src\" />\n    </key>\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/src\" />\n    </key>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"295bd0f1-267f-424b-95be-ded08e7e91b6\" name=\"Changes\" comment=\"\" />\n      <created>1676519710054</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1676519710054</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Added Project2 project files\">\n      <created>1676519840527</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676519840527</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Added files from project 1\">\n      <created>1676520609591</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676520609591</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Added files from project 1 again\">\n      <created>1676520897895</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676520897895</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Fixed project 1 import errors\">\n      <created>1676521829428</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676521829428</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"5\" />\n    <servers />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Added Project2 project files\" />\n    <MESSAGE value=\"Added files from project 1\" />\n    <MESSAGE value=\"Added files from project 1 again\" />\n    <MESSAGE value=\"Fixed project 1 import errors\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Fixed project 1 import errors\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 8c02109f7861aea6bd20def91f46c2a9fccd9e9d)
++++ b/.idea/workspace.xml	(date 1676694158245)
+@@ -6,13 +6,8 @@
+   <component name="ChangeListManager">
+     <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="Fixed project 1 import errors">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/manager/TutionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TutionManager.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/student/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Resident.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Student.java" afterDir="false" />
+-    </list>
+-    <list id="9ef76fca-2f20-4472-a93e-d81279b1a739" name="Changes by srikumaravirneni" comment="">
+-      <change beforePath="$PROJECT_DIR$/src/student/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Resident.java" afterDir="false" />
+     </list>
++    <list id="9ef76fca-2f20-4472-a93e-d81279b1a739" name="Changes by srikumaravirneni" comment="" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -28,16 +23,6 @@
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-  </component>
+-  <component name="LineStatusTrackerManager">
+-    <file path="$PROJECT_DIR$/src/student/Resident.java">
+-      <ranges>
+-        <range start1="2" end1="2" start2="2" end2="3" changelist="9ef76fca-2f20-4472-a93e-d81279b1a739" />
+-        <range start1="12" end1="13" start2="13" end2="17" changelist="9ef76fca-2f20-4472-a93e-d81279b1a739" />
+-        <range start1="14" end1="14" start2="18" end2="20" changelist="295bd0f1-267f-424b-95be-ded08e7e91b6" />
+-        <range start1="15" end1="15" start2="21" end2="44" changelist="9ef76fca-2f20-4472-a93e-d81279b1a739" />
+-      </ranges>
+-    </file>
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+@@ -48,14 +33,14 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "codeWithMe.voiceChat.enabledByDefault": "false",
+-    "last_opened_file_path": "/Users/srikumaravirneni/IdeaProjects/Project2_CS211/src"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
++    &quot;last_opened_file_path&quot;: &quot;/Users/srikumaravirneni/IdeaProjects/Project2_CS211/src&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="$PROJECT_DIR$/src" />
+@@ -103,6 +88,17 @@
+     </task>
+     <option name="localTasksCounter" value="5" />
+     <servers />
++  </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Added Project2 project files" />

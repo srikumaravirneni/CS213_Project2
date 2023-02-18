@@ -17,6 +17,7 @@ public class TutionManager {
     private static final int ZERO = 0;
     private static final int NEGATIVE_ONE = -1;
     private static final int ONE = 1;
+    private static final int TWO = 2;
 
     /**
      * Takes the input from main method, parses the command from input.
@@ -230,10 +231,12 @@ public class TutionManager {
             String inputText = input.nextLine();
             if (inputText.equals("")) {
 
-            } else if (inputText.substring(ZERO, ONE).equals("A") || inputText.substring(ZERO, ONE).equals("R") ||
+            } else if (inputText.substring(ZERO, ONE).equals("R") ||
                     inputText.equals("P") || inputText.equals("PS") ||
                     inputText.equals("PC") || inputText.substring(ZERO, ONE).equals("L") ||
-                    inputText.substring(ZERO, ONE).equals("C")) {
+                    inputText.substring(ZERO, ONE).equals("C") || inputText.substring(ZERO, TWO).equals("AR") ||
+                    inputText.substring(ZERO, TWO).equals("AN") || inputText.substring(ZERO, TWO).equals("AT") ||
+                    inputText.substring(ZERO, TWO).equals("AI")) {
 
                 input(inputText);
 
