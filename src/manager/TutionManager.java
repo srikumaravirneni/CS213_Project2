@@ -124,9 +124,13 @@ public class TutionManager {
             return;
         }
 
+        /*
+
         Profile profile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
         Student student = new Student(profile, Major.valueOf(studentInfo[4].toUpperCase()),
                 Integer.parseInt(studentInfo[5]));
+
+
 
         if (studentRoster.contains(student)) {
             System.out.println(student.getProfile().toString() + " " + "is already in the roster.");
@@ -134,6 +138,9 @@ public class TutionManager {
             studentRoster.add(student);
             System.out.println(student.getProfile().toString() + " " + "added to the roster.");
         }
+
+        */
+
     }
 
     /**
@@ -198,15 +205,15 @@ public class TutionManager {
 
         String[] studentInfo = details.split("\\s+");
         Profile profile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
-        Student student = new Student(profile, null, 0);
+        // Student student = new Student(profile, null, 0);
 
         Student returnedStudent = studentRoster.containsProfile(profile);
 
         if (returnedStudent != null) {
             studentRoster.remove(returnedStudent);
-            System.out.println(student.getProfile().toString() + " " + "removed from the roster.");
+           // System.out.println(student.getProfile().toString() + " " + "removed from the roster.");
         } else {
-            System.out.println(student.getProfile().toString() + " " + "is not in the roster.");
+           // System.out.println(student.getProfile().toString() + " " + "is not in the roster.");
         }
     }
 
