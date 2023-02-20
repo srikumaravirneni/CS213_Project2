@@ -4,19 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="">
+    <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="Major code additions v1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/EnrollStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/EnrollStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/Enrollment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Enrollment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/student/International.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/International.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/student/NonResident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/NonResident.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/student/TriState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/TriState.java" afterDir="false" />
-    </list>
-    <list id="444074e3-054c-436b-9747-9de9238c2f74" name="Changes by Raghu" comment="">
-      <change beforePath="$PROJECT_DIR$/src/manager/Enrollment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Enrollment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/TutionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TutionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/student/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Resident.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/student/TriState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/TriState.java" afterDir="false" />
     </list>
     <list id="9ef76fca-2f20-4472-a93e-d81279b1a739" name="Changes by srikumaravirneni" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,25 +24,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/manager/Enrollment.java">
-      <ranges>
-        <range start1="5" end1="6" start2="5" end2="34" changelist="444074e3-054c-436b-9747-9de9238c2f74" />
-        <range start1="7" end1="8" start2="35" end2="45" changelist="295bd0f1-267f-424b-95be-ded08e7e91b6" />
-        <range start1="9" end1="9" start2="46" end2="53" changelist="444074e3-054c-436b-9747-9de9238c2f74" />
-        <range start1="11" end1="12" start2="55" end2="65" changelist="444074e3-054c-436b-9747-9de9238c2f74" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/student/TriState.java">
-      <ranges>
-        <range start1="2" end1="3" start2="2" end2="3" changelist="295bd0f1-267f-424b-95be-ded08e7e91b6" />
-        <range start1="4" end1="4" start2="4" end2="5" changelist="295bd0f1-267f-424b-95be-ded08e7e91b6" />
-        <range start1="11" end1="12" start2="12" end2="13" changelist="444074e3-054c-436b-9747-9de9238c2f74" />
-        <range start1="13" end1="13" start2="14" end2="15" changelist="444074e3-054c-436b-9747-9de9238c2f74" />
-        <range start1="14" end1="14" start2="16" end2="37" changelist="295bd0f1-267f-424b-95be-ded08e7e91b6" />
-      </ranges>
-    </file>
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -63,15 +33,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "last_opened_file_path": "/Users/srikumaravirneni/IdeaProjects/Project2_CS211/src",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/srikumaravirneni/IdeaProjects/Project2_CS211/src&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -131,7 +102,21 @@
       <option name="project" value="LOCAL" />
       <updated>1676694147215</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Major code additions v1">
+      <created>1676698913322</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1676698913323</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Major Code additions v1">
+      <created>1676698935384</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1676698935384</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -152,6 +137,8 @@
     <MESSAGE value="Fixed project 1 import errors" />
     <MESSAGE value="Added resident subclass methods" />
     <MESSAGE value="fixes to nonresident" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes to nonresident" />
+    <MESSAGE value="Major code additions v1" />
+    <MESSAGE value="Major Code additions v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Major Code additions v1" />
   </component>
 </project>
