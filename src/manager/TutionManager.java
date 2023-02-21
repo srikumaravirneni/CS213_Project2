@@ -1,8 +1,10 @@
 package manager;
-import student.Profile;
-import student.Student;
+import student.*;
+import java.io.File;
+
+import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
-import student.Major;
 
 /**
  * Roster manager class is the class that takes commands from the user and performs the necessary action on the roster
@@ -34,9 +36,9 @@ public class TutionManager {
         } else if ((inputText.substring(ZERO, TWO)).equals("AN")) {
             addNonResStudent(inputText);
         } else if ((inputText.substring(ZERO, TWO)).equals("AT")) {
-            addTrisStateStudent(inputText);
+            addTriStateStudent(inputText);
         } else if ((inputText.substring(ZERO, TWO)).equals("AI")) {
-
+            addInternationalStudent(inputText);
         } else if ((inputText.substring(ZERO, ONE)).equals("D")) {
             dropStudentHelper(inputText);
         } else if (inputText.equals("PS")) {
@@ -47,8 +49,14 @@ public class TutionManager {
             studentRoster.print();
         } else if ((inputText.substring(ZERO, ONE)).equals("S")){
 
-        } else if ((inputText.substring(ZERO, ONE)).equals("L")) {
-            listStudentsSchool(inputText);
+        } else if ((inputText.substring(ZERO, TWO)).equals("LS")) {
+            String[] input = inputText.split("\\s+");
+            try {
+                File textFile = new File(input[1]);
+                listStudent(textFile);
+            } catch ( FileNotFoundException e ) {
+                return;
+            }
         } else if ((inputText.substring(ZERO, ONE)).equals("C")) {
             changeStudentHelper(inputText);
         }
@@ -121,84 +129,164 @@ public class TutionManager {
     private void addResStudent(String details) {
         String[] studentInfo = details.split("\\s+");
 
-        Date date = new Date(studentInfo[3]);
-        int credits;
+        try{
+            Date date = new Date(studentInfo[3]);
+            int credits;
 
-        if (!isNumeric(studentInfo[5])) {
-            System.out.println("Credits completed invalid: not an integer!");
-            return;
-        } else {
-            credits = Integer.parseInt(studentInfo[5]);
+            if (!isNumeric(studentInfo[5])) {
+                System.out.println("Credits completed invalid: not an integer!");
+                return;
+            } else {
+                credits = Integer.parseInt(studentInfo[5]);
+            }
+            if ( !isPositive(credits) ) {
+                System.out.println("Credits completed invalid: cannot be negative!");
+                return;
+            } else if (!dateCheck(date)) {
+                return;
+            } else if (!validMajor(studentInfo[4])) {
+                return;
+            }
+            String major = studentInfo[4].toUpperCase();
+            Profile resProfile = new Profile ( studentInfo[2], studentInfo[1], date );
+            student.Resident resStudent = new student.Resident (resProfile, Major.valueOf(major), credits, 0);
+            studentRoster.add(resStudent);
+            EnrollStudent newEnroll = new EnrollStudent(resProfile, credits);
+            enrollment.add(newEnroll);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Missing data in command line.");
         }
-        if ( !isPositive(credits) ) {
-            System.out.println("Credits completed invalid: cannot be negative!");
-            return;
-        } else if (!dateCheck(date)) {
-            return;
-        } else if (!validMajor(studentInfo[4])) {
-            return;
-        }
-        String major = studentInfo[4].toUpperCase();
-        Profile resProfile = new Profile ( studentInfo[2], studentInfo[1], date );
-        student.Resident resStudent = new student.Resident (resProfile, Major.valueOf(major), credits, 0);
-        studentRoster.add(resStudent);
-        EnrollStudent newEnroll = new EnrollStudent(resProfile, credits);
-        enrollment.add(newEnroll);
+
     }
 
     private void addNonResStudent(String details){
         String[] studentInfo = details.split("\\s+");
 
-        Date date = new Date(studentInfo[3]);
-        int credits;
+        try {
+            Date date = new Date(studentInfo[3]);
+            int credits;
 
-        if (!isNumeric(studentInfo[5])) {
-            System.out.println("Credits completed invalid: not an integer!");
-            return;
-        } else {
-            credits = Integer.parseInt(studentInfo[5]);
+            if (!isNumeric(studentInfo[5])) {
+                System.out.println("Credits completed invalid: not an integer!");
+                return;
+            } else {
+                credits = Integer.parseInt(studentInfo[5]);
+            }
+            if ( !isPositive(credits) ) {
+                System.out.println("Credits completed invalid: cannot be negative!");
+                return;
+            } else if (!dateCheck(date)) {
+                return;
+            } else if (!validMajor(studentInfo[4])) {
+                return;
+            }
+            String major = studentInfo[4].toUpperCase();
+            Profile nResProfile = new Profile ( studentInfo[2], studentInfo[1], date );
+            NonResident nResStudent = new NonResident (nResProfile, Major.valueOf(major), credits);
+            studentRoster.add(nResStudent);
+            EnrollStudent newEnroll = new EnrollStudent(nResProfile, credits);
+            enrollment.add(newEnroll);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Missing data in command line.");
         }
-        if ( !isPositive(credits) ) {
-            System.out.println("Credits completed invalid: cannot be negative!");
-            return;
-        } else if (!dateCheck(date)) {
-            return;
-        } else if (!validMajor(studentInfo[4])) {
-            return;
-        }
-        String major = studentInfo[4].toUpperCase();
-        Profile nResProfile = new Profile ( studentInfo[2], studentInfo[1], date );
-        student.NonResident nResStudent = new student.NonResident (nResProfile, Major.valueOf(major), credits);
-        studentRoster.add(nResStudent);
-        EnrollStudent newEnroll = new EnrollStudent(nResProfile, credits);
-        enrollment.add(newEnroll);
+
     }
 
-    private void addTrisStateStudent(String details){
+    private boolean validState(String state) {
+        if ( state.equals("NY") || state.equals("CT") ) {
+
+            return true;
+        }
+        System.out.println(state + ": Invalid state code.");
+        return false;
+    }
+
+    private void addTriStateStudent(String details){
+
         String[] studentInfo = details.split("\\s+");
 
-        Date date = new Date(studentInfo[3]);
-        int credits;
-
-        if (!isNumeric(studentInfo[5])) {
-            System.out.println("Credits completed invalid: not an integer!");
-            return;
-        } else {
-            credits = Integer.parseInt(studentInfo[5]);
+        try {
+            Date date = new Date(studentInfo[3]);
+            int credits;
+            if (!isNumeric(studentInfo[5])) {
+                System.out.println("Credits completed invalid: not an integer!");
+                return;
+            } else {
+                credits = Integer.parseInt(studentInfo[5]);
+            }
+            if ( !isPositive(credits) ) {
+                System.out.println("Credits completed invalid: cannot be negative!");
+                return;
+            } else if (!dateCheck(date)) {
+                return;
+            } else if (!validMajor(studentInfo[4])) {
+                return;
+            } else if ( !validState(studentInfo[6]) ) {
+                return;
+            }
+            String major = studentInfo[4].toUpperCase();
+            Profile triProfile = new Profile ( studentInfo[2], studentInfo[1], date );
+            TriState triStudent = new TriState ( triProfile, Major.valueOf(major), credits, studentInfo[6] );
+            studentRoster.add(triStudent);
+            EnrollStudent newEnroll = new EnrollStudent(triProfile, credits);
+            enrollment.add(newEnroll);
+        } catch ( ArrayIndexOutOfBoundsException e ) {
+            System.out.println("Missing data in command line.");
         }
-        if ( !isPositive(credits) ) {
-            System.out.println("Credits completed invalid: cannot be negative!");
-            return;
-        } else if (!dateCheck(date)) {
-            return;
-        } else if (!validMajor(studentInfo[4])) {
-            return;
-        }
-        Profile profile = new Profile(studentInfo[2], studentInfo[1], date);
-
-        student.TriState tristateStudent = new student.TriState(profile, Major.valueOf(studentInfo[4]), Integer.parseInt(studentInfo[5]), studentInfo[6]);
 
     }
+
+    public boolean isStudyAbroad(String[] studentInfo) {
+
+        try {
+            if ( studentInfo[6].equals("true") ){
+                return true;
+            } else if ( studentInfo[6].equals("false") ) {
+                return false;
+            }
+            return false;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+
+    }
+
+    public void addInternationalStudent(String details) {
+        String[] studentInfo = details.split("\\s+");
+        boolean studyAbroad;
+        try {
+            Date date = new Date(studentInfo[3]);
+            int credits;
+            if (!isNumeric(studentInfo[5])) {
+                System.out.println("Credits completed invalid: not an integer!");
+                return;
+            } else {
+                credits = Integer.parseInt(studentInfo[5]);
+            }
+            if ( !isPositive(credits) ) {
+                System.out.println("Credits completed invalid: cannot be negative!");
+                return;
+            } else if (!dateCheck(date)) {
+                return;
+            } else if (!validMajor(studentInfo[4])) {
+                return;
+            } else if ( !validState(studentInfo[6]) ) {
+                return;
+            }
+            studyAbroad = isStudyAbroad(studentInfo);
+            String major = studentInfo[4].toUpperCase();
+            Profile interProfile = new Profile ( studentInfo[2], studentInfo[1], date );
+            International interStudent = new International ( interProfile, Major.valueOf(major), credits,
+                    studyAbroad );
+            studentRoster.add(interStudent);
+            EnrollStudent newEnroll = new EnrollStudent(interProfile, credits);
+            enrollment.add(newEnroll);
+        } catch ( ArrayIndexOutOfBoundsException e ) {
+            System.out.println("Missing data in command line.");
+        }
+
+    }
+
     /**
      * Modifies the student major if the new major that has been entered exists and is an appropriate valid value.
      *
@@ -223,33 +311,41 @@ public class TutionManager {
         }
     }
 
-    /**
-     * Takes in the details entered by user, finds the school entered and prints the students from
-     * the roster that are in the school.
-     *
-     * @param details a line of text entered by user in terminal that contain school name along with other details.
-     */
-    private void listStudentsSchool(String details) {
-        String[] studentInfo = details.split("\\s+");
-        String schoolName = studentInfo[1].toUpperCase();
-        Student[] returnedList = studentRoster.listBySchool(schoolName);
-        if (returnedList[ZERO] == null) {
-            System.out.println("School doesn't exist: " + schoolName);
-            return;
-        }
 
-        returnedList = studentRoster.sortByName(returnedList, returnedList.length);
+    private void listStudent(File textFile) throws FileNotFoundException {
 
-        System.out.println("* Students in " + schoolName + " *");
+        Scanner scanner = new Scanner(textFile);
+        scanner.useDelimiter(",");
+        while ( scanner.hasNextLine() ){
+            String inputText = scanner.nextLine();
+            String[] studentInfo = inputText.split(",");
+            if ( studentInfo[0].equals("R") ) {
+                String major = studentInfo[4].toUpperCase();
+                Profile resProfile = new Profile ( studentInfo[2], studentInfo[1], new Date(studentInfo[3]) );
+                Resident resStudent = new Resident (resProfile, Major.valueOf(major),
+                        Integer.parseInt(studentInfo[5]), 0);
+                studentRoster.add(resStudent);
+            } else if ( studentInfo[0].equals("N") ) {
+                String major = studentInfo[4].toUpperCase();
+                Profile nresProfile = new Profile ( studentInfo[2], studentInfo[1], new Date(studentInfo[3]) );
+                NonResident nresStudent = new NonResident (nresProfile, Major.valueOf(major),
+                        Integer.parseInt(studentInfo[5]));
+                studentRoster.add(nresStudent);
+            } else if ( studentInfo[0].equals("T") ) {
+                String major = studentInfo[4].toUpperCase();
+                Profile triProfile = new Profile ( studentInfo[2], studentInfo[1], new Date(studentInfo[3]) );
+                TriState triStudent = new TriState (triProfile, Major.valueOf(major),
+                        Integer.parseInt(studentInfo[5]), studentInfo[6]);
+                studentRoster.add(triStudent);
+            } else if ( studentInfo[0].equals("I") ) {
+                String major = studentInfo[4].toUpperCase();
+                Profile interProfile = new Profile ( studentInfo[2], studentInfo[1], new Date(studentInfo[3]) );
+                International interStudent = new International (interProfile, Major.valueOf(major),
+                        Integer.parseInt(studentInfo[5]), Boolean.parseBoolean(studentInfo[6]) );
+                studentRoster.add(interStudent);
 
-        for (int i = ZERO; i < returnedList.length; i++) {
-
-            if (returnedList[i] == null) {
-                break;
             }
-            System.out.println(returnedList[i].toString());
         }
-        System.out.println("*end of list");
     }
 
     /**
@@ -267,9 +363,9 @@ public class TutionManager {
 
         if (returnedStudent != null) {
             studentRoster.remove(returnedStudent);
-           // System.out.println(student.getProfile().toString() + " " + "removed from the roster.");
+            // System.out.println(student.getProfile().toString() + " " + "removed from the roster.");
         } else {
-           // System.out.println(student.getProfile().toString() + " " + "is not in the roster.");
+            // System.out.println(student.getProfile().toString() + " " + "is not in the roster.");
         }
     }
 

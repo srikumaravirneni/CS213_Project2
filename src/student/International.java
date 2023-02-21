@@ -1,6 +1,6 @@
 package student;
 
-public class International extends Student{
+public class International extends NonResident {
     private boolean isStudyAbroad;
 
     /**

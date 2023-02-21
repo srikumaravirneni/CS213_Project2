@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="Major code additions v1">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_17_23__11_22_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_17_23__11_22_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_17_23__8_12_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_17_23__8_12_PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/TutionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TutionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/student/International.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/International.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/student/NonResident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/NonResident.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/student/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Resident.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/student/TriState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/TriState.java" afterDir="false" />
     </list>
     <list id="18efc3ee-9cb2-4d5c-bd8d-3da227eef93e" name="Changes by Raghu" comment="" />
@@ -131,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676931569311</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Major code additions v2">
+      <created>1676947246672</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1676947246672</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,6 +157,7 @@
     <MESSAGE value="fixes to nonresident" />
     <MESSAGE value="Major Code additions v1" />
     <MESSAGE value="Major code additions v1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Major code additions v1" />
+    <MESSAGE value="Major code additions v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Major code additions v2" />
   </component>
 </project>

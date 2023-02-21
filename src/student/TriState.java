@@ -1,6 +1,6 @@
 package student;
 
-public class TriState extends Student {
+public class TriState extends NonResident {
     private String state;
 
     /**
@@ -21,9 +21,9 @@ public class TriState extends Student {
         int fullTime = 12;
         int ctTutionDiscount = 5000;
         int nyTutionDiscount = 4000;
-        if ( state == "NY" && creditsEnrolled >= fullTime ) {
+        if ( state.equals("NY") && creditsEnrolled >= fullTime ) {
             return tuitionDue(creditsEnrolled) - nyTutionDiscount;
-        } else if ( state == "CT" && creditsEnrolled >= fullTime ) {
+        } else if ( state.equals("CT") && creditsEnrolled >= fullTime ) {
             return tuitionDue(creditsEnrolled) - ctTutionDiscount;
         } else {
             return tuitionDue(creditsEnrolled);
