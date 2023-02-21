@@ -1,6 +1,7 @@
 package manager;
 
 
+import student.Profile;
 import student.Student;
 
 /**
@@ -40,6 +41,26 @@ public class Enrollment {
             }
         }
     } //add to the end of array
+
+    public EnrollStudent findProfile ( Profile enrollmentStudent ) {
+        for ( int i = 0; i < this.size; i++ ) {
+            if ( enrollStudents[i] == null ) {
+                return null;
+            } else if ( enrollStudents[i].getProfile() == enrollmentStudent ) {
+                return enrollStudents[i];
+            }
+        }
+        return null;
+    }
+
+    public void updateEnrollment(int index, EnrollStudent student) {
+        this.enrollStudents[index] = student;
+    }
+
+    public EnrollStudent getEnrollment (int index) {
+        return enrollStudents[index];
+    }
+
 
     public int findEnrollment ( EnrollStudent enrollmentStudent ) {
         for ( int i = 0; i < this.size; i++ ) {

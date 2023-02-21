@@ -31,7 +31,17 @@ public class TutionManager {
      */
     private void input(String inputText) {
 
-        if ((inputText.substring(ZERO, TWO)).equals("AR")) {
+        if (inputText.equals("P")) {
+            studentRoster.print();
+        } else if (inputText.equals("S")){
+                updateScholarship(inputText);
+        } else if (inputText.equals("C")) {
+            changeStudentHelper(inputText);
+        } else if (inputText.equals("D")) {
+            dropEnrollment(inputText);
+        } else if (inputText.equals("E")) {
+            enrollStudent(inputText);
+        } else if ((inputText.substring(ZERO, TWO)).equals("AR")) {
             addResStudent(inputText);
         } else if ((inputText.substring(ZERO, TWO)).equals("AN")) {
             addNonResStudent(inputText);
@@ -45,11 +55,7 @@ public class TutionManager {
             studentRoster.printByStanding();
         } else if (inputText.equals("PC")) {
             studentRoster.printBySchoolMajor();
-        } else if ((inputText.substring(ZERO, ONE)).equals("P")) {
-            studentRoster.print();
-        } else if ((inputText.substring(ZERO, ONE)).equals("S")){
-
-        } else if ((inputText.substring(ZERO, TWO)).equals("LS")) {
+        }  else if ((inputText.substring(ZERO, TWO)).equals("LS")) {
             String[] input = inputText.split("\\s+");
             try {
                 File textFile = new File(input[1]);
@@ -57,9 +63,81 @@ public class TutionManager {
             } catch ( FileNotFoundException e ) {
                 return;
             }
-        } else if ((inputText.substring(ZERO, ONE)).equals("C")) {
-            changeStudentHelper(inputText);
         }
+    }
+
+
+    public boolean validAmount(String userInput){
+        int maxAmount = 10000;
+        String[] studentInfo = userInput.split("\\s+");
+        try {
+            int amount = Integer.parseInt(studentInfo[4]);
+            if ( amount > 10000  || amount <= 0) {
+                System.out.println(amount+ ": invalid amount.");
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            System.out.println("Amount is not an integer.");
+            return false;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println ("0: invalid amount.");
+            return false;
+        }
+    }
+
+    public void updateScholarship(String inputText){
+
+        String[] studentInfo = inputText.split("\\s+");
+        Profile tempProfile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
+        EnrollStudent student = enrollment.findProfile(tempProfile);
+
+        int index = enrollment.findEnrollment(student);
+
+        if ( index == -1 ) {
+            System.out.println(tempProfile.toString() + " is not in the roster.");
+            return;
+        } else if ( !validAmount(inputText) ) {
+            return;
+        }
+
+        EnrollStudent returnedStudent = enrollment.getEnrollment(index);
+
+        if ( returnedStudent.getCreditsEnrolled() < 12 ) {
+            System.out.println(tempProfile.toString() + " part time student is not eligible for the scholarship.");
+            return;
+        }
+
+
+    }
+
+    public void dropEnrollment(String inputText) {
+        String[] studentInfo = inputText.split("\\s+");
+
+        Profile tempProfile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
+        EnrollStudent student = enrollment.findProfile(tempProfile);
+        if ( student == null ) {
+            System.out.println(tempProfile.toString() + " is not enrolled.");
+            return;
+        }
+        enrollment.remove(student);
+    }
+
+    public void enrollStudent( String inputText ){
+        String[] studentInfo = inputText.split("\\s+");
+        int credits = Integer.parseInt(studentInfo[4]);
+        Profile tempProfile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
+        EnrollStudent student = new EnrollStudent(tempProfile, credits);
+
+        int index = enrollment.findEnrollment(student);
+
+        if ( index != 1 ) {
+            enrollment.updateEnrollment(index, student);
+            System.out.println(tempProfile.toString() + " enrolled " + credits + " credits");
+            return;
+        }
+        System.out.println(tempProfile.toString() + " enrolled " + credits + " credits");
+        enrollment.add(student);
     }
 
     /**
@@ -382,9 +460,9 @@ public class TutionManager {
             String inputText = input.nextLine();
             if (inputText.equals("")) {
                 continue;
-            } else if (inputText.substring(ZERO, ONE).equals("R") || inputText.substring(ZERO, TWO).equals("D") ||
+            } else if (inputText.substring(ZERO, ONE).equals("R") || inputText.substring(ZERO, ONE).equals("D") ||
                     inputText.equals("P") || inputText.equals("PS") || inputText.substring(ZERO, TWO).equals("E") ||
-                    inputText.equals("PC") || inputText.substring(ZERO, ONE).equals("L") ||
+                    inputText.equals("PC") || inputText.substring(ZERO, TWO).equals("LS") ||
                     inputText.substring(ZERO, ONE).equals("C") || inputText.substring(ZERO, TWO).equals("AR") ||
                     inputText.substring(ZERO, TWO).equals("AN") || inputText.substring(ZERO, TWO).equals("AT") ||
                     inputText.substring(ZERO, TWO).equals("AI") || inputText.substring(ZERO, TWO).equals("PT") ||

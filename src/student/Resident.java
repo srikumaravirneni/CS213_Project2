@@ -19,6 +19,14 @@ public class Resident extends Student{
 
     }
 
+    public void setScholarship(int scholarship){
+        this.scholarship = scholarship;
+    }
+
+    public int getCredits() {
+        return super.getCreditCompleted();
+    }
+
     @Override
     public double tuitionDue(int creditsEnrolled) {
 
