@@ -1,10 +1,38 @@
 package manager;
 
+
+import student.Student;
+
+/**
+ * Enrollment class that stores a list of enrolled students
+ *
+ * @author Raghunandan Wable
+ * @author Srikumar Avirneni
+ */
 public class Enrollment {
     private EnrollStudent[] enrollStudents;
     private int size;
 
+    public Enrollment() {
+        this.enrollStudents = new EnrollStudent[4];
+        this.size = 4;
+    }
+
+    public void grow() {
+        EnrollStudent[] arrayIncrease = new EnrollStudent[this.size + 4];
+        for (int i = 0; i < this.size; i++) {
+            arrayIncrease[i] = this.enrollStudents[i];
+        }
+        this.size += 4;
+        this.enrollStudents = arrayIncrease;
+    }
+
+
     public void add(EnrollStudent enrollStudent){
+
+        if ( this.enrollStudents[this.size -1] != null ) {
+            grow();
+        }
         for ( int i = 0; i < this.size; i++ ) {
             if ( this.enrollStudents[i] == null ) {
                 enrollStudents[i] = enrollStudent;

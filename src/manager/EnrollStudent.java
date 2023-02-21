@@ -2,6 +2,12 @@ package manager;
 
 import student.Profile;
 
+/**
+ * This class keeps a track of the credits that a student has enrolled for
+ *
+ * @author Raghunandan Wable
+ * @author Srikumar Avirneni
+ */
 public class EnrollStudent {
     private Profile profile;
     private int creditsEnrolled;

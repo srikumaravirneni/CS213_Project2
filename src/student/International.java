@@ -15,6 +15,7 @@ public class International extends Student{
         this.isStudyAbroad = isStudyAbroad;
     }
 
+
     @Override
     public double tuitionDue(int creditsEnrolled) {
 

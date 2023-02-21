@@ -14,6 +14,7 @@ import student.Major;
  */
 public class TutionManager {
     private Roster studentRoster = new Roster(); //creating a Roster object to pass the student input to Roster class.
+    private Enrollment enrollment = new Enrollment();
     private static final int ZERO = 0;
     private static final int NEGATIVE_ONE = -1;
     private static final int ONE = 1;
@@ -28,10 +29,16 @@ public class TutionManager {
      */
     private void input(String inputText) {
 
-        if ((inputText.substring(ZERO, ONE)).equals("A")) {
-            addStudentHelper(inputText, studentRoster);
-        } else if ((inputText.substring(ZERO, ONE)).equals("R")) {
-            removeStudentHelper(inputText);
+        if ((inputText.substring(ZERO, TWO)).equals("AR")) {
+            addResStudent(inputText);
+        } else if ((inputText.substring(ZERO, TWO)).equals("AN")) {
+            addNonResStudent(inputText);
+        } else if ((inputText.substring(ZERO, TWO)).equals("AT")) {
+            addTrisStateStudent(inputText);
+        } else if ((inputText.substring(ZERO, TWO)).equals("AI")) {
+
+        } else if ((inputText.substring(ZERO, ONE)).equals("D")) {
+            dropStudentHelper(inputText);
         } else if (inputText.equals("PS")) {
             studentRoster.printByStanding();
         } else if (inputText.equals("PC")) {
@@ -76,16 +83,20 @@ public class TutionManager {
      */
     private boolean isNumeric(String credits) {
 
-        if (credits.charAt(ZERO) == '-') {
-            System.out.println("Credits completed invalid: cannot be negative!");
+        int creditsValue;
+
+        try {
+            creditsValue = Integer.parseInt(credits);
+            return true;
+        } catch ( NumberFormatException e ) {
             return false;
         }
 
-        for (int i = ZERO; i < credits.length(); i++) {
-            if (!Character.isDigit(credits.charAt(i))) {
-                System.out.println("Credits completed invalid: not an integer!");
-                return false;
-            }
+    }
+
+    private boolean isPositive( int credits ) {
+        if ( credits < ZERO ) {
+            return false;
         }
         return true;
     }
@@ -106,20 +117,29 @@ public class TutionManager {
         return false;
     }
 
+
+
     /**
      * Parses the entered details and adds the student if the student details are right and student doesn't
      * exist in the roster.
      *
      * @param details       a line of text entered by user in terminal that contain student details
-     * @param studentRoster - roster of students
      */
-    private void addStudentHelper(String details, Roster studentRoster) {
+    private void addResStudent(String details) {
 
         String[] studentInfo = details.split("\\s+");
 
         Date date = new Date(studentInfo[3]);
+        int credits;
 
         if (!isNumeric(studentInfo[5])) {
+            System.out.println("Credits completed invalid: not an integer!");
+            return;
+        } else {
+            credits = Integer.parseInt(studentInfo[5]);
+        }
+        if ( !isPositive(credits) ) {
+            System.out.println("Credits completed invalid: cannot be negative!");
             return;
         } else if (!dateCheck(date)) {
             return;
@@ -127,23 +147,8 @@ public class TutionManager {
             return;
         }
 
-        /*
-
-        Profile profile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
-        Student student = new Student(profile, Major.valueOf(studentInfo[4].toUpperCase()),
-                Integer.parseInt(studentInfo[5]));
-
-
-
-        if (studentRoster.contains(student)) {
-            System.out.println(student.getProfile().toString() + " " + "is already in the roster.");
-        } else {
-            studentRoster.add(student);
-            System.out.println(student.getProfile().toString() + " " + "added to the roster.");
-        }
-
-        */
-
+        Profile resStudent = new Profile ( studentInfo[2], studentInfo[1], date );
+        student.Resident resStudent = new student.Resident (addNonResStudent);)
     }
 
     private void addNonResStudent(String details){
