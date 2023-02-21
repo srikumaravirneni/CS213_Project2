@@ -17,6 +17,7 @@ public class International extends Student{
 
     @Override
     public double tuitionDue(int creditsEnrolled) {
+
         int tuition = 29737;
         int universityFee = 3268;
         double totalDue;
@@ -26,13 +27,18 @@ public class International extends Student{
         int insuranceFees = 2650;
 
 
-        if ( isValid(creditsEnrolled) && creditsEnrolled < fullTime ) {
-            return ( perCreditRate * ( creditsEnrolled ) ) + ( universityFee * 0.8 );
-        } else if ( isValid(creditsEnrolled) && creditsEnrolled < maxFullTime && creditsEnrolled > fullTime ) {
-            return tuition + universityFee + insuranceFees;
-        } else if ( isValid(creditsEnrolled) && creditsEnrolled > maxFullTime ) {
-            return tuition + universityFee + ( perCreditRate * ( creditsEnrolled - maxFullTime ) ) + insuranceFees;
+        if ( !isStudyAbroad ) {
+            if ( isValid(creditsEnrolled) && creditsEnrolled < fullTime ) {
+                return ( perCreditRate * ( creditsEnrolled ) ) + ( universityFee * 0.8 );
+            } else if ( isValid(creditsEnrolled) && creditsEnrolled < maxFullTime && creditsEnrolled > fullTime ) {
+                return tuition + universityFee + insuranceFees;
+            } else if ( isValid(creditsEnrolled) && creditsEnrolled > maxFullTime ) {
+                return tuition + universityFee + ( perCreditRate * ( creditsEnrolled - maxFullTime ) ) + insuranceFees;
+            }
+        } else if ( isStudyAbroad ) {
+
         }
+
 
         return 0;
     }

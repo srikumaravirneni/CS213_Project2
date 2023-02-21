@@ -38,6 +38,8 @@ public class TutionManager {
             studentRoster.printBySchoolMajor();
         } else if ((inputText.substring(ZERO, ONE)).equals("P")) {
             studentRoster.print();
+        } else if ((inputText.substring(ZERO, ONE)).equals("S")){
+
         } else if ((inputText.substring(ZERO, ONE)).equals("L")) {
             listStudentsSchool(inputText);
         } else if ((inputText.substring(ZERO, ONE)).equals("C")) {
@@ -144,6 +146,43 @@ public class TutionManager {
 
     }
 
+    private void addNonResStudent(String details){
+        String[] studentInfo = details.split("\\s+");
+        Date date = new Date(studentInfo[3]);
+
+
+        if ( !isNumeric(studentInfo[5]) ) {
+            System.out.println("Credits completed invalid: not an integer!");
+        } else if (!dateCheck(date)) {
+            return;
+        } else if (!validMajor(studentInfo[4])){
+            return;
+        }
+
+        Profile profile = new Profile(studentInfo[2], studentInfo[1], date);
+
+        student.NonResident nonresStudent = new student.NonResident(profile, Major.valueOf(studentInfo[4]), Integer.parseInt(studentInfo[5]));
+
+    }
+
+    private void addTrisStateStudent(String details){
+        String[] studentInfo = details.split("\\s+");
+        Date date = new Date(studentInfo[3]);
+
+
+        if ( !isNumeric(studentInfo[5]) ) {
+            System.out.println("Credits completed invalid: not an integer!");
+        } else if (!dateCheck(date)) {
+            return;
+        } else if (!validMajor(studentInfo[4])){
+            return;
+        }
+
+        Profile profile = new Profile(studentInfo[2], studentInfo[1], date);
+
+        student.TriState tristateStudent = new student.TriState(profile, Major.valueOf(studentInfo[4]), Integer.parseInt(studentInfo[5]), studentInfo[6]);
+
+    }
     /**
      * Modifies the student major if the new major that has been entered exists and is an appropriate valid value.
      *
@@ -202,7 +241,7 @@ public class TutionManager {
      *
      * @param details the student to be removed
      */
-    private void removeStudentHelper(String details) {
+    private void dropStudentHelper(String details) {
 
         String[] studentInfo = details.split("\\s+");
         Profile profile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
@@ -223,25 +262,26 @@ public class TutionManager {
      * User interactive method that takes input from the user and passes it to input helper method that processes it.
      */
     public void run() {
-        System.out.println("Roster Manager running...");
+        System.out.println("Tuition Manager running...");
         Scanner input = new Scanner(System.in);
 
         while (input.hasNextLine()) {
 
             String inputText = input.nextLine();
             if (inputText.equals("")) {
-
-            } else if (inputText.substring(ZERO, ONE).equals("R") ||
-                    inputText.equals("P") || inputText.equals("PS") ||
+                continue;
+            } else if (inputText.substring(ZERO, ONE).equals("R") || inputText.substring(ZERO, TWO).equals("D") ||
+                    inputText.equals("P") || inputText.equals("PS") || inputText.substring(ZERO, TWO).equals("E") ||
                     inputText.equals("PC") || inputText.substring(ZERO, ONE).equals("L") ||
                     inputText.substring(ZERO, ONE).equals("C") || inputText.substring(ZERO, TWO).equals("AR") ||
                     inputText.substring(ZERO, TWO).equals("AN") || inputText.substring(ZERO, TWO).equals("AT") ||
-                    inputText.substring(ZERO, TWO).equals("AI")) {
+                    inputText.substring(ZERO, TWO).equals("AI") || inputText.substring(ZERO, TWO).equals("PT") ||
+                    inputText.substring(ZERO, ONE).equals("S")) {
 
                 input(inputText);
 
             } else if (inputText.substring(ZERO, ONE).equals("Q")) {
-                System.out.println("Roster Manager terminated.");
+                System.out.println("Tuition Manager terminated.");
                 System.exit(ZERO);
             } else {
                 System.out.println(inputText + " " + "is an invalid command!");
