@@ -45,4 +45,9 @@ public class Resident extends Student{
     public boolean isResident() {
         return true;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (resident)";
+    }
 }

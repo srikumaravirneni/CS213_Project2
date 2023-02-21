@@ -118,15 +118,7 @@ public class TutionManager {
     }
 
 
-
-    /**
-     * Parses the entered details and adds the student if the student details are right and student doesn't
-     * exist in the roster.
-     *
-     * @param details       a line of text entered by user in terminal that contain student details
-     */
     private void addResStudent(String details) {
-
         String[] studentInfo = details.split("\\s+");
 
         Date date = new Date(studentInfo[3]);
@@ -146,43 +138,62 @@ public class TutionManager {
         } else if (!validMajor(studentInfo[4])) {
             return;
         }
-
-        Profile resStudent = new Profile ( studentInfo[2], studentInfo[1], date );
-        student.Resident resStudent = new student.Resident (addNonResStudent);)
+        String major = studentInfo[4].toUpperCase();
+        Profile resProfile = new Profile ( studentInfo[2], studentInfo[1], date );
+        student.Resident resStudent = new student.Resident (resProfile, Major.valueOf(major), credits, 0);
+        studentRoster.add(resStudent);
+        EnrollStudent newEnroll = new EnrollStudent(resProfile, credits);
+        enrollment.add(newEnroll);
     }
 
     private void addNonResStudent(String details){
         String[] studentInfo = details.split("\\s+");
+
         Date date = new Date(studentInfo[3]);
+        int credits;
 
-
-        if ( !isNumeric(studentInfo[5]) ) {
+        if (!isNumeric(studentInfo[5])) {
             System.out.println("Credits completed invalid: not an integer!");
+            return;
+        } else {
+            credits = Integer.parseInt(studentInfo[5]);
+        }
+        if ( !isPositive(credits) ) {
+            System.out.println("Credits completed invalid: cannot be negative!");
+            return;
         } else if (!dateCheck(date)) {
             return;
-        } else if (!validMajor(studentInfo[4])){
+        } else if (!validMajor(studentInfo[4])) {
             return;
         }
-
-        Profile profile = new Profile(studentInfo[2], studentInfo[1], date);
-
-        student.NonResident nonresStudent = new student.NonResident(profile, Major.valueOf(studentInfo[4]), Integer.parseInt(studentInfo[5]));
-
+        String major = studentInfo[4].toUpperCase();
+        Profile nResProfile = new Profile ( studentInfo[2], studentInfo[1], date );
+        student.NonResident nResStudent = new student.NonResident (nResProfile, Major.valueOf(major), credits);
+        studentRoster.add(nResStudent);
+        EnrollStudent newEnroll = new EnrollStudent(nResProfile, credits);
+        enrollment.add(newEnroll);
     }
 
     private void addTrisStateStudent(String details){
         String[] studentInfo = details.split("\\s+");
+
         Date date = new Date(studentInfo[3]);
+        int credits;
 
-
-        if ( !isNumeric(studentInfo[5]) ) {
+        if (!isNumeric(studentInfo[5])) {
             System.out.println("Credits completed invalid: not an integer!");
+            return;
+        } else {
+            credits = Integer.parseInt(studentInfo[5]);
+        }
+        if ( !isPositive(credits) ) {
+            System.out.println("Credits completed invalid: cannot be negative!");
+            return;
         } else if (!dateCheck(date)) {
             return;
-        } else if (!validMajor(studentInfo[4])){
+        } else if (!validMajor(studentInfo[4])) {
             return;
         }
-
         Profile profile = new Profile(studentInfo[2], studentInfo[1], date);
 
         student.TriState tristateStudent = new student.TriState(profile, Major.valueOf(studentInfo[4]), Integer.parseInt(studentInfo[5]), studentInfo[6]);

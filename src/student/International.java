@@ -48,4 +48,9 @@ public class International extends Student{
     public boolean isResident() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (international)";
+    }
 }
