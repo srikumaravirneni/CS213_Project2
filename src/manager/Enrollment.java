@@ -19,6 +19,10 @@ public class Enrollment {
         this.size = 4;
     }
 
+    public int getSize() {
+        return this.size;
+    }
+
     public void grow() {
         EnrollStudent[] arrayIncrease = new EnrollStudent[this.size + 4];
         for (int i = 0; i < this.size; i++) {

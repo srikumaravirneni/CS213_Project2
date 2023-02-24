@@ -1,4 +1,5 @@
 package student;
+import java.text.DecimalFormat;
 
 public class Resident extends Student{
     private int scholarship;
@@ -32,19 +33,22 @@ public class Resident extends Student{
     @Override
     public double tuitionDue(int creditsEnrolled) {
 
-                int tuition = 12536;
-                int universityFee = 3268;
-                double totalDue;
-                int maxFullTime = 16;
-                int partTime = 12;
-                int perCreditRate = 404;
+        int tuition = 12536;
+        int universityFee = 3268;
+        double totalDue;
+        int maxFullTime = 16;
+        int partTime = 12;
+        int perCreditRate = 404;
 
-                if ( isValid(creditsEnrolled) && creditsEnrolled < partTime ) {
-                    return ( perCreditRate * ( creditsEnrolled ) ) + ( universityFee * 0.8 );
-                } else if ( isValid(creditsEnrolled) && creditsEnrolled < maxFullTime && creditsEnrolled > partTime ) {
-                    return tuition + universityFee - this.scholarship;
+        DecimalFormat dFormat = new DecimalFormat("###.##");
+
+        if ( isValid(creditsEnrolled) && creditsEnrolled < partTime ) {
+            return ( perCreditRate * ( creditsEnrolled ) ) + ( universityFee * 0.8 );
+        } else if ( isValid(creditsEnrolled) && creditsEnrolled < maxFullTime && creditsEnrolled > partTime ) {
+            return tuition + universityFee - this.scholarship;
         } else if ( isValid(creditsEnrolled) && creditsEnrolled > maxFullTime ) {
-            return tuition + universityFee + ( perCreditRate * ( creditsEnrolled - maxFullTime ) ) - this.scholarship;
+            double total = tuition + universityFee + ( perCreditRate * ( creditsEnrolled - maxFullTime ) ) - this.scholarship;
+            return Double.parseDouble(dFormat.format(total));
         }
 
 

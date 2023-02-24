@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/Enrollment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Enrollment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/Roster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Roster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/TutionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TutionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/International.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/International.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/NonResident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/NonResident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Resident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/TriState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/TriState.java" afterDir="false" />
     </list>
     <list id="18efc3ee-9cb2-4d5c-bd8d-3da227eef93e" name="Changes by Raghu" comment="" />
     <list id="9ef76fca-2f20-4472-a93e-d81279b1a739" name="Changes by srikumaravirneni" comment="" />
@@ -160,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677201218948</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="updates and fixes.">
+      <created>1677201724992</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1677201724992</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -187,14 +200,15 @@
     <MESSAGE value="Major code / file additions v3" />
     <MESSAGE value="Major code additions v4" />
     <MESSAGE value="Changes to scholarship setter method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes to scholarship setter method" />
+    <MESSAGE value="updates and fixes." />
+    <option name="LAST_COMMIT_MESSAGE" value="updates and fixes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/manager/TutionManager.java</url>
-          <line>459</line>
+          <line>461</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

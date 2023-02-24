@@ -1,5 +1,7 @@
 package student;
 
+import java.text.DecimalFormat;
+
 public class International extends NonResident {
     private boolean isStudyAbroad;
 
@@ -21,20 +23,24 @@ public class International extends NonResident {
 
         int tuition = 29737;
         int universityFee = 3268;
-        double totalDue;
+        double total;
         int maxFullTime = 16;
         int fullTime = 12;
         int perCreditRate = 966;
         int insuranceFees = 2650;
 
+        DecimalFormat dFormat = new DecimalFormat("###.##");
 
         if ( !isStudyAbroad ) {
             if ( isValid(creditsEnrolled) && creditsEnrolled < fullTime ) {
-                return ( perCreditRate * ( creditsEnrolled ) ) + ( universityFee * 0.8 );
+                total = ( perCreditRate * ( creditsEnrolled ) ) + ( universityFee * 0.8 );
+                return Double.parseDouble(dFormat.format(total));
             } else if ( isValid(creditsEnrolled) && creditsEnrolled < maxFullTime && creditsEnrolled > fullTime ) {
-                return tuition + universityFee + insuranceFees;
+                total = tuition + universityFee + insuranceFees;
+                return Double.parseDouble(dFormat.format(total));
             } else if ( isValid(creditsEnrolled) && creditsEnrolled > maxFullTime ) {
-                return tuition + universityFee + ( perCreditRate * ( creditsEnrolled - maxFullTime ) ) + insuranceFees;
+                total = tuition + universityFee + ( perCreditRate * ( creditsEnrolled - maxFullTime ) ) + insuranceFees;
+                return Double.parseDouble(dFormat.format(total));
             }
         } else if ( isStudyAbroad ) {
 
@@ -51,6 +57,12 @@ public class International extends NonResident {
 
     @Override
     public String toString() {
+
+        if (isStudyAbroad) {
+            return super.toString() + " (international: study abroad)";
+        }
+
         return super.toString() + " (international)";
+
     }
 }

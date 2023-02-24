@@ -68,6 +68,7 @@ public class TutionManager {
 
 
 
+
     public boolean validAmount(String userInput){
         int maxAmount = 10000;
         String[] studentInfo = userInput.split("\\s+");

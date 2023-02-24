@@ -1,5 +1,7 @@
 package student;
 
+import java.text.DecimalFormat;
+
 public class TriState extends NonResident {
     private String state;
 
@@ -21,12 +23,18 @@ public class TriState extends NonResident {
         int fullTime = 12;
         int ctTutionDiscount = 5000;
         int nyTutionDiscount = 4000;
+        DecimalFormat dFormat = new DecimalFormat("###.##");
+        double total;
+
         if ( state.equals("NY") && creditsEnrolled >= fullTime ) {
-            return tuitionDue(creditsEnrolled) - nyTutionDiscount;
+            total = tuitionDue(creditsEnrolled) - nyTutionDiscount;
+            return Double.parseDouble(dFormat.format(total));
         } else if ( state.equals("CT") && creditsEnrolled >= fullTime ) {
-            return tuitionDue(creditsEnrolled) - ctTutionDiscount;
+            total = tuitionDue(creditsEnrolled) - ctTutionDiscount;
+            return Double.parseDouble(dFormat.format(total));
         } else {
-            return tuitionDue(creditsEnrolled);
+            total = tuitionDue(creditsEnrolled);
+            return Double.parseDouble(dFormat.format(total));
         }
     }
 

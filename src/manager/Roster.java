@@ -39,6 +39,10 @@ public class Roster {
         return NOT_FOUND;
     }
 
+    public int getSize(){
+        return this.size;
+    }
+
     public boolean updateScholarshipStudent( Student rStudent, int scholarship ){
         for (int i = 0; i < roster.length; i++) {
             if (roster[i].equals(rStudent)) {
@@ -49,6 +53,7 @@ public class Roster {
         }
         return false;
     }
+
 
 
 /**
