@@ -2,6 +2,7 @@ package manager;
 import student.Profile;
 import student.Student;
 import student.Major;
+import student.Resident;
 
 /**
  * Creates a Student roster object and implements all the major functionalities like add, remove, modify and sorting.
@@ -38,9 +39,21 @@ public class Roster {
         return NOT_FOUND;
     }
 
-    /**
-     * Method increases the array capacity by 4 if the array is full.
-     */
+    public boolean updateScholarshipStudent( Student rStudent, int scholarship ){
+        for (int i = 0; i < roster.length; i++) {
+            if (roster[i].equals(rStudent)) {
+                Resident resStudent = (Resident) roster[i]; // cast the object to Subclass
+                resStudent.setScholarship(scholarship); // call the subclass method
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+/**
+ * Method increases the array capacity by 4 if the array is full.
+ */
     private void grow() {
         if (this.size == ZERO) {
             Student[] rosterIncrease = new Student[4];

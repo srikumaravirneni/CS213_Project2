@@ -91,23 +91,33 @@ public class TutionManager {
         String[] studentInfo = inputText.split("\\s+");
         Profile tempProfile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
         EnrollStudent student = enrollment.findProfile(tempProfile);
+        int scholarship;
 
-        int index = enrollment.findEnrollment(student);
+        if ( !isNumeric(studentInfo[4]) ){
+            System.out.println("Amount is not an integer.");
+            return;
+        } else {
+            scholarship = Integer.parseInt(studentInfo[4]);
+        }
 
-        if ( index == -1 ) {
+        if ( !( studentRoster.containsProfile(tempProfile) instanceof Resident ) ) {
+            System.out.println(tempProfile.toString() + " (Non-Resident) is not eligible for the scholarship.");
+            return;
+        }
+
+        if ( studentRoster.containsProfile(tempProfile) == null  ) {
             System.out.println(tempProfile.toString() + " is not in the roster.");
             return;
         } else if ( !validAmount(inputText) ) {
             return;
         }
-
-        EnrollStudent returnedStudent = enrollment.getEnrollment(index);
-
-        if ( returnedStudent.getCreditsEnrolled() < 12 ) {
+        if ( studentRoster.containsProfile(tempProfile).getCreditCompleted() < 12 ) {
             System.out.println(tempProfile.toString() + " part time student is not eligible for the scholarship.");
             return;
         }
 
+        studentRoster.updateScholarshipStudent(studentRoster.containsProfile(tempProfile), scholarship);
+        System.out.println(tempProfile.toString() + ": scholarship amount updated.");
 
     }
 

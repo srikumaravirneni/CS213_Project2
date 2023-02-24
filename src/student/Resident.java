@@ -27,6 +27,8 @@ public class Resident extends Student{
         return super.getCreditCompleted();
     }
 
+
+
     @Override
     public double tuitionDue(int creditsEnrolled) {
 
