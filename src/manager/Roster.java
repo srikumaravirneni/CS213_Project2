@@ -43,6 +43,7 @@ public class Roster {
         return this.size;
     }
 
+
     public boolean updateScholarshipStudent( Student rStudent, int scholarship ){
         for (int i = 0; i < roster.length; i++) {
             if (roster[i].equals(rStudent)) {
@@ -411,6 +412,15 @@ public class Roster {
             System.out.println(student.toString());
         }
         System.out.println("* end of roster **");
+    }
+
+    public String getStatus(Profile profile) {
+        for ( int i = 0; i < size; i++) {
+            if ( roster[i].getProfile().equals(profile) ) {
+                return roster[i].getStatus();
+            }
+        }
+        return null;
     }
 
 }

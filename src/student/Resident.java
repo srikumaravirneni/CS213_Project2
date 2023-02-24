@@ -56,6 +56,10 @@ public class Resident extends Student{
     }
 
     @Override
+    public String getStatus() {
+        return "Resident";
+    }
+    @Override
     public boolean isResident() {
         return true;
     }

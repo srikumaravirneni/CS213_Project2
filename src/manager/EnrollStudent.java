@@ -1,6 +1,8 @@
 package manager;
 
+import student.Major;
 import student.Profile;
+import student.Student;
 
 /**
  * This class keeps a track of the credits that a student has enrolled for
@@ -24,6 +26,8 @@ public class EnrollStudent {
     public int getCreditsEnrolled () {
         return this.creditsEnrolled;
     }
+
+
 
     @Override
     public boolean equals (Object enrollment ){

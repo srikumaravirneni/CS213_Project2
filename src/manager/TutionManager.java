@@ -31,25 +31,29 @@ public class TutionManager {
      */
     private void input(String inputText) {
 
-        if (inputText.equals("P")) {
+        if ( inputText.equals("P") ) {
             studentRoster.print();
-        } else if ((inputText.substring(ZERO, ONE)).equals("S")){
+        } else if ( (inputText.substring(ZERO, ONE)).equals("S") ){
                 updateScholarship(inputText);
-        } else if ((inputText.substring(ZERO, ONE)).equals("C")) {
+        } else if ( (inputText.substring(ZERO, ONE)).equals("C") ) {
             changeStudentHelper(inputText);
-        } else if ((inputText.substring(ZERO, ONE)).equals("D")) {
+        } else if ( (inputText.substring(ZERO, ONE)).equals("D") ) {
             dropEnrollment(inputText);
-        } else if ((inputText.substring(ZERO, ONE)).equals("E")) {
+        } else if ( (inputText.substring(ZERO, ONE)).equals("E") ) {
             enrollStudent(inputText);
-        } else if ((inputText.substring(ZERO, TWO)).equals("AR")) {
+        } else if ( (inputText.substring(ZERO, TWO)).equals("AR") ) {
             addResStudent(inputText);
-        } else if ((inputText.substring(ZERO, TWO)).equals("AN")) {
+        } else if ( (inputText.substring(ZERO, TWO)).equals("AN") ) {
             addNonResStudent(inputText);
-        } else if ((inputText.substring(ZERO, TWO)).equals("AT")) {
+        } else if ( (inputText.substring(ZERO, TWO)).equals("AT") ) {
             addTriStateStudent(inputText);
-        } else if ((inputText.substring(ZERO, TWO)).equals("AI")) {
+        } else if ( (inputText.substring(ZERO, TWO)).equals("AI") ) {
             addInternationalStudent(inputText);
-        } else if (inputText.equals("PE")){
+        } else if ( inputText.equals("PT") ){
+            enrollment.printWithTuition();
+        } else if ( inputText.equals("SE") ){
+            //enrollment.addCreditsAndPrint();
+        } else if ( inputText.equals("PE") ){
             enrollment.print();
         } else if (inputText.equals("PS")) {
             studentRoster.printByStanding();
@@ -68,13 +72,30 @@ public class TutionManager {
 
 
 
+    public void printWithTuition(){
+        System.out.println("** Tuition due **");
+        for ( int i = 0; i < this.size; i++ ) {
+            if ( enrollStudents[i] == null ) {
+                return;
+            }
+            // String status =
+            Profile profile = enrollStudents[i].getProfile();
+
+
+            //double tuition = enrollStudents[i].tuitionDue(enrollStudents[i].getCreditsEnrolled());
+            // System.out.println(enrollStudents[i].toString() + " tuition due: $" + tuition);
+        }
+
+        System.out.println("* end of tuition due *");
+
+    }
 
     public boolean validAmount(String userInput){
         int maxAmount = 10000;
         String[] studentInfo = userInput.split("\\s+");
         try {
             int amount = Integer.parseInt(studentInfo[4]);
-            if ( amount > 10000  || amount <= 0) {
+            if ( amount > 10000  || amount <= 0 ) {
                 System.out.println(amount+ ": invalid amount.");
                 return false;
             }
@@ -281,6 +302,8 @@ public class TutionManager {
         }
 
     }
+
+
 
     private boolean validState(String state) {
         if ( state.equals("NY") || state.equals("CT") ) {

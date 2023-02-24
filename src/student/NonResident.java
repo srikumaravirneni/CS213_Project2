@@ -44,6 +44,10 @@ public class NonResident extends Student{
         return 0;
     }
 
+    @Override
+    public String getStatus() {
+        return "Non-Resident";
+    }
 
     @Override
     public boolean isResident() {

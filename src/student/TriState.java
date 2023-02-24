@@ -38,7 +38,10 @@ public class TriState extends NonResident {
         }
     }
 
-
+    @Override
+    public String getStatus() {
+        return "Tri-state";
+    }
     @Override
     public boolean isResident() {
         return false;

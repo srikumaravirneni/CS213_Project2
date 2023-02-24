@@ -160,7 +160,6 @@ public abstract class Student implements Comparable<Student> {
     public int getCreditCompleted() {
         return creditCompleted;
     }
-
     /**
      * The method helps to figure out whether the student is freshman, sophomore, junior or senior based on credits
      * completed.
@@ -213,6 +212,8 @@ public abstract class Student implements Comparable<Student> {
         }
         return ZERO;
     }
+
+    public abstract String getStatus();
 
     /**
      * This method overrides the superclass equals() methods and returns whether the given two student objects are

@@ -51,6 +51,11 @@ public class International extends NonResident {
     }
 
     @Override
+    public String getStatus() {
+        return "International";
+    }
+
+    @Override
     public boolean isResident() {
         return false;
     }

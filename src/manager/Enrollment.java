@@ -1,6 +1,6 @@
 package manager;
-
-
+import student.International;
+import student.Major;
 import student.Profile;
 import student.Student;
 
@@ -11,6 +11,7 @@ import student.Student;
  * @author Srikumar Avirneni
  */
 public class Enrollment {
+
     private EnrollStudent[] enrollStudents;
     private int size;
 
@@ -56,6 +57,8 @@ public class Enrollment {
         }
         return null;
     }
+
+
 
     public void updateEnrollment(int index, EnrollStudent student) {
         this.enrollStudents[index] = student;
@@ -119,6 +122,10 @@ public class Enrollment {
         System.out.println("* end of enrollment *");
 
     } //print the array as is without sorting
+
+
+
+
 }
 
 
