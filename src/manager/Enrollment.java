@@ -104,6 +104,7 @@ public class Enrollment {
     }
 
     public void print() {
+        System.out.println("** Enrollment **");
         for ( int i = 0; i < this.size; i++ ) {
             if ( enrollStudents[i] == null ) {
                 return;
@@ -111,5 +112,9 @@ public class Enrollment {
             System.out.println(enrollStudents[i].toString());
         }
 
+        System.out.println("* end of enrollment *");
+
     } //print the array as is without sorting
 }
+
+

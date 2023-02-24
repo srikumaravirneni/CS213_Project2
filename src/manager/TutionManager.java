@@ -33,13 +33,13 @@ public class TutionManager {
 
         if (inputText.equals("P")) {
             studentRoster.print();
-        } else if (inputText.equals("S")){
+        } else if ((inputText.substring(ZERO, ONE)).equals("S")){
                 updateScholarship(inputText);
-        } else if (inputText.equals("C")) {
+        } else if ((inputText.substring(ZERO, ONE)).equals("C")) {
             changeStudentHelper(inputText);
-        } else if (inputText.equals("D")) {
+        } else if ((inputText.substring(ZERO, ONE)).equals("D")) {
             dropEnrollment(inputText);
-        } else if (inputText.equals("E")) {
+        } else if ((inputText.substring(ZERO, ONE)).equals("E")) {
             enrollStudent(inputText);
         } else if ((inputText.substring(ZERO, TWO)).equals("AR")) {
             addResStudent(inputText);
@@ -49,8 +49,8 @@ public class TutionManager {
             addTriStateStudent(inputText);
         } else if ((inputText.substring(ZERO, TWO)).equals("AI")) {
             addInternationalStudent(inputText);
-        } else if ((inputText.substring(ZERO, ONE)).equals("D")) {
-            dropStudentHelper(inputText);
+        } else if (inputText.equals("PE")){
+            enrollment.print();
         } else if (inputText.equals("PS")) {
             studentRoster.printByStanding();
         } else if (inputText.equals("PC")) {
@@ -65,6 +65,7 @@ public class TutionManager {
             }
         }
     }
+
 
 
     public boolean validAmount(String userInput){
@@ -433,27 +434,6 @@ public class TutionManager {
                 studentRoster.add(interStudent);
 
             }
-        }
-    }
-
-    /**
-     * The method takes in the student to be removed as input and removes the student if it exists in the roster.
-     *
-     * @param details the student to be removed
-     */
-    private void dropStudentHelper(String details) {
-
-        String[] studentInfo = details.split("\\s+");
-        Profile profile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
-        // Student student = new Student(profile, null, 0);
-
-        Student returnedStudent = studentRoster.containsProfile(profile);
-
-        if (returnedStudent != null) {
-            studentRoster.remove(returnedStudent);
-            // System.out.println(student.getProfile().toString() + " " + "removed from the roster.");
-        } else {
-            // System.out.println(student.getProfile().toString() + " " + "is not in the roster.");
         }
     }
 
