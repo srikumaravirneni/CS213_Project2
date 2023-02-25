@@ -15,9 +15,14 @@ public class Enrollment {
     private EnrollStudent[] enrollStudents;
     private int size;
 
+
     public Enrollment() {
         this.enrollStudents = new EnrollStudent[4];
         this.size = 4;
+    }
+
+    public EnrollStudent[] getEnrollStudents() {
+        return enrollStudents;
     }
 
     public int getSize() {
@@ -51,7 +56,7 @@ public class Enrollment {
         for ( int i = 0; i < this.size; i++ ) {
             if ( enrollStudents[i] == null ) {
                 return null;
-            } else if ( enrollStudents[i].getProfile() == enrollmentStudent ) {
+            } else if ( enrollStudents[i].getProfile().equals(enrollmentStudent)) {
                 return enrollStudents[i];
             }
         }
@@ -122,6 +127,7 @@ public class Enrollment {
         System.out.println("* end of enrollment *");
 
     } //print the array as is without sorting
+
 
 
 

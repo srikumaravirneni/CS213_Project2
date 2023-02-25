@@ -52,7 +52,11 @@ public class International extends NonResident {
 
     @Override
     public String getStatus() {
-        return "International";
+
+        if ( isStudyAbroad ) {
+            return "International student study abroad";
+        }
+        return "International student";
     }
 
     @Override
@@ -64,10 +68,10 @@ public class International extends NonResident {
     public String toString() {
 
         if (isStudyAbroad) {
-            return super.toString() + " (international: study abroad)";
+            return super.toString() + "(international:study abroad)";
         }
 
-        return super.toString() + " (international)";
+        return super.toString() + "(international)";
 
     }
 }

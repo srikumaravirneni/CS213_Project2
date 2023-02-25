@@ -66,6 +66,6 @@ public class Resident extends Student{
 
     @Override
     public String toString() {
-        return super.toString() + " (resident)";
+        return super.toString() + "(resident)";
     }
 }

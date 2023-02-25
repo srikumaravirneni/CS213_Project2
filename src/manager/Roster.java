@@ -20,6 +20,13 @@ public class Roster {
     private static final int NEGATIVE_ONE = -1;
     private static final int ZERO = 0;
 
+    public boolean empty() {
+        if ( this.size < ONE ) {
+            return true;
+        }
+         return false;
+    }
+
     /**
      * Searches for the given student in the roster and returns its index in the array if present.
      *
@@ -269,7 +276,6 @@ public class Roster {
         return students;
     }
 
-
     /**
      * Sorts the roster array students first name, last name and dob using sortByName helper method
      */
@@ -284,7 +290,7 @@ public class Roster {
             return;
         }
 
-        System.out.println("* Student roster sorted by last name, first name, DOB **");
+        System.out.println("** Student roster sorted by last name, first name, DOB **");
         Student[] sortedArray = sortByName(this.roster, size);
 
         for (Student student : sortedArray) {
@@ -294,7 +300,7 @@ public class Roster {
 
             System.out.println(student.toString());
         }
-        System.out.println("* end of roster **");
+        System.out.println("* end of roster *");
     }
 
     /**
@@ -332,7 +338,7 @@ public class Roster {
         }
 
 
-        System.out.println("* Student roster sorted by school, major **");
+        System.out.println("** Student roster sorted by school, major **");
         if (this.size < ONE) {
             System.out.println("Student roster is empty!");
             return;
@@ -366,7 +372,7 @@ public class Roster {
             }
             System.out.println(student.toString());
         }
-        System.out.println("* end of roster **");
+        System.out.println("* end of roster *");
     }
 
 
@@ -382,7 +388,7 @@ public class Roster {
             System.out.println(roster[0].toString());
             return;
         }
-        System.out.println("* Student roster sorted by standing **");
+        System.out.println("** Student roster sorted by standing **");
         for (int i = ZERO; i < size - 1; i++) {
             if (roster[i] == null) {
                 break;
@@ -411,7 +417,7 @@ public class Roster {
 
             System.out.println(student.toString());
         }
-        System.out.println("* end of roster **");
+        System.out.println("* end of roster *");
     }
 
     public String getStatus(Profile profile) {

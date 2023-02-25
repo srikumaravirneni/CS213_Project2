@@ -21,16 +21,16 @@ public class TriState extends NonResident {
     @Override
     public double tuitionDue(int creditsEnrolled) {
         int fullTime = 12;
-        int ctTutionDiscount = 5000;
-        int nyTutionDiscount = 4000;
+        int ctTuitionDiscount = 5000;
+        int nyTuitionDiscount = 4000;
         DecimalFormat dFormat = new DecimalFormat("###.##");
         double total;
 
         if ( state.equals("NY") && creditsEnrolled >= fullTime ) {
-            total = tuitionDue(creditsEnrolled) - nyTutionDiscount;
+            total = tuitionDue(creditsEnrolled) - nyTuitionDiscount;
             return Double.parseDouble(dFormat.format(total));
         } else if ( state.equals("CT") && creditsEnrolled >= fullTime ) {
-            total = tuitionDue(creditsEnrolled) - ctTutionDiscount;
+            total = tuitionDue(creditsEnrolled) - ctTuitionDiscount;
             return Double.parseDouble(dFormat.format(total));
         } else {
             total = tuitionDue(creditsEnrolled);
@@ -40,7 +40,9 @@ public class TriState extends NonResident {
 
     @Override
     public String getStatus() {
-        return "Tri-state";
+
+        return "Tri-state " + state;
+
     }
     @Override
     public boolean isResident() {
@@ -49,6 +51,6 @@ public class TriState extends NonResident {
 
     @Override
     public String toString() {
-        return super.toString() + " (tri-state:" + this.state + ")";
+        return super.toString() + "(tri-state:" + this.state + ")";
     }
 }
