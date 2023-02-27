@@ -15,8 +15,8 @@ import java.util.Scanner;
  * @author Srikumar Avirneni
  */
 public class TutionManager {
-    private Roster studentRoster = new Roster(); //creating a Roster object to pass the student input to Roster class.
-    private Enrollment enrollment = new Enrollment();
+    private final Roster studentRoster = new Roster(); //creating a Roster object to pass the student input to Roster class.
+    private final Enrollment enrollment = new Enrollment();
     private static final int ZERO = 0;
     private static final int NEGATIVE_ONE = -1;
     private static final int ONE = 1;
@@ -33,23 +33,23 @@ public class TutionManager {
 
         if ( inputText.equals("P") ) {
             studentRoster.print();
-        } else if ( (inputText.substring(ZERO, ONE)).equals("S") ){
+        } else if (inputText.charAt(ZERO) == 'S'){
                 updateScholarship(inputText);
-        } else if ( (inputText.substring(ZERO, ONE)).equals("C") ) {
+        } else if (inputText.charAt(ZERO) == 'C') {
             changeStudentHelper(inputText);
-        } else if ( (inputText.substring(ZERO, ONE)).equals("D") ) {
+        } else if (inputText.charAt(ZERO) == 'D') {
             dropEnrollment(inputText);
-        } else if ( (inputText.substring(ZERO, ONE)).equals("E") ) {
+        } else if (inputText.charAt(ZERO) == 'E') {
             enrollStudent(inputText);
-        } else if ( (inputText.substring(ZERO, ONE)).equals("R") ) {
+        } else if (inputText.charAt(ZERO) == 'R') {
             dropRoster(inputText);
-        } else if ( (inputText.substring(ZERO, TWO)).equals("AR") ) {
+        } else if ( (inputText).startsWith("AR") ) {
             addResStudent(inputText);
-        } else if ( (inputText.substring(ZERO, TWO)).equals("AN") ) {
+        } else if ( (inputText).startsWith("AN") ) {
             addNonResStudent(inputText);
-        } else if ( (inputText.substring(ZERO, TWO)).equals("AT") ) {
+        } else if ( (inputText).startsWith("AT") ) {
             addTriStateStudent(inputText);
-        } else if ( (inputText.substring(ZERO, TWO)).equals("AI") ) {
+        } else if ( (inputText).startsWith("AI") ) {
             addInternationalStudent(inputText);
         } else if ( inputText.equals("PT") ){
                 printWithTuition();
@@ -61,19 +61,16 @@ public class TutionManager {
             studentRoster.printByStanding();
         } else if (inputText.equals("PC")) {
             studentRoster.printBySchoolMajor();
-        }  else if ((inputText.substring(ZERO, TWO)).equals("LS")) {
+        }  else if ((inputText).startsWith("LS")) {
             String[] input = inputText.split("\\s+");
             try {
                 File textFile = new File(input[1]);
                 listStudent(textFile);
                 System.out.println("Students loaded to the roster.");
             } catch ( FileNotFoundException e ) {
-                return;
             }
         }
     }
-
-
 
     public void printWithTuition(){
         if (studentRoster.empty() ) {
@@ -129,23 +126,23 @@ public class TutionManager {
         }
 
         if ( !( studentRoster.containsProfile(tempProfile).getStatus().equals("Resident") ) ) {
-            System.out.println(tempProfile.toString() + " (Non-Resident) is not eligible for the scholarship.");
+            System.out.println(tempProfile + " (Non-Resident) is not eligible for the scholarship.");
             return;
         }
 
         if ( studentRoster.containsProfile(tempProfile) == null  ) {
-            System.out.println(tempProfile.toString() + " is not in the roster.");
+            System.out.println(tempProfile + " is not in the roster.");
             return;
         } else if ( !validAmount(inputText) ) {
             return;
         }
         if ( studentRoster.containsProfile(tempProfile).getCreditCompleted() < 12 ) {
-            System.out.println(tempProfile.toString() + " part time student is not eligible for the scholarship.");
+            System.out.println(tempProfile + " part time student is not eligible for the scholarship.");
             return;
         }
 
         studentRoster.updateScholarshipStudent(studentRoster.containsProfile(tempProfile), scholarship);
-        System.out.println(tempProfile.toString() + ": scholarship amount updated.");
+        System.out.println(tempProfile + ": scholarship amount updated.");
 
     }
 
@@ -209,19 +206,19 @@ public class TutionManager {
         }
 
         if ( studentRoster.containsProfile(tempProfile) == null ) {
-            System.out.println("Cannot enroll: " + tempProfile.toString() + " is not in the roster.");
+            System.out.println("Cannot enroll: " + tempProfile + " is not in the roster.");
             return;
         }
 
         int index = enrollment.findEnrollmentProfile(tempProfile);
         if ( index != -1 ) {
             enrollment.updateEnrollment(index, credits);
-            System.out.println(tempProfile.toString() + " enrolled " + credits + " credits");
+            System.out.println(tempProfile + " enrolled " + credits + " credits");
             return;
         }
 
         enrollment.add(student);
-        System.out.println(tempProfile.toString() + " enrolled " + credits + " credits");
+        System.out.println(tempProfile + " enrolled " + credits + " credits");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Missing data in line command.");
         }
@@ -237,10 +234,10 @@ public class TutionManager {
         Date currentDate = new Date();
 
         if (date.compareTo(currentDate) >= ZERO || !date.isValid()) {
-            System.out.println("DOB invalid: " + date.toString() + " not a valid calendar date!");
+            System.out.println("DOB invalid: " + date + " not a valid calendar date!");
             return false;
         } else if (currentDate.tooYoung(date)) {
-            System.out.println("DOB invalid: " + date.toString() + " younger than 16 years old.");
+            System.out.println("DOB invalid: " + date + " younger than 16 years old.");
             return false;
         } else {
             return true;
@@ -258,11 +255,11 @@ public class TutionManager {
         Profile tempProfile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
         EnrollStudent student = enrollment.findProfile(tempProfile);
         if ( student == null ) {
-            System.out.println(tempProfile.toString() + " is not enrolled.");
+            System.out.println(tempProfile + " is not enrolled.");
             return;
         }
         enrollment.remove(student);
-        System.out.println(tempProfile.toString() + " dropped.");
+        System.out.println(tempProfile + " dropped.");
     }
 
     public void dropRoster(String inputText) {
@@ -276,11 +273,11 @@ public class TutionManager {
         Profile tempProfile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
         EnrollStudent student = enrollment.findProfile(tempProfile);
         if ( studentRoster.containsProfile(tempProfile) == null ) {
-            System.out.println(tempProfile.toString() + " is not in the roster.");
+            System.out.println(tempProfile + " is not in the roster.");
             return;
         }
         studentRoster.remove(studentRoster.containsProfile(tempProfile));
-        System.out.println(tempProfile.toString() + " removed from the roster.");
+        System.out.println(tempProfile + " removed from the roster.");
     }
 
 
@@ -304,10 +301,7 @@ public class TutionManager {
     }
 
     private boolean isPositive( int credits ) {
-        if ( credits < ZERO ) {
-            return false;
-        }
-        return true;
+        return credits >= ZERO;
     }
 
     /**
@@ -351,12 +345,12 @@ public class TutionManager {
             Profile resProfile = new Profile ( studentInfo[2], studentInfo[1], date );
             student.Resident resStudent = new student.Resident (resProfile, Major.valueOf(major), credits, 0);
             if (studentRoster.contains(resStudent)) {
-                System.out.println( resProfile.toString() + " is already in the roster.");
+                System.out.println( resProfile + " is already in the roster.");
                 return;
             }
             studentRoster.add(resStudent);
             EnrollStudent newEnroll = new EnrollStudent(resProfile, credits);
-            System.out.println( resProfile.toString() + " added to the roster.");
+            System.out.println( resProfile + " added to the roster.");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Missing data in line command.");
         }
@@ -388,12 +382,12 @@ public class TutionManager {
             Profile nResProfile = new Profile ( studentInfo[2], studentInfo[1], date );
             NonResident nResStudent = new NonResident (nResProfile, Major.valueOf(major), credits);
             if (studentRoster.contains(nResStudent)) {
-                System.out.println( nResProfile.toString() + " is already in the roster.");
+                System.out.println( nResProfile + " is already in the roster.");
                 return;
             }
             studentRoster.add(nResStudent);
             EnrollStudent newEnroll = new EnrollStudent(nResProfile, credits);
-            System.out.println( nResProfile.toString() + " added to the roster.");
+            System.out.println( nResProfile + " added to the roster.");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Missing data in line command.");
         }
@@ -470,12 +464,12 @@ public class TutionManager {
             Profile triProfile = new Profile ( studentInfo[2], studentInfo[1], date );
             TriState triStudent = new TriState ( triProfile, Major.valueOf(major), creditsTaken, state );
             if (studentRoster.contains(triStudent)) {
-                System.out.println( triProfile.toString() + " is already in the roster.");
+                System.out.println( triProfile + " is already in the roster.");
                 return;
             }
             studentRoster.add(triStudent);
             EnrollStudent newEnroll = new EnrollStudent(triProfile, creditsTaken);
-            System.out.println( triProfile.toString() + " added to the roster.");
+            System.out.println( triProfile + " added to the roster.");
     }
 
     public boolean isStudyAbroad(String[] studentInfo) {
@@ -519,12 +513,12 @@ public class TutionManager {
             International interStudent = new International ( interProfile, Major.valueOf(major), credits,
                     studyAbroad );
             if (studentRoster.contains(interStudent)) {
-                System.out.println( interProfile.toString() + " is already in the roster.");
+                System.out.println( interProfile + " is already in the roster.");
                 return;
             }
             studentRoster.add(interStudent);
             EnrollStudent newEnroll = new EnrollStudent(interProfile, credits);
-            System.out.println( interProfile.toString() + " added to the roster.");
+            System.out.println( interProfile + " added to the roster.");
         } catch ( ArrayIndexOutOfBoundsException e ) {
             System.out.println("Missing data in line command.");
         }
@@ -542,11 +536,11 @@ public class TutionManager {
         String major = studentInfo[4];
 
         if (studentRoster.containsProfile(profile) == null) {
-            System.out.println(profile.toString() + " " + "is not in the roster.");
+            System.out.println(profile + " " + "is not in the roster.");
 
         } else if (validMajor(studentInfo[4])) {
             studentRoster.changeMajor(profile, major);
-            System.out.println(profile.toString() + " major changed to " + major);
+            System.out.println(profile + " major changed to " + major);
 
         } else {
             System.out.println("Major code invalid:" + " " + major);
@@ -608,18 +602,18 @@ public class TutionManager {
             try {
                 if (inputText.equals("")) {
                     continue;
-                } else if (inputText.substring(ZERO, ONE).equals("R") || inputText.substring(ZERO, ONE).equals("D") ||
-                        inputText.equals("P") || inputText.equals("PS") || inputText.substring(ZERO, ONE).equals("E") ||
-                        inputText.substring(ZERO, ONE).equals("S") || inputText.equals("PC") || inputText.substring(ZERO, TWO).equals("LS") ||
-                        inputText.substring(ZERO, ONE).equals("C") || inputText.substring(ZERO, TWO).equals("AR") ||
-                        inputText.substring(ZERO, TWO).equals("AN") || inputText.substring(ZERO, TWO).equals("AT") ||
-                        inputText.substring(ZERO, TWO).equals("AI") || inputText.substring(ZERO, TWO).equals("PT") ||
-                        inputText.substring(ZERO, TWO).equals("PE")
+                } else if (inputText.charAt(ZERO) == 'R' || inputText.charAt(ZERO) == 'D' ||
+                        inputText.equals("P") || inputText.equals("PS") || inputText.charAt(ZERO) == 'E' ||
+                        inputText.charAt(ZERO) == 'S' || inputText.equals("PC") || inputText.startsWith("LS") ||
+                        inputText.charAt(ZERO) == 'C' || inputText.startsWith("AR") ||
+                        inputText.startsWith("AN") || inputText.startsWith("AT") ||
+                        inputText.startsWith("AI") || inputText.startsWith("PT") ||
+                        inputText.startsWith("PE")
                 ) {
 
                     input(inputText);
 
-                } else if (inputText.substring(ZERO, ONE).equals("Q")) {
+                } else if (inputText.charAt(ZERO) == 'Q') {
                     System.out.println("Tuition Manager terminated.");
                     System.exit(ZERO);
                 } else {

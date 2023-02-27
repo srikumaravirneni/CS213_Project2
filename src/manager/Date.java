@@ -108,11 +108,7 @@ public class Date implements Comparable<Date> {
     private boolean isLeap() {
         if (this.year % QUADRENNIAL == ZERO) {
             if (this.year % CENTENNIAL == ZERO) {
-                if (this.year % QUATERCENTENNIAL == ZERO) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return this.year % QUATERCENTENNIAL == ZERO;
             } else {
                 return true;
             }
@@ -130,11 +126,7 @@ public class Date implements Comparable<Date> {
      */
     public boolean rightLength(int monthLength) {
 
-        if (this.day > monthLength || this.month < ONE) {
-            return false;
-        } else {
-            return true;
-        }
+        return this.day <= monthLength && this.month >= ONE;
     }
 
     /**
@@ -272,21 +264,9 @@ public class Date implements Comparable<Date> {
 
         if (this.year - other.getYear() == ageLimit) {
             if (this.month == other.getMonth()) {
-                if (this.day < other.getDay()) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else if (this.month > other.getMonth()) {
-                return false;
-            } else {
-                return true;
-            }
-        } else if (this.year - other.getYear() < ageLimit) {
-            return true;
-        } else {
-            return false;
-        }
+                return this.day < other.getDay();
+            } else return this.month <= other.getMonth();
+        } else return this.year - other.getYear() < ageLimit;
     }
 
     /**
@@ -298,10 +278,9 @@ public class Date implements Comparable<Date> {
     @Override
     public boolean equals(Object dateToCompare) {
 
-        if (!(dateToCompare instanceof Date)) {
+        if (!(dateToCompare instanceof Date date)) {
             return false;
         }
-        Date date = (Date) dateToCompare;
 
         return this.day == date.getDay() && this.month == date.getMonth() && this.year == date.getYear();
     }

@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="Added get methods">
-      <change afterPath="$PROJECT_DIR$/src/manager/DateTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/student/InternationalTest.java" afterDir="false" />
+    <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="Added test for date and tuition">
+      <change afterPath="$PROJECT_DIR$/src/manager/RosterTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project2_CS211.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Project2_CS211.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Date.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/EnrollStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/EnrollStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/Enrollment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Enrollment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/Roster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Roster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/TutionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TutionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/student/International.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/International.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/InternationalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/InternationalTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/NonResident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/NonResident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Resident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/student/TriState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/TriState.java" afterDir="false" />
     </list>
     <list id="18efc3ee-9cb2-4d5c-bd8d-3da227eef93e" name="Changes by Raghu" comment="" />
     <list id="9ef76fca-2f20-4472-a93e-d81279b1a739" name="Changes by srikumaravirneni" comment="" />
@@ -68,8 +79,8 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="student" />
       <recent name="manager" />
+      <recent name="student" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.InternationalTest">
@@ -138,9 +149,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.InternationalTest" />
-        <item itemvalue="JUnit.InternationalTest.test_tuition_notStudyAbroad" />
-        <item itemvalue="JUnit.InternationalTest.test_tuition_isStudyAbroad" />
         <item itemvalue="JUnit.DateTest" />
+        <item itemvalue="JUnit.InternationalTest.test_tuition_isStudyAbroad" />
+        <item itemvalue="JUnit.InternationalTest.test_tuition_notStudyAbroad" />
       </list>
     </recent_temporary>
   </component>
@@ -258,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677201724992</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Added test for date and tuition">
+      <created>1677475054821</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1677475054821</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -287,6 +305,7 @@
     <MESSAGE value="Changes to scholarship setter method" />
     <MESSAGE value="updates and fixes." />
     <MESSAGE value="Added get methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added get methods" />
+    <MESSAGE value="Added test for date and tuition" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added test for date and tuition" />
   </component>
 </project>
