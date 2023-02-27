@@ -27,7 +27,9 @@ public class EnrollStudent {
         return this.creditsEnrolled;
     }
 
-
+    public void setCreditsEnrolled (int creditsEnrolled) {
+        this.creditsEnrolled = creditsEnrolled;
+    }
 
     @Override
     public boolean equals (Object enrollment ){

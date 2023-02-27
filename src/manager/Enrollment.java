@@ -29,6 +29,13 @@ public class Enrollment {
         return this.size;
     }
 
+    public boolean empty() {
+        if ( this.size < 1 ) {
+            return true;
+        }
+        return false;
+    }
+
     public void grow() {
         EnrollStudent[] arrayIncrease = new EnrollStudent[this.size + 4];
         for (int i = 0; i < this.size; i++) {
@@ -65,20 +72,30 @@ public class Enrollment {
 
 
 
-    public void updateEnrollment(int index, EnrollStudent student) {
-        this.enrollStudents[index] = student;
+    public void updateEnrollment(int index, int newCredits) {
+        this.enrollStudents[index].setCreditsEnrolled(newCredits);
     }
 
     public EnrollStudent getEnrollment (int index) {
         return enrollStudents[index];
     }
 
+    public int findEnrollmentProfile ( Profile profile ) {
+        for ( int i = 0; i < this.size; i++ ) {
+            if ( enrollStudents[i] == null ) {
+                return -1;
+            } else if ( enrollStudents[i].getProfile().equals(profile) ) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     public int findEnrollment ( EnrollStudent enrollmentStudent ) {
         for ( int i = 0; i < this.size; i++ ) {
             if ( enrollStudents[i] == null ) {
                 return -1;
-            } else if ( enrollStudents[i] == enrollmentStudent ) {
+            } else if ( enrollStudents[i].equals(enrollmentStudent) ) {
                 return i;
             }
         }
@@ -116,8 +133,14 @@ public class Enrollment {
     }
 
     public void print() {
+
+        if ( enrollStudents[0] == null) {
+            System.out.println("Enrollment is empty!");
+            return;
+        }
+
         System.out.println("** Enrollment **");
-        for ( int i = 0; i < this.size; i++ ) {
+        for ( int i = 0; i < this.size - 1; i++ ) {
             if ( enrollStudents[i] == null ) {
                 return;
             }
