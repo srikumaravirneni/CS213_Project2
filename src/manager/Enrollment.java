@@ -98,11 +98,17 @@ public class Enrollment {
     }
 
     public void rearrange (int currIndex){
-        for ( int i = currIndex + 1; i < this.size - 1; i++ ) {
-            if ( enrollStudents[i+1] == null ){
-                enrollStudents[currIndex] = enrollStudents[i];
+
+        int i = 0;
+        while ( i < this.size - 1 ) {
+            if ( this.enrollStudents[i] == null && i != currIndex) {
+                break;
             }
+            i++;
         }
+        this.enrollStudents[currIndex] = this.enrollStudents[i];
+        this.enrollStudents[i] = null;
+
     }
 
     //move the last one in the array to replace the deleting index position
