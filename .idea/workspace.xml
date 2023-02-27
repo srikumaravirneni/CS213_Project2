@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project2_CS211.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Project2_CS211.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/student/International.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/International.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/student/NonResident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/NonResident.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/student/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Resident.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/student/TriState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/student/TriState.java" afterDir="false" />
     </list>
     <list id="18efc3ee-9cb2-4d5c-bd8d-3da227eef93e" name="Changes by Raghu" comment="" />
     <list id="9ef76fca-2f20-4472-a93e-d81279b1a739" name="Changes by srikumaravirneni" comment="" />
@@ -280,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677475145968</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="My bad G">
+      <created>1677533987007</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1677533987007</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -310,7 +312,8 @@
     <MESSAGE value="updates and fixes." />
     <MESSAGE value="Added get methods" />
     <MESSAGE value="Major testing revamp" />
-    <option name="LAST_COMMIT_MESSAGE" value="Major testing revamp" />
+    <MESSAGE value="My bad G" />
+    <option name="LAST_COMMIT_MESSAGE" value="My bad G" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -318,11 +321,20 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/manager/TutionManager.java</url>
           <line>77</line>
-          <properties class="manager.TutionManager">
+          <properties class="manager.TutionManager" method="finalAddPrint">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/student/Resident.java</url>
+          <line>33</line>
+          <properties class="student.Resident" method="tuitionDue">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

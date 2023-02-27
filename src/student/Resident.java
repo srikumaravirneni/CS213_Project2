@@ -44,11 +44,11 @@ public class Resident extends Student{
 
         if ( isValid(creditsEnrolled) && creditsEnrolled < partTime ) {
             return ( perCreditRate * ( creditsEnrolled ) ) + ( universityFee * 0.8 );
-        } else if ( isValid(creditsEnrolled) && creditsEnrolled < maxFullTime && creditsEnrolled > partTime ) {
+        } else if ( isValid(creditsEnrolled) && creditsEnrolled <= maxFullTime && creditsEnrolled > partTime ) {
             return tuition + universityFee - this.scholarship;
         } else if ( isValid(creditsEnrolled) && creditsEnrolled > maxFullTime ) {
             double total = tuition + universityFee + ( perCreditRate * ( creditsEnrolled - maxFullTime ) ) - this.scholarship;
-            return Double.parseDouble(dFormat.format(total));
+            return total;
         }
 
 
