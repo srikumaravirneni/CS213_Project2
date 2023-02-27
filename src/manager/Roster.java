@@ -21,10 +21,7 @@ public class Roster {
     private static final int ZERO = 0;
 
     public boolean empty() {
-        if ( this.size < ONE ) {
-            return true;
-        }
-         return false;
+        return this.size < ONE;
     }
 
     public Student[] getRoster() {
@@ -82,9 +79,7 @@ public class Roster {
 
         } else {
             Student[] rosterIncrease = new Student[this.size + 4];
-            for (int i = 0; i < this.size; i++) {
-                rosterIncrease[i] = this.roster[i];
-            }
+            if (this.size >= 0) System.arraycopy(this.roster, 0, rosterIncrease, 0, this.size);
             this.size += 4;
             this.roster = rosterIncrease;
 
@@ -305,7 +300,7 @@ public class Roster {
                 break;
             }
 
-            System.out.println(student.toString());
+            System.out.println(student);
         }
         System.out.println("* end of roster *");
     }
@@ -377,7 +372,7 @@ public class Roster {
             if (student == null) {
                 break;
             }
-            System.out.println(student.toString());
+            System.out.println(student);
         }
         System.out.println("* end of roster *");
     }
@@ -433,7 +428,7 @@ public class Roster {
                 break;
             }
 
-            System.out.println(student.toString());
+            System.out.println(student);
         }
         System.out.println("* end of roster *");
     }

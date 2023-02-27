@@ -8,9 +8,9 @@ import manager.Date;
  * @author Srikumar Avirneni
  */
 public class Profile implements Comparable<Profile> {
-    private String lname;
-    private String fname;
-    private Date dob;
+    private final String lname;
+    private final String fname;
+    private final Date dob;
 
     private static final int ZERO = 0;
 
@@ -101,10 +101,9 @@ public class Profile implements Comparable<Profile> {
     @Override
     public boolean equals(Object profileToCompare) {
 
-        if (!(profileToCompare instanceof Profile)) {
+        if (!(profileToCompare instanceof Profile profile)) {
             return false;
         }
-        Profile profile = (Profile) profileToCompare;
 
         return profile.getFname().equals(fname) && profile.getLname().equals(lname) && profile.getDob().equals(dob);
     }

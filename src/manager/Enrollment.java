@@ -30,17 +30,12 @@ public class Enrollment {
     }
 
     public boolean empty() {
-        if ( this.size < 1 ) {
-            return true;
-        }
-        return false;
+        return this.size < 1;
     }
 
     public void grow() {
         EnrollStudent[] arrayIncrease = new EnrollStudent[this.size + 4];
-        for (int i = 0; i < this.size; i++) {
-            arrayIncrease[i] = this.enrollStudents[i];
-        }
+        if (this.size >= 0) System.arraycopy(this.enrollStudents, 0, arrayIncrease, 0, this.size);
         this.size += 4;
         this.enrollStudents = arrayIncrease;
     }

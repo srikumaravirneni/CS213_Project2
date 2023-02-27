@@ -11,7 +11,7 @@ import student.Student;
  * @author Srikumar Avirneni
  */
 public class EnrollStudent {
-    private Profile profile;
+    private final Profile profile;
     private int creditsEnrolled;
 
     public EnrollStudent ( Profile profile, int creditsEnrolled ) {
@@ -34,11 +34,9 @@ public class EnrollStudent {
     @Override
     public boolean equals (Object enrollment ){
 
-        if (!(enrollment instanceof EnrollStudent)) {
+        if (!(enrollment instanceof EnrollStudent student)) {
             return false;
         }
-
-        EnrollStudent student = (EnrollStudent) enrollment;
 
         return this.profile.equals(student.getProfile()) && this.creditsEnrolled == student.getCreditsEnrolled();
     }
