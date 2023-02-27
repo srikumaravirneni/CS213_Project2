@@ -118,7 +118,7 @@ public class TutionManager {
             String status = studentRoster.containsProfile(tempProfile).getStatus();
             int enrolledCred = studentArr[i].getCreditsEnrolled();
             double tuitionDue = studentRoster.containsProfile(tempProfile).tuitionDue(enrolledCred);
-            System.out.println( tempProfile.toString() + "(" + status + ")" + " enrolled " + enrolledCred +
+            System.out.println( tempProfile.toString() + " (" + status + ")" + " enrolled " + enrolledCred +
                     " credits: "  + "tuition due: $" + dFormat.format(tuitionDue));
         }
         System.out.println("* end of tuition due *");
@@ -206,7 +206,7 @@ public class TutionManager {
                 System.out.println("(" + status + ") " + student.getCreditsEnrolled() + ": invalid credit hours.");
                 return false;
             }
-        } else if ( status.equals("International student study abroad") ) {
+        } else if ( status.equals("International studentstudy abroad") ) {
             if (student.getCreditsEnrolled() < minCredits || student.getCreditsEnrolled() > minCreditInternational ) {
                 System.out.println("(" + status + ") " + student.getCreditsEnrolled() + ": invalid credit hours.");
                 return false;
@@ -460,7 +460,7 @@ public class TutionManager {
             credits = studentInfo[5];
             major = studentInfo[4];
         } catch ( ArrayIndexOutOfBoundsException e ) {
-            System.out.println("Missing data in command line.");
+            System.out.println("Missing data in line command.");
             return true;
         }
         try {

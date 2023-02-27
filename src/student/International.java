@@ -66,7 +66,7 @@ public class International extends NonResident {
     public String getStatus() {
 
         if ( isStudyAbroad ) {
-            return "International student study abroad";
+            return "International studentstudy abroad";
         }
         return "International student";
     }

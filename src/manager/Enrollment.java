@@ -141,7 +141,7 @@ public class Enrollment {
         }
 
         System.out.println("** Enrollment **");
-        for ( int i = 0; i < this.size - 1; i++ ) {
+        for ( int i = 0; i < this.size; i++ ) {
             if ( enrollStudents[i] == null ) {
                 return;
             }
