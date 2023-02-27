@@ -3,6 +3,7 @@ import student.*;
 import java.io.File;
 
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -33,6 +34,8 @@ public class TutionManager {
 
         if ( inputText.equals("P") ) {
             studentRoster.print();
+        } else if ( inputText.equals("SE") ){
+            finalAddPrint();
         } else if ( (inputText.substring(ZERO, ONE)).equals("S") ){
                 updateScholarship(inputText);
         } else if ( (inputText.substring(ZERO, ONE)).equals("C") ) {
@@ -53,8 +56,6 @@ public class TutionManager {
             addInternationalStudent(inputText);
         } else if ( inputText.equals("PT") ){
                 printWithTuition();
-        } else if ( inputText.equals("SE") ){
-            //enrollment.addCreditsAndPrint();
         } else if ( inputText.equals("PE") ){
             enrollment.print();
         } else if (inputText.equals("PS")) {
@@ -74,8 +75,34 @@ public class TutionManager {
     }
 
 
+    public void finalAddPrint() {
+        EnrollStudent[] tempArray = enrollment.getEnrollStudents();
+        int size = enrollment.getSize();
+
+        for ( int i = 0; i < size; i++ ){
+            if ( tempArray[i] == null ) {
+                break;
+            }
+            int getCredEnrolled = tempArray[i].getCreditsEnrolled();
+            int totalCred = getCredEnrolled + studentRoster.containsProfile(tempArray[i].getProfile()).
+                    getCreditCompleted();
+            studentRoster.updateStudentCreds(tempArray[i].getProfile(), totalCred);
+        }
+        System.out.println("Credit completed has been updated.");
+        System.out.println("** list of students eligible for graduation **");
+        Student[] tempRoster = studentRoster.getRoster();
+        for ( int i = 0; i < tempRoster.length; i++ ) {
+            if ( tempRoster[i] == null ) {
+                break;
+            }
+            if ( tempRoster[i].getCreditCompleted() >= 120 ) {
+                System.out.println(tempRoster[i].toString());
+            }
+        }
+    }
 
     public void printWithTuition(){
+        DecimalFormat dFormat = new DecimalFormat("#,###.00");
         if (studentRoster.empty() ) {
             System.out.println("Student roster is empty!");
             return;
@@ -84,12 +111,15 @@ public class TutionManager {
         int arrSize = enrollment.getSize();
         System.out.println("** Tuition due **");
         for ( int i = 0; i < arrSize; i++ ) {
+            if ( studentArr[i] == null ) {
+                break;
+            }
             Profile tempProfile = studentArr[i].getProfile();
             String status = studentRoster.containsProfile(tempProfile).getStatus();
             int enrolledCred = studentArr[i].getCreditsEnrolled();
             double tuitionDue = studentRoster.containsProfile(tempProfile).tuitionDue(enrolledCred);
             System.out.println( tempProfile.toString() + "(" + status + ")" + " enrolled " + enrolledCred +
-                    " credits: "  + "tuition due: $" + tuitionDue);
+                    " credits: "  + "tuition due: $" + dFormat.format(tuitionDue));
         }
         System.out.println("* end of tuition due *");
 
@@ -117,36 +147,38 @@ public class TutionManager {
     public void updateScholarship(String inputText){
 
         String[] studentInfo = inputText.split("\\s+");
-        Profile tempProfile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
-        EnrollStudent student = enrollment.findProfile(tempProfile);
-        int scholarship;
 
-        if ( !isNumeric(studentInfo[4]) ){
-            System.out.println("Amount is not an integer.");
-            return;
-        } else {
-            scholarship = Integer.parseInt(studentInfo[4]);
+        try {
+            Profile tempProfile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
+            EnrollStudent student = enrollment.findProfile(tempProfile);
+            int scholarship;
+            if (studentRoster.containsProfile(tempProfile) == null) {
+                System.out.println(tempProfile.toString() + " is not in the roster.");
+                return;
+            } else if (!isNumeric(studentInfo[4])) {
+                System.out.println("Amount is not an integer.");
+                return;
+            } else  {
+                scholarship = Integer.parseInt(studentInfo[4]);
+            }
+            if (!(studentRoster.containsProfile(tempProfile).getStatus().equals("Resident"))) {
+                System.out.println(tempProfile.toString() + " (Non-Resident) is not eligible for the scholarship.");
+                return;
+            } else if ( student.getCreditsEnrolled() < 12) {
+                System.out.println(tempProfile.toString() + " part time student is not eligible for the scholarship.");
+                return;
+            } else if (!validAmount(inputText)) {
+                return;
+            }
+            if (studentRoster.containsProfile(tempProfile).getCreditCompleted() < 12) {
+                System.out.println(tempProfile.toString() + " part time student is not eligible for the scholarship.");
+                return;
+            }
+            studentRoster.updateScholarshipStudent(studentRoster.containsProfile(tempProfile), scholarship);
+            System.out.println(tempProfile.toString() + ": scholarship amount updated.");
+        }catch( ArrayIndexOutOfBoundsException e ){
+            System.out.println("Missing data in line command.");
         }
-
-        if ( !( studentRoster.containsProfile(tempProfile).getStatus().equals("Resident") ) ) {
-            System.out.println(tempProfile.toString() + " (Non-Resident) is not eligible for the scholarship.");
-            return;
-        }
-
-        if ( studentRoster.containsProfile(tempProfile) == null  ) {
-            System.out.println(tempProfile.toString() + " is not in the roster.");
-            return;
-        } else if ( !validAmount(inputText) ) {
-            return;
-        }
-        if ( studentRoster.containsProfile(tempProfile).getCreditCompleted() < 12 ) {
-            System.out.println(tempProfile.toString() + " part time student is not eligible for the scholarship.");
-            return;
-        }
-
-        studentRoster.updateScholarshipStudent(studentRoster.containsProfile(tempProfile), scholarship);
-        System.out.println(tempProfile.toString() + ": scholarship amount updated.");
-
     }
 
     public boolean correctCredits(EnrollStudent student){
@@ -608,20 +640,18 @@ public class TutionManager {
             try {
                 if (inputText.equals("")) {
                     continue;
+                } else if (inputText.substring(ZERO, ONE).equals("Q")) {
+                    System.out.println("Tuition Manager terminated.");
+                    System.exit(ZERO);
                 } else if (inputText.substring(ZERO, ONE).equals("R") || inputText.substring(ZERO, ONE).equals("D") ||
-                        inputText.equals("P") || inputText.equals("PS") || inputText.substring(ZERO, ONE).equals("E") ||
+                        inputText.equals("P") || inputText.equals("PS") ||  inputText.equals("SE") || inputText.substring(ZERO, ONE).equals("E") ||
                         inputText.substring(ZERO, ONE).equals("S") || inputText.equals("PC") || inputText.substring(ZERO, TWO).equals("LS") ||
                         inputText.substring(ZERO, ONE).equals("C") || inputText.substring(ZERO, TWO).equals("AR") ||
                         inputText.substring(ZERO, TWO).equals("AN") || inputText.substring(ZERO, TWO).equals("AT") ||
                         inputText.substring(ZERO, TWO).equals("AI") || inputText.substring(ZERO, TWO).equals("PT") ||
                         inputText.substring(ZERO, TWO).equals("PE")
                 ) {
-
                     input(inputText);
-
-                } else if (inputText.substring(ZERO, ONE).equals("Q")) {
-                    System.out.println("Tuition Manager terminated.");
-                    System.exit(ZERO);
                 } else {
                     System.out.println(inputText + " " + "is an invalid command!");
                 }

@@ -23,18 +23,16 @@ public class TriState extends NonResident {
         int fullTime = 12;
         int ctTuitionDiscount = 5000;
         int nyTuitionDiscount = 4000;
-        DecimalFormat dFormat = new DecimalFormat("###.##");
-        double total;
+
+
 
         if ( state.equals("NY") && creditsEnrolled >= fullTime ) {
-            total = tuitionDue(creditsEnrolled) - nyTuitionDiscount;
-            return Double.parseDouble(dFormat.format(total));
+            return super.tuitionDue(creditsEnrolled) - nyTuitionDiscount;
         } else if ( state.equals("CT") && creditsEnrolled >= fullTime ) {
-            total = tuitionDue(creditsEnrolled) - ctTuitionDiscount;
-            return Double.parseDouble(dFormat.format(total));
+            double superCred = super.tuitionDue(creditsEnrolled);
+            return superCred - ctTuitionDiscount;
         } else {
-            total = tuitionDue(creditsEnrolled);
-            return Double.parseDouble(dFormat.format(total));
+            return super.tuitionDue(creditsEnrolled);
         }
     }
 

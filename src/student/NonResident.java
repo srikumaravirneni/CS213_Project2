@@ -26,22 +26,16 @@ public class NonResident extends Student{
         int maxFullTime = 16;
         int partTime = 12;
         int perCreditRate = 966;
-        DecimalFormat dFormat = new DecimalFormat("###.##");
-        double total;
 
         if ( isValid(creditsEnrolled) && creditsEnrolled < partTime ) {
-
-            total = ( perCreditRate * ( creditsEnrolled ) ) + ( universityFee * 0.8 );
-            return Double.parseDouble(dFormat.format(total));
-        } else if ( isValid(creditsEnrolled) && creditsEnrolled < maxFullTime && creditsEnrolled > partTime ) {
-            total =  tuition + universityFee;
-            return Double.parseDouble(dFormat.format(total));
+            return ( perCreditRate * ( creditsEnrolled ) ) + ( universityFee * 0.8 );
+        } else if ( isValid(creditsEnrolled) && creditsEnrolled <= maxFullTime && creditsEnrolled > partTime ) {
+            return tuition + universityFee;
         } else if ( isValid(creditsEnrolled) && creditsEnrolled > maxFullTime ) {
-            total = tuition + universityFee + ( perCreditRate * ( creditsEnrolled - maxFullTime ) );
-            return Double.parseDouble(dFormat.format(total));
+            return tuition + universityFee + ( perCreditRate * ( creditsEnrolled - maxFullTime ) );
         }
 
-        return 0;
+        return 0.00;
     }
 
     @Override

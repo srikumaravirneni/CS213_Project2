@@ -27,6 +27,10 @@ public class Roster {
          return false;
     }
 
+    public Student[] getRoster() {
+        return this.roster;
+    }
+
     /**
      * Searches for the given student in the roster and returns its index in the array if present.
      *
@@ -53,6 +57,9 @@ public class Roster {
 
     public boolean updateScholarshipStudent( Student rStudent, int scholarship ){
         for (int i = 0; i < roster.length; i++) {
+            if ( roster[i] == null ) {
+                break;
+            }
             if (roster[i].equals(rStudent)) {
                 Resident resStudent = (Resident) roster[i]; // cast the object to Subclass
                 resStudent.setScholarship(scholarship); // call the subclass method
@@ -373,6 +380,17 @@ public class Roster {
             System.out.println(student.toString());
         }
         System.out.println("* end of roster *");
+    }
+
+    public void updateStudentCreds(Profile profile, int credits) {
+        for ( int i = 0; i < this.size; i++ ) {
+            if ( roster[i] == null ) {
+                break;
+            }
+            if( roster[i].getProfile().equals(profile)) {
+                roster[i].setCreditCompleted(credits);
+            }
+        }
     }
 
 

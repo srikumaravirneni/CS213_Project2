@@ -29,21 +29,18 @@ public class International extends NonResident {
         int perCreditRate = 966;
         int insuranceFees = 2650;
 
-        DecimalFormat dFormat = new DecimalFormat("###.##");
+        DecimalFormat dFormat = new DecimalFormat("#,###.00");
 
         if ( !isStudyAbroad ) {
             if ( isValid(creditsEnrolled) && creditsEnrolled < fullTime ) {
-                total = ( perCreditRate * ( creditsEnrolled ) ) + ( universityFee * 0.8 );
-                return Double.parseDouble(dFormat.format(total));
+                return ( perCreditRate * ( creditsEnrolled ) ) + ( universityFee * 0.8 );
             } else if ( isValid(creditsEnrolled) && creditsEnrolled < maxFullTime && creditsEnrolled >= fullTime ) {
-                total = tuition + universityFee + insuranceFees;
-                return Double.parseDouble(dFormat.format(total));
+                return tuition + universityFee + insuranceFees;
             } else if ( isValid(creditsEnrolled) && creditsEnrolled > maxFullTime ) {
-                total = tuition + universityFee + ( perCreditRate * ( creditsEnrolled - maxFullTime ) ) + insuranceFees;
-                return Double.parseDouble(dFormat.format(total));
+                return tuition + universityFee + ( perCreditRate * ( creditsEnrolled - maxFullTime ) ) + insuranceFees;
             }
         } else if ( isStudyAbroad ) {
-            return Double.parseDouble(dFormat.format(universityFee+insuranceFees));
+            return universityFee+insuranceFees;
         }
 
 

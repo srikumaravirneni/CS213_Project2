@@ -40,19 +40,17 @@ public class Resident extends Student{
         int partTime = 12;
         int perCreditRate = 404;
 
-        DecimalFormat dFormat = new DecimalFormat("###.##");
+
 
         if ( isValid(creditsEnrolled) && creditsEnrolled < partTime ) {
             return ( perCreditRate * ( creditsEnrolled ) ) + ( universityFee * 0.8 );
-        } else if ( isValid(creditsEnrolled) && creditsEnrolled < maxFullTime && creditsEnrolled > partTime ) {
-            return tuition + universityFee - this.scholarship;
+        } else if ( isValid(creditsEnrolled) && creditsEnrolled <= maxFullTime && creditsEnrolled > partTime ) {
+           return tuition + universityFee - this.scholarship;
         } else if ( isValid(creditsEnrolled) && creditsEnrolled > maxFullTime ) {
-            double total = tuition + universityFee + ( perCreditRate * ( creditsEnrolled - maxFullTime ) ) - this.scholarship;
-            return Double.parseDouble(dFormat.format(total));
+            return tuition + universityFee + ( perCreditRate * ( creditsEnrolled - maxFullTime ) ) - this.scholarship;
         }
 
-
-        return 0;
+        return 0.00;
     }
 
     @Override

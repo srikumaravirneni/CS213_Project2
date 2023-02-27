@@ -28,8 +28,12 @@ public abstract class Student implements Comparable<Student> {
         this.creditCompleted = creditCompleted;
     }
 
+    public void setCreditCompleted(int creditCompleted) {
+        this.creditCompleted = creditCompleted;
+    }
+
     public boolean isValid(int creditEnrolled) {
-        if ( this.creditCompleted < 3 || this.creditCompleted > 24 ){
+        if ( creditEnrolled < 3 || creditEnrolled > 24 ){
             return false;
         }
         return true;
