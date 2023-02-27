@@ -35,7 +35,7 @@ public class International extends NonResident {
             if ( isValid(creditsEnrolled) && creditsEnrolled < fullTime ) {
                 total = ( perCreditRate * ( creditsEnrolled ) ) + ( universityFee * 0.8 );
                 return Double.parseDouble(dFormat.format(total));
-            } else if ( isValid(creditsEnrolled) && creditsEnrolled < maxFullTime && creditsEnrolled > fullTime ) {
+            } else if ( isValid(creditsEnrolled) && creditsEnrolled < maxFullTime && creditsEnrolled >= fullTime ) {
                 total = tuition + universityFee + insuranceFees;
                 return Double.parseDouble(dFormat.format(total));
             } else if ( isValid(creditsEnrolled) && creditsEnrolled > maxFullTime ) {
@@ -43,7 +43,7 @@ public class International extends NonResident {
                 return Double.parseDouble(dFormat.format(total));
             }
         } else if ( isStudyAbroad ) {
-
+            return Double.parseDouble(dFormat.format(universityFee+insuranceFees));
         }
 
 

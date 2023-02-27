@@ -42,11 +42,12 @@ public class Date implements Comparable<Date> {
         this.year = Integer.parseInt(dateSplit[2]);
     }
 
-    /**
+    /*
+
      * This main method is serving as a testBed to test the isValid() class.
      *
      * @param args
-     */
+
     public static void main(String[] args) {
         System.out.println("Date isValid() Testbed running... \n");
         boolean expectedOutput;
@@ -81,13 +82,13 @@ public class Date implements Comparable<Date> {
         testResult(dateTest7, expectedOutput, actualOutput);
     }
 
-    /**
+
      * This is a helper method for the testBed to help determine whether the expected output matches the expected input.
      *
      * @param date           date object to test.
      * @param expectedOutput the output the user expects to see.
      * @param actualOutput   the output returned.
-     */
+
     private static void testResult(Date date, boolean expectedOutput, boolean actualOutput) {
         System.out.println(date.toString());
         System.out.println("Date isValid() method returns " + actualOutput);
@@ -98,7 +99,7 @@ public class Date implements Comparable<Date> {
             System.out.println("FAIL.\n");
         }
     }
-
+    */
     /**
      * This method calculates whether the objects year is a leap year or not.
      *
