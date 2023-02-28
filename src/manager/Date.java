@@ -42,72 +42,14 @@ public class Date implements Comparable<Date> {
         this.year = Integer.parseInt(dateSplit[2]);
     }
 
-    /*
-
-     * This main method is serving as a testBed to test the isValid() class.
-     *
-     * @param args
-
-    public static void main(String[] args) {
-        System.out.println("Date isValid() Testbed running... \n");
-        boolean expectedOutput;
-        boolean actualOutput;
-        Date dateTest1 = new Date("11/21/800");
-        expectedOutput = false;
-        actualOutput = dateTest1.isValid();
-        testResult(dateTest1, expectedOutput, actualOutput);
-        Date dateTest2 = new Date("2/29/2003");
-        expectedOutput = false;
-        actualOutput = dateTest2.isValid();
-        testResult(dateTest2, expectedOutput, actualOutput);
-        Date dateTest3 = new Date("13/31/2003");
-        expectedOutput = false;
-        actualOutput = dateTest3.isValid();
-        testResult(dateTest3, expectedOutput, actualOutput);
-        Date dateTest4 = new Date("4/31/2003");
-        expectedOutput = false;
-        actualOutput = dateTest4.isValid();
-        testResult(dateTest4, expectedOutput, actualOutput);
-        Date dateTest5 = new Date("-1/2/2007");
-        expectedOutput = false;
-        actualOutput = dateTest5.isValid();
-        testResult(dateTest5, expectedOutput, actualOutput);
-        Date dateTest6 = new Date("1/2/2007");
-        expectedOutput = true;
-        actualOutput = dateTest6.isValid();
-        testResult(dateTest6, expectedOutput, actualOutput);
-        Date dateTest7 = new Date("5/1/1996");
-        expectedOutput = true;
-        actualOutput = dateTest7.isValid();
-        testResult(dateTest7, expectedOutput, actualOutput);
-    }
-
-
-     * This is a helper method for the testBed to help determine whether the expected output matches the expected input.
-     *
-     * @param date           date object to test.
-     * @param expectedOutput the output the user expects to see.
-     * @param actualOutput   the output returned.
-
-    private static void testResult(Date date, boolean expectedOutput, boolean actualOutput) {
-        System.out.println(date.toString());
-        System.out.println("Date isValid() method returns " + actualOutput);
-
-        if (actualOutput == expectedOutput) {
-            System.out.println("PASS.\n");
-        } else {
-            System.out.println("FAIL.\n");
-        }
-    }
-    */
     /**
      * This method calculates whether the objects year is a leap year or not.
      *
      * @return boolean true for leap year and false for not a leap year.
      */
     private boolean isLeap() {
-        if (this.year % QUADRENNIAL == ZERO) {
-            if (this.year % CENTENNIAL == ZERO) {
+        if ( this.year % QUADRENNIAL == ZERO ) {
+            if ( this.year % CENTENNIAL == ZERO ) {
                 return this.year % QUATERCENTENNIAL == ZERO;
             } else {
                 return true;
@@ -125,7 +67,6 @@ public class Date implements Comparable<Date> {
      * @return boolean indicates true if the objects day field is within limits or returns false otherwise.
      */
     public boolean rightLength(int monthLength) {
-
         return this.day <= monthLength && this.month >= ONE;
     }
 
@@ -144,21 +85,21 @@ public class Date implements Comparable<Date> {
         int minYear = 1900;
 
 
-        if (this.year < minYear) {
+        if ( this.year < minYear ) {
             return false;
         }
 
-        if (this.month == Calendar.JANUARY + 1 || this.month == Calendar.MARCH + 1 || this.month == Calendar.MAY + 1 ||
+        if ( this.month == Calendar.JANUARY + 1 || this.month == Calendar.MARCH + 1 || this.month == Calendar.MAY + 1 ||
                 this.month == Calendar.JULY + 1 || this.month == Calendar.AUGUST + 1 || this.month == Calendar.OCTOBER
-                + 1 || this.month == Calendar.DECEMBER + 1) {
+                + 1 || this.month == Calendar.DECEMBER + 1 ) {
             return rightLength(longMonth);
-        } else if (this.month == Calendar.APRIL + 1 || this.month == Calendar.JUNE + 1 ||
-                this.month == Calendar.SEPTEMBER + 1 || this.month == Calendar.NOVEMBER + 1) {
+        } else if ( this.month == Calendar.APRIL + 1 || this.month == Calendar.JUNE + 1 ||
+                this.month == Calendar.SEPTEMBER + 1 || this.month == Calendar.NOVEMBER + 1 ) {
             return rightLength(shortMonth);
         }
-        if (isLeap() && this.month == Calendar.FEBRUARY + 1) {
+        if ( isLeap() && this.month == Calendar.FEBRUARY + 1 ) {
             return rightLength(leapMonth);
-        } else if (!isLeap() && this.month == Calendar.FEBRUARY + 1) {
+        } else if ( !isLeap() && this.month == Calendar.FEBRUARY + 1 ) {
             return rightLength(nonLeap);
         }
         return false;
@@ -230,21 +171,21 @@ public class Date implements Comparable<Date> {
         int greaterThan = 1;
         int equal = 0;
 
-        if (this.year == other.getYear()) {
-            if (this.month == other.getMonth()) {
-                if (this.day == other.getDay()) {
+        if ( this.year == other.getYear() ) {
+            if ( this.month == other.getMonth() ) {
+                if ( this.day == other.getDay() ) {
                     return equal;
-                } else if (this.day < other.getDay()) {
+                } else if ( this.day < other.getDay() ) {
                     return lessThan;
                 } else {
                     return greaterThan;
                 }
-            } else if (this.month < other.getMonth()) {
+            } else if ( this.month < other.getMonth() ) {
                 return lessThan;
             } else {
                 return greaterThan;
             }
-        } else if (this.year < other.getYear()) {
+        } else if ( this.year < other.getYear() ) {
             return lessThan;
         } else {
             return greaterThan;
@@ -262,8 +203,8 @@ public class Date implements Comparable<Date> {
 
         int ageLimit = 16;
 
-        if (this.year - other.getYear() == ageLimit) {
-            if (this.month == other.getMonth()) {
+        if ( this.year - other.getYear() == ageLimit ) {
+            if ( this.month == other.getMonth() ) {
                 return this.day < other.getDay();
             } else return this.month <= other.getMonth();
         } else return this.year - other.getYear() < ageLimit;
@@ -278,7 +219,7 @@ public class Date implements Comparable<Date> {
     @Override
     public boolean equals(Object dateToCompare) {
 
-        if (!(dateToCompare instanceof Date date)) {
+        if ( !( dateToCompare instanceof Date date ) ) {
             return false;
         }
 

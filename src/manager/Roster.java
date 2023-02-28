@@ -20,10 +20,18 @@ public class Roster {
     private static final int NEGATIVE_ONE = -1;
     private static final int ZERO = 0;
 
+    /**
+     * Checks if the roster is empty based on size of roster array.
+     * @return true if the size is less than one otherwise false.
+     */
     public boolean empty() {
         return this.size < ONE;
     }
 
+    /**
+     * Returns the roster array of student object.
+     * @return the student roster array.
+     */
     public Student[] getRoster() {
         return this.roster;
     }
@@ -36,28 +44,30 @@ public class Roster {
      */
     private int find(Student student) {
 
-        for (int i = ZERO; i < size; i++) {
-            if (roster[i] == null) {
+        for ( int i = ZERO; i < size; i++ ) {
+            if ( roster[i] == null ) {
                 break;
             }
-            if (roster[i].equals(student)) {
+            if ( roster[i].equals(student) ) {
                 return i;
             }
         }
         return NOT_FOUND;
     }
 
-    public int getSize(){
-        return this.size;
-    }
 
-
+    /**
+     * This method updates the scholarship of a student in roster.
+     * @param rStudent student for which the scholarship must be updated
+     * @param scholarship the amount that needs to be added to scholarship for a student.
+     * @return true if student has been found and scholarship has been updated successfully, otherwise false.
+     */
     public boolean updateScholarshipStudent( Student rStudent, int scholarship ){
-        for (int i = 0; i < roster.length; i++) {
+        for ( int i = 0; i < roster.length; i++ ) {
             if ( roster[i] == null ) {
                 break;
             }
-            if (roster[i].equals(rStudent)) {
+            if ( roster[i].equals(rStudent) ) {
                 Resident resStudent = (Resident) roster[i]; // cast the object to Subclass
                 resStudent.setScholarship(scholarship); // call the subclass method
                 return true;
@@ -68,18 +78,18 @@ public class Roster {
 
 
 
-/**
- * Method increases the array capacity by 4 if the array is full.
- */
+    /**
+     * Method increases the array capacity by 4 if the array is full.
+     */
     private void grow() {
-        if (this.size == ZERO) {
+        if ( this.size == ZERO ) {
             Student[] rosterIncrease = new Student[4];
             this.size += 4;
             this.roster = rosterIncrease;
 
         } else {
             Student[] rosterIncrease = new Student[this.size + 4];
-            if (this.size >= 0) System.arraycopy(this.roster, 0, rosterIncrease, 0, this.size);
+            if ( this.size >= 0 ) System.arraycopy(this.roster, 0, rosterIncrease, 0, this.size);
             this.size += 4;
             this.roster = rosterIncrease;
 
@@ -93,12 +103,34 @@ public class Roster {
      * @param student student that needs to be added.
      */
     private void addStudent(Student student) {
-        for (int i = ZERO; i < size; i++) {
-            if (roster[i] == null) {
+        for ( int i = ZERO; i < size; i++ ) {
+            if ( roster[i] == null ) {
                 roster[i] = student;
                 break;
             }
         }
+    }
+
+    /**
+     * The method checks if the enrolling student status is valid or not.
+     * @param status the status of student enrolled.
+     * @return true if status exists otherwise false.
+     */
+    public boolean statusChecker( String status) {
+        if ( status.equals("Resident") ) {
+            return true;
+        } else if (status.equals("Non-Resident")) {
+            return true;
+        } else if ( status.equals("International student study abroad") ) {
+            return true;
+        } else if (  status.equals("International student") ) {
+            return true;
+        } else if ( status.equals("Tri-state NY") ) {
+            return true;
+        } else if ( status.equals("Tri-state CT") ) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -110,7 +142,17 @@ public class Roster {
      */
     public boolean add(Student student) {
 
-        if (this.size <= ZERO || this.roster == null || roster[size - 1] != null) {
+        String status = student.getStatus();
+
+        if ( !(student.getProfile().getDob()).isValid() ) {
+            return false;
+        } else if ( !statusChecker(status) ) {
+            return false;
+        } else if ( student.getCreditCompleted() < 0 ) {
+            return false;
+        }
+
+        if ( this.size <= ZERO || this.roster == null || roster[size - 1] != null ) {
             grow();
             addStudent(student);
             return true;
@@ -126,7 +168,7 @@ public class Roster {
      * @param position the position from which rearrangement of roster must be done.
      */
     private void rearrangeRoster(int position) {
-        for (int i = position; i < size - 1; i++) {
+        for ( int i = position; i < size - 1; i++ ) {
             roster[i] = roster[i + 1];
         }
     }
@@ -139,11 +181,11 @@ public class Roster {
      * @return true if the student has been found and removed, false otherwise.
      */
     public boolean remove(Student student) {
-        if (this.size < ONE) {
+        if ( this.size < ONE ) {
             return false;
         }
         int i = find(student);
-        if (i != NOT_FOUND) {
+        if ( i != NOT_FOUND ) {
             roster[i] = null;
             rearrangeRoster(i);
             return true;
@@ -162,15 +204,15 @@ public class Roster {
         Student[] schoolList = new Student[this.size];
         int counter = ZERO;
 
-        for (int i = ZERO; i < this.size; i++) {
+        for ( int i = ZERO; i < this.size; i++ ) {
 
-            if (roster[i] == null) {
+            if ( roster[i] == null ) {
                 break;
             }
 
             String currentSchoolName = roster[i].getMajor().getSchoolName();
 
-            if (currentSchoolName.equals(schoolName)) {
+            if ( currentSchoolName.equals(schoolName) ) {
                 schoolList[counter] = roster[i];
                 counter++;
             }
@@ -186,7 +228,7 @@ public class Roster {
      * @param major   The new major that should be replaced with the existing major.
      */
     public void changeMajor(Profile profile, String major) {
-        if (containsProfile(profile) == null) {
+        if ( containsProfile(profile) == null ) {
             return;
         }
         Student toChange = containsProfile(profile);
@@ -200,15 +242,15 @@ public class Roster {
      * @return true if student exists in the roster, false otherwise.
      */
     public boolean contains(Student student) {
-        if (this.size < ONE) {
+        if ( this.size < ONE ) {
             return false;
         }
         int i = ZERO;
-        while (i < size) {
-            if (this.roster[i] == null) {
+        while ( i < size ) {
+            if ( this.roster[i] == null ) {
                 break;
             }
-            if (roster[i].equals(student)) {
+            if ( roster[i].equals(student) ) {
                 return true;
             }
             i++;
@@ -224,18 +266,18 @@ public class Roster {
      */
     public Student containsProfile(Profile profile) {
 
-        if (this.size < ONE) {
+        if ( this.size < ONE ) {
             return null;
         }
 
         int i = ZERO;
-        while (i < size) {
+        while ( i < size ) {
 
-            if (this.roster[i] == null) {
+            if ( this.roster[i] == null ) {
                 break;
             }
 
-            if (roster[i].getProfile().equals(profile)) {
+            if ( roster[i].getProfile().equals(profile) ) {
                 return roster[i];
             }
             i++;
@@ -252,7 +294,7 @@ public class Roster {
      */
     public Student[] sortByName(Student[] students, int arrayLength) {
 
-        for (int i = ZERO; i < arrayLength - 1; i++) {
+        for ( int i = ZERO; i < arrayLength - 1; i++ ) {
 
             if (students[i] == null) {
                 break;
@@ -260,7 +302,7 @@ public class Roster {
 
             int pointer = i;
 
-            for (int j = i + 1; j < arrayLength; j++) {
+            for ( int j = i + 1; j < arrayLength; j++ ) {
                 if (students[j] == null) {
                     break;
                 }
@@ -283,11 +325,11 @@ public class Roster {
      */
     public void print() {
 
-        if (this.size < ONE) {
+        if ( this.size < ONE ) {
             System.out.println("Student roster is empty!");
             return;
         }
-        if (this.roster[1] == null) {
+        if ( this.roster[1] == null ) {
             System.out.println(this.roster[ZERO].toString());
             return;
         }
@@ -295,8 +337,8 @@ public class Roster {
         System.out.println("** Student roster sorted by last name, first name, DOB **");
         Student[] sortedArray = sortByName(this.roster, size);
 
-        for (Student student : sortedArray) {
-            if (student == null) {
+        for ( Student student : sortedArray ) {
+            if ( student == null ) {
                 break;
             }
 
@@ -319,7 +361,7 @@ public class Roster {
 
         int schoolCompare = schoolName1.compareTo(schoolName2);
 
-        if (schoolCompare == ZERO) {
+        if ( schoolCompare == ZERO ) {
             return major1.toString().compareTo(major2.toString());
         }
         return schoolCompare;
@@ -330,37 +372,36 @@ public class Roster {
      */
     public void printBySchoolMajor() {
 
-        if (this.size < ONE) {
+        if ( this.size < ONE ) {
             System.out.println("Student roster is empty!");
             return;
         }
-        if (this.roster[ONE] == null) {
+        if ( this.roster[ONE] == null ) {
             System.out.println(this.roster[0].toString());
             return;
         }
 
-
         System.out.println("** Student roster sorted by school, major **");
-        if (this.size < ONE) {
+        if ( this.size < ONE ) {
             System.out.println("Student roster is empty!");
             return;
         }
-        if (roster[ONE] == null) {
+        if ( roster[ONE] == null ) {
             System.out.println(roster[ZERO].toString());
             return;
         }
-        for (int i = ZERO; i < size - 1; i++) {
-            if (roster[i] == null) {
+        for ( int i = ZERO; i < size - 1; i++ ) {
+            if ( roster[i] == null ) {
                 break;
             }
             int pointer = i;
-            for (int j = i + 1; j < size; j++) {
-                if (roster[j] == null) {
+            for ( int j = i + 1; j < size; j++ ) {
+                if ( roster[j] == null ) {
                     break;
                 }
                 Major tempMajor = roster[pointer].getMajor();
                 Major iterateMajor = roster[j].getMajor();
-                if (compareMajor(iterateMajor, tempMajor) < ZERO) {
+                if ( compareMajor(iterateMajor, tempMajor) < ZERO ) {
                     pointer = j;
                 }
             }
@@ -368,8 +409,8 @@ public class Roster {
             roster[pointer] = roster[i];
             roster[i] = tempStudent;
         }
-        for (Student student : roster) {
-            if (student == null) {
+        for ( Student student : roster ) {
+            if ( student == null ) {
                 break;
             }
             System.out.println(student);
@@ -377,43 +418,47 @@ public class Roster {
         System.out.println("* end of roster *");
     }
 
+    /**
+     * Adding enrolled credits to completed credits.
+     * @param profile the profile for which completed credits must be added.
+     * @param credits the number of credits that need to be added to completed credits.
+     */
     public void updateStudentCreds(Profile profile, int credits) {
         for ( int i = 0; i < this.size; i++ ) {
             if ( roster[i] == null ) {
                 break;
             }
-            if( roster[i].getProfile().equals(profile)) {
+            if( roster[i].getProfile().equals(profile) ) {
                 roster[i].setCreditCompleted(credits);
             }
         }
     }
 
-
     /**
-     * prints roster by standing.
+     * Prints roster by standing.
      */
     public void printByStanding() {
-        if (this.size < ONE) {
+        if ( this.size < ONE ) {
             System.out.println("Student roster is empty!");
             return;
         }
-        if (roster[ONE] == null) {
+        if ( roster[ONE] == null ) {
             System.out.println(roster[0].toString());
             return;
         }
         System.out.println("** Student roster sorted by standing **");
-        for (int i = ZERO; i < size - 1; i++) {
-            if (roster[i] == null) {
+        for ( int i = ZERO; i < size - 1; i++ ) {
+            if ( roster[i] == null ) {
                 break;
             }
             int pointer = i;
-            for (int j = i + 1; j < size; j++) {
-                if (roster[j] == null) {
+            for ( int j = i + 1; j < size; j++ ) {
+                if ( roster[j] == null ) {
                     break;
                 }
                 String currentStanding = roster[j].standing(roster[j].getCreditCompleted());
                 String tempStanding = roster[pointer].standing(roster[pointer].getCreditCompleted());
-                if (currentStanding.compareTo(tempStanding) < ZERO) {
+                if ( currentStanding.compareTo(tempStanding) < ZERO ) {
                     pointer = j;
                 }
             }
@@ -423,8 +468,8 @@ public class Roster {
         }
 
 
-        for (Student student : roster) {
-            if (student == null) {
+        for ( Student student : roster ) {
+            if ( student == null ) {
                 break;
             }
 
@@ -432,14 +477,4 @@ public class Roster {
         }
         System.out.println("* end of roster *");
     }
-
-    public String getStatus(Profile profile) {
-        for ( int i = 0; i < size; i++) {
-            if ( roster[i].getProfile().equals(profile) ) {
-                return roster[i].getStatus();
-            }
-        }
-        return null;
-    }
-
 }

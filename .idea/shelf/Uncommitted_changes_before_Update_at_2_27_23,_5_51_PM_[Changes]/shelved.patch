@@ -1,0 +1,694 @@
+Index: src/manager/Enrollment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package manager;\nimport student.International;\nimport student.Major;\nimport student.Profile;\nimport student.Student;\n\n/**\n * Enrollment class that stores a list of enrolled students\n *\n * @author Raghunandan Wable\n * @author Srikumar Avirneni\n */\npublic class Enrollment {\n\n    private EnrollStudent[] enrollStudents;\n    private int size;\n\n\n    public Enrollment() {\n        this.enrollStudents = new EnrollStudent[4];\n        this.size = 4;\n    }\n\n    public EnrollStudent[] getEnrollStudents() {\n        return enrollStudents;\n    }\n\n    public int getSize() {\n        return this.size;\n    }\n\n    public boolean empty() {\n        return this.size < 1;\n    }\n\n    public void grow() {\n        EnrollStudent[] arrayIncrease = new EnrollStudent[this.size + 4];\n        if (this.size >= 0) System.arraycopy(this.enrollStudents, 0, arrayIncrease, 0, this.size);\n        this.size += 4;\n        this.enrollStudents = arrayIncrease;\n    }\n\n\n    public void add(EnrollStudent enrollStudent){\n\n        if ( this.enrollStudents[this.size -1] != null ) {\n            grow();\n        }\n        for ( int i = 0; i < this.size; i++ ) {\n            if ( this.enrollStudents[i] == null ) {\n                enrollStudents[i] = enrollStudent;\n                break;\n            }\n        }\n    } //add to the end of array\n\n    public EnrollStudent findProfile ( Profile enrollmentStudent ) {\n        for ( int i = 0; i < this.size; i++ ) {\n            if ( enrollStudents[i] == null ) {\n                return null;\n            } else if ( enrollStudents[i].getProfile().equals(enrollmentStudent)) {\n                return enrollStudents[i];\n            }\n        }\n        return null;\n    }\n\n\n\n    public void updateEnrollment(int index, int newCredits) {\n        this.enrollStudents[index].setCreditsEnrolled(newCredits);\n    }\n\n    public EnrollStudent getEnrollment (int index) {\n        return enrollStudents[index];\n    }\n\n    public int findEnrollmentProfile ( Profile profile ) {\n        for ( int i = 0; i < this.size; i++ ) {\n            if ( enrollStudents[i] == null ) {\n                return -1;\n            } else if ( enrollStudents[i].getProfile().equals(profile) ) {\n                return i;\n            }\n        }\n        return -1;\n    }\n\n    public int findEnrollment ( EnrollStudent enrollmentStudent ) {\n        for ( int i = 0; i < this.size; i++ ) {\n            if ( enrollStudents[i] == null ) {\n                return -1;\n            } else if ( enrollStudents[i].equals(enrollmentStudent) ) {\n                return i;\n            }\n        }\n        return -1;\n    }\n\n    public void rearrange (int currIndex){\n\n        int i = 0;\n        while ( i < this.size - 1 ) {\n            if ( this.enrollStudents[i] == null && i != currIndex) {\n                break;\n            }\n            i++;\n        }\n        this.enrollStudents[currIndex] = this.enrollStudents[i];\n        this.enrollStudents[i] = null;\n\n    }\n\n    //move the last one in the array to replace the deleting index position\n    public void remove (EnrollStudent enrollStudent) {\n        int index = findEnrollment(enrollStudent);\n        if ( index == -1 ) {\n            return;\n        } else {\n            enrollStudents[index] = null;\n        }\n        rearrange(index);\n    }\n\n    public boolean contains(EnrollStudent enrollStudent){\n        for ( int i = 0; i < this.size; i++ ) {\n            if ( enrollStudents[i] == null ) {\n                return false;\n            } else if ( enrollStudents[i] == enrollStudent ) {\n                return true;\n            }\n        }\n        return false;\n    }\n\n    public void print() {\n\n        if ( enrollStudents[0] == null) {\n            System.out.println(\"Enrollment is empty!\");\n            return;\n        }\n\n        System.out.println(\"** Enrollment **\");\n        for ( int i = 0; i < this.size - 1; i++ ) {\n            if ( enrollStudents[i] == null ) {\n                return;\n            }\n            System.out.println(enrollStudents[i].toString());\n        }\n\n        System.out.println(\"* end of enrollment *\");\n\n    } //print the array as is without sorting\n\n\n\n\n\n}\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/manager/Enrollment.java b/src/manager/Enrollment.java
+--- a/src/manager/Enrollment.java	(revision 8f6312ad4a3ebeb1bfdb4464c1a162fd0377a1e7)
++++ b/src/manager/Enrollment.java	(date 1677538262670)
+@@ -1,8 +1,5 @@
+ package manager;
+-import student.International;
+-import student.Major;
+ import student.Profile;
+-import student.Student;
+ 
+ /**
+  * Enrollment class that stores a list of enrolled students
+@@ -12,35 +9,58 @@
+  */
+ public class Enrollment {
+ 
+-    private EnrollStudent[] enrollStudents;
+-    private int size;
++    private EnrollStudent[] enrollStudents; //array that stored enrolled students
++    private int size; //size of EnrollStudent array.
+ 
+-
++    /**
++     * Method initializes the enrollStudents array with size of 4.
++     */
+     public Enrollment() {
+         this.enrollStudents = new EnrollStudent[4];
+         this.size = 4;
+     }
+ 
++    /**
++     * Returns the EnrollStudent[] array
++     *
++     * @return EnrollStudent[] enrollStudents array
++     */
+     public EnrollStudent[] getEnrollStudents() {
+         return enrollStudents;
+     }
+ 
++    /**
++     * Returns the size of enrollStudents array
++     * @return size of enrollStudents array
++     */
+     public int getSize() {
+         return this.size;
+     }
+ 
++    /**
++     * Returns true or false based on enrollStudents array size.
++     * @return true if size is less than one, else returns false.
++     */
+     public boolean empty() {
+         return this.size < 1;
+     }
+ 
++    /**
++     * Increases the size of enrollStudents array by 4.
++     */
+     public void grow() {
+         EnrollStudent[] arrayIncrease = new EnrollStudent[this.size + 4];
+-        if (this.size >= 0) System.arraycopy(this.enrollStudents, 0, arrayIncrease, 0, this.size);
++        if ( this.size >= 0 ) {
++            System.arraycopy(this.enrollStudents, 0, arrayIncrease, 0, this.size);
++        }
+         this.size += 4;
+         this.enrollStudents = arrayIncrease;
+     }
+ 
+-
++    /**
++     * The method adds students to the end of enrollStudents array.
++     * @param enrollStudent the student that needs to be enrolled/ added the enrollStudents array.
++     */
+     public void add(EnrollStudent enrollStudent){
+ 
+         if ( this.enrollStudents[this.size -1] != null ) {
+@@ -52,29 +72,45 @@
+                 break;
+             }
+         }
+-    } //add to the end of array
++    }
+ 
++    /**
++     * Tme method looks for the enrollmentStudent profile and returns the enrollStudent object.
++     * @param enrollmentStudent the student that needs to be searched for.
++     * @return the student of the profile that is being searched otherwise returns null.
++     */
+     public EnrollStudent findProfile ( Profile enrollmentStudent ) {
+         for ( int i = 0; i < this.size; i++ ) {
+             if ( enrollStudents[i] == null ) {
+                 return null;
+-            } else if ( enrollStudents[i].getProfile().equals(enrollmentStudent)) {
++            } else if ( enrollStudents[i].getProfile().equals( enrollmentStudent ) ) {
+                 return enrollStudents[i];
+             }
+         }
+         return null;
+     }
+ 
+-
+-
++    /** Update the number of credits the student has enrolled.
++     * @param index the index of the student object whose enrollment needs to be changed.
++     * @param newCredits the number of credits that the currently enrolled credits need to be replaced with.
++     */
+     public void updateEnrollment(int index, int newCredits) {
+         this.enrollStudents[index].setCreditsEnrolled(newCredits);
+     }
+ 
++    /**
++     * Get enrollment of a specific index in EnrollStudent array.
++     * @param index the index for which the enrollment must be returned.
++     * @return the enrollStudents of the index value.
++     */
+     public EnrollStudent getEnrollment (int index) {
+         return enrollStudents[index];
+     }
+ 
++    /**
++     * The profile that needs to be searched for in the enrollStudents array.
++     * @return the index of the profile in the enrollStudents array otherwise -1(if not found).
++     */
+     public int findEnrollmentProfile ( Profile profile ) {
+         for ( int i = 0; i < this.size; i++ ) {
+             if ( enrollStudents[i] == null ) {
+@@ -86,6 +122,11 @@
+         return -1;
+     }
+ 
++    /**
++     * The method looks for enrollmentStudent from enrollStudents array.
++     * @param enrollmentStudent the enrolled student that needs to be searched for in the enrollStudents array.
++     * @return the index of enrollmentStudent value in enrollStudents array.
++     * */
+     public int findEnrollment ( EnrollStudent enrollmentStudent ) {
+         for ( int i = 0; i < this.size; i++ ) {
+             if ( enrollStudents[i] == null ) {
+@@ -97,6 +138,10 @@
+         return -1;
+     }
+ 
++    /**
++     * Move the last one in the array to replace the deleting index position
++     * @param currIndex the index where the student has been removed.
++     */
+     public void rearrange (int currIndex){
+ 
+         int i = 0;
+@@ -111,7 +156,11 @@
+ 
+     }
+ 
+-    //move the last one in the array to replace the deleting index position
++    /**
++     * Remove a student from enrollStudents array
++     * @param enrollStudent the student that needs to be removed from the enrollStudents array.
++     */
++    //
+     public void remove (EnrollStudent enrollStudent) {
+         int index = findEnrollment(enrollStudent);
+         if ( index == -1 ) {
+@@ -122,6 +171,11 @@
+         rearrange(index);
+     }
+ 
++    /**
++     * Check if the enrollStudents array contains the enrollStudent value.
++     * @param enrollStudent the student that needs to be checked for in enrollStudents arrray.
++     * @return true is enrollStudents array contains the enrollStudent, otherwise false.
++     */
+     public boolean contains(EnrollStudent enrollStudent){
+         for ( int i = 0; i < this.size; i++ ) {
+             if ( enrollStudents[i] == null ) {
+@@ -133,6 +187,9 @@
+         return false;
+     }
+ 
++    /**
++     * Print the array as it is without sorting.
++     */
+     public void print() {
+ 
+         if ( enrollStudents[0] == null) {
+@@ -150,12 +207,7 @@
+ 
+         System.out.println("* end of enrollment *");
+ 
+-    } //print the array as is without sorting
+-
+-
+-
+-
+-
++    }
+ }
+ 
+ 
+Index: src/manager/TutionManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package manager;\nimport student.*;\nimport java.io.File;\n\nimport java.io.FileNotFoundException;\nimport java.text.DecimalFormat;\nimport java.util.NoSuchElementException;\nimport java.util.Scanner;\n\n/**\n * Roster manager class is the class that takes commands from the user and performs the necessary action on the roster\n * object based on the command entered.\n * This class calls necessary methods from different classes to perform its operations.\n *\n * @author Raghunandan Wable\n * @author Srikumar Avirneni\n */\npublic class TutionManager {\n    private Roster studentRoster = new Roster(); //creating a Roster object to pass the student input to Roster class.\n    private Enrollment enrollment = new Enrollment();\n    private static final int ZERO = 0;\n    private static final int NEGATIVE_ONE = -1;\n    private static final int ONE = 1;\n    private static final int TWO = 2;\n\n    /**\n     * Takes the input from main method, parses the command from input.\n     * Based on the entered command calls necessary helper method in other class or in same class that execute\n     * the command.\n     *\n     * @param inputText a line of text entered by user in terminal taken in by scanner\n     */\n    private void input(String inputText) {\n\n        if ( inputText.equals(\"P\") ) {\n            studentRoster.print();\n        } else if ( inputText.equals(\"SE\") ){\n            finalAddPrint();\n        } else if ( (inputText.substring(ZERO, ONE)).equals(\"S\") ){\n                updateScholarship(inputText);\n        } else if ( (inputText.substring(ZERO, ONE)).equals(\"C\") ) {\n            changeStudentHelper(inputText);\n        } else if ( (inputText.substring(ZERO, ONE)).equals(\"D\") ) {\n            dropEnrollment(inputText);\n        } else if ( (inputText.substring(ZERO, ONE)).equals(\"E\") ) {\n            enrollStudent(inputText);\n        } else if ( (inputText.substring(ZERO, ONE)).equals(\"R\") ) {\n            dropRoster(inputText);\n        } else if ( (inputText.substring(ZERO, TWO)).equals(\"AR\") ) {\n            addResStudent(inputText);\n        } else if ( (inputText.substring(ZERO, TWO)).equals(\"AN\") ) {\n            addNonResStudent(inputText);\n        } else if ( (inputText.substring(ZERO, TWO)).equals(\"AT\") ) {\n            addTriStateStudent(inputText);\n        } else if ( (inputText.substring(ZERO, TWO)).equals(\"AI\") ) {\n            addInternationalStudent(inputText);\n        } else if ( inputText.equals(\"PT\") ){\n                printWithTuition();\n        } else if ( inputText.equals(\"PE\") ){\n            enrollment.print();\n        } else if (inputText.equals(\"PS\")) {\n            studentRoster.printByStanding();\n        } else if (inputText.equals(\"PC\")) {\n            studentRoster.printBySchoolMajor();\n        }  else if ((inputText.substring(ZERO, TWO)).equals(\"LS\")) {\n            String[] input = inputText.split(\"\\\\s+\");\n            try {\n                File textFile = new File(input[1]);\n                listStudent(textFile);\n                System.out.println(\"Students loaded to the roster.\");\n            } catch ( FileNotFoundException e ) {\n                return;\n            }\n        }\n    }\n\n\n    public void finalAddPrint() {\n        EnrollStudent[] tempArray = enrollment.getEnrollStudents();\n        int size = enrollment.getSize();\n\n        for ( int i = 0; i < size; i++ ){\n            if ( tempArray[i] == null ) {\n                break;\n            }\n            int getCredEnrolled = tempArray[i].getCreditsEnrolled();\n            int totalCred = getCredEnrolled + studentRoster.containsProfile(tempArray[i].getProfile()).\n                    getCreditCompleted();\n            studentRoster.updateStudentCreds(tempArray[i].getProfile(), totalCred);\n        }\n        System.out.println(\"Credit completed has been updated.\");\n        System.out.println(\"** list of students eligible for graduation **\");\n        Student[] tempRoster = studentRoster.getRoster();\n        for ( int i = 0; i < tempRoster.length; i++ ) {\n            if ( tempRoster[i] == null ) {\n                break;\n            }\n            if ( tempRoster[i].getCreditCompleted() >= 120 ) {\n                System.out.println(tempRoster[i].toString());\n            }\n        }\n    }\n\n    public void printWithTuition(){\n        DecimalFormat dFormat = new DecimalFormat(\"#,###.00\");\n        if (studentRoster.empty() ) {\n            System.out.println(\"Student roster is empty!\");\n            return;\n        }\n        EnrollStudent[] studentArr = enrollment.getEnrollStudents();\n        int arrSize = enrollment.getSize();\n        System.out.println(\"** Tuition due **\");\n        for ( int i = 0; i < arrSize; i++ ) {\n            if ( studentArr[i] == null ) {\n                break;\n            }\n            Profile tempProfile = studentArr[i].getProfile();\n            String status = studentRoster.containsProfile(tempProfile).getStatus();\n            int enrolledCred = studentArr[i].getCreditsEnrolled();\n            double tuitionDue = studentRoster.containsProfile(tempProfile).tuitionDue(enrolledCred);\n            System.out.println( tempProfile.toString() + \"(\" + status + \")\" + \" enrolled \" + enrolledCred +\n                    \" credits: \"  + \"tuition due: $\" + dFormat.format(tuitionDue));\n        }\n        System.out.println(\"* end of tuition due *\");\n\n    }\n\n    public boolean validAmount(String userInput){\n        int maxAmount = 10000;\n        String[] studentInfo = userInput.split(\"\\\\s+\");\n        try {\n            int amount = Integer.parseInt(studentInfo[4]);\n            if ( amount > 10000  || amount <= 0 ) {\n                System.out.println(amount+ \": invalid amount.\");\n                return false;\n            }\n            return true;\n        } catch (NumberFormatException e) {\n            System.out.println(\"Amount is not an integer.\");\n            return false;\n        } catch (ArrayIndexOutOfBoundsException e) {\n            System.out.println (\"0: invalid amount.\");\n            return false;\n        }\n    }\n\n    public void updateScholarship(String inputText){\n\n        String[] studentInfo = inputText.split(\"\\\\s+\");\n\n        try {\n            Profile tempProfile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));\n            EnrollStudent student = enrollment.findProfile(tempProfile);\n            int scholarship;\n            if (studentRoster.containsProfile(tempProfile) == null) {\n                System.out.println(tempProfile.toString() + \" is not in the roster.\");\n                return;\n            } else if (!isNumeric(studentInfo[4])) {\n                System.out.println(\"Amount is not an integer.\");\n                return;\n            } else  {\n                scholarship = Integer.parseInt(studentInfo[4]);\n            }\n            if (!(studentRoster.containsProfile(tempProfile).getStatus().equals(\"Resident\"))) {\n                System.out.println(tempProfile.toString() + \" (Non-Resident) is not eligible for the scholarship.\");\n                return;\n            } else if ( student.getCreditsEnrolled() < 12) {\n                System.out.println(tempProfile.toString() + \" part time student is not eligible for the scholarship.\");\n                return;\n            } else if (!validAmount(inputText)) {\n                return;\n            }\n            if (studentRoster.containsProfile(tempProfile).getCreditCompleted() < 12) {\n                System.out.println(tempProfile.toString() + \" part time student is not eligible for the scholarship.\");\n                return;\n            }\n            studentRoster.updateScholarshipStudent(studentRoster.containsProfile(tempProfile), scholarship);\n            System.out.println(tempProfile.toString() + \": scholarship amount updated.\");\n        }catch( ArrayIndexOutOfBoundsException e ){\n            System.out.println(\"Missing data in line command.\");\n        }\n    }\n\n    public boolean correctCredits(EnrollStudent student){\n        int minCredits = 3;\n        int maxCredits = 24;\n        int minCreditInternational = 12;\n\n        Profile tempProfile = student.getProfile();\n        if ( studentRoster.containsProfile(tempProfile) == null ) {\n            return true;\n        }\n            String status = studentRoster.containsProfile(tempProfile).getStatus();\n        if ( status.equals(\"Resident\") ) {\n            if (student.getCreditsEnrolled() < minCredits || student.getCreditsEnrolled() > maxCredits) {\n                System.out.println(\"(\" + status + \") \" + student.getCreditsEnrolled() + \": invalid credit hours.\");\n                return false;\n            }\n        } else if ( status.equals(\"Non-Resident\") ) {\n            if (student.getCreditsEnrolled() < minCredits || student.getCreditsEnrolled() > maxCredits) {\n                System.out.println(\"(\" + status + \") \" + student.getCreditsEnrolled() + \": invalid credit hours.\");\n                return false;\n            }\n        } else if ( status.equals(\"Tri-state CT\")  || status.equals(\"Tri-state NY\") ) {\n            if (student.getCreditsEnrolled() < minCredits || student.getCreditsEnrolled() > maxCredits) {\n                System.out.println(\"(\" + status + \") \" + student.getCreditsEnrolled() + \": invalid credit hours.\");\n                return false;\n            }\n        } else if ( status.equals(\"International student study abroad\") ) {\n            if (student.getCreditsEnrolled() < minCredits || student.getCreditsEnrolled() > minCreditInternational ) {\n                System.out.println(\"(\" + status + \") \" + student.getCreditsEnrolled() + \": invalid credit hours.\");\n                return false;\n            }\n        } else if ( status.equals(\"International student\") ) {\n            if (student.getCreditsEnrolled() < minCreditInternational || student.getCreditsEnrolled() > maxCredits) {\n                System.out.println(\"(\" + status + \") \" + student.getCreditsEnrolled() + \": invalid credit hours.\");\n                return false;\n            }\n        }\n        return true;\n    }\n\n\n    public void enrollStudent( String inputText ){\n        String[] studentInfo = inputText.split(\"\\\\s+\");\n\n        try{\n\n        int credits;\n        if ( !(isNumeric(studentInfo[4])) ) {\n            System.out.println(\"Credits enrolled is not an integer.\");\n            return;\n        } else {\n            credits = Integer.parseInt(studentInfo[4]);\n        }\n        Profile tempProfile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));\n        EnrollStudent student = new EnrollStudent(tempProfile, credits);\n\n        if ( !correctCredits(student) ) {\n            return;\n        }\n\n        if ( studentRoster.containsProfile(tempProfile) == null ) {\n            System.out.println(\"Cannot enroll: \" + tempProfile.toString() + \" is not in the roster.\");\n            return;\n        }\n\n        int index = enrollment.findEnrollmentProfile(tempProfile);\n        if ( index != -1 ) {\n            enrollment.updateEnrollment(index, credits);\n            System.out.println(tempProfile.toString() + \" enrolled \" + credits + \" credits\");\n            return;\n        }\n\n        enrollment.add(student);\n        System.out.println(tempProfile.toString() + \" enrolled \" + credits + \" credits\");\n        } catch (ArrayIndexOutOfBoundsException e) {\n            System.out.println(\"Missing data in line command.\");\n        }\n    }\n\n    /**\n     * Checks if the date of birth entered by user is valid or is not too young.\n     *\n     * @param date the date entered by user that needs to be checked.\n     * @return true if date is valid, false otherwise.\n     */\n    private boolean dateCheck(Date date) {\n        Date currentDate = new Date();\n\n        if (date.compareTo(currentDate) >= ZERO || !date.isValid()) {\n            System.out.println(\"DOB invalid: \" + date.toString() + \" not a valid calendar date!\");\n            return false;\n        } else if (currentDate.tooYoung(date)) {\n            System.out.println(\"DOB invalid: \" + date.toString() + \" younger than 16 years old.\");\n            return false;\n        } else {\n            return true;\n        }\n    }\n\n    public void dropEnrollment(String inputText) {\n        String[] studentInfo = inputText.split(\"\\\\s+\");\n\n        if ( enrollment.empty() ) {\n            System.out.println(\"Enrollment is empty!\");\n            return;\n        }\n\n        Profile tempProfile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));\n        EnrollStudent student = enrollment.findProfile(tempProfile);\n        if ( student == null ) {\n            System.out.println(tempProfile.toString() + \" is not enrolled.\");\n            return;\n        }\n        enrollment.remove(student);\n        System.out.println(tempProfile.toString() + \" dropped.\");\n    }\n\n    public void dropRoster(String inputText) {\n        String[] studentInfo = inputText.split(\"\\\\s+\");\n\n        if ( studentRoster.empty() ) {\n            System.out.println(\"Student roster is empty!\");\n            return;\n        }\n\n        Profile tempProfile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));\n        EnrollStudent student = enrollment.findProfile(tempProfile);\n        if ( studentRoster.containsProfile(tempProfile) == null ) {\n            System.out.println(tempProfile.toString() + \" is not in the roster.\");\n            return;\n        }\n        studentRoster.remove(studentRoster.containsProfile(tempProfile));\n        System.out.println(tempProfile.toString() + \" removed from the roster.\");\n    }\n\n\n    /**\n     * Checks if the credits entered by user is a positive integer or not.\n     *\n     * @param credits value entered by user that represents the number of credits\n     * @return true if credits value is a positive integer, false otherwise.\n     */\n    private boolean isNumeric(String credits) {\n\n        int creditsValue;\n\n        try {\n            creditsValue = Integer.parseInt(credits);\n            return true;\n        } catch ( NumberFormatException e ) {\n            return false;\n        }\n\n    }\n\n    private boolean isPositive( int credits ) {\n        if ( credits < ZERO ) {\n            return false;\n        }\n        return true;\n    }\n\n    /**\n     * Checks if the user entered a valid major or not.\n     *\n     * @param major major entered by user that needs to be checked.\n     * @return true if the major is valid, false otherwise.\n     */\n    private boolean validMajor(String major) {\n        for (Major majorTypes : Major.values()) {\n            if (majorTypes.name().equals(major.toUpperCase())) {\n                return true;\n            }\n        }\n        return false;\n    }\n\n\n    private void addResStudent(String details) {\n        String[] studentInfo = details.split(\"\\\\s+\");\n\n        try{\n            Date date = new Date(studentInfo[3]);\n            int credits;\n\n            if (!isNumeric(studentInfo[5])) {\n                System.out.println(\"Credits completed invalid: not an integer!\");\n                return;\n            } else {\n                credits = Integer.parseInt(studentInfo[5]);\n            }\n            if ( !isPositive(credits) ) {\n                System.out.println(\"Credits completed invalid: cannot be negative!\");\n                return;\n            } else if (!dateCheck(date)) {\n                return;\n            } else if (!validMajor(studentInfo[4])) {\n                return;\n            }\n            String major = studentInfo[4].toUpperCase();\n            Profile resProfile = new Profile ( studentInfo[2], studentInfo[1], date );\n            student.Resident resStudent = new student.Resident (resProfile, Major.valueOf(major), credits, 0);\n            if (studentRoster.contains(resStudent)) {\n                System.out.println( resProfile.toString() + \" is already in the roster.\");\n                return;\n            }\n            studentRoster.add(resStudent);\n            EnrollStudent newEnroll = new EnrollStudent(resProfile, credits);\n            System.out.println( resProfile.toString() + \" added to the roster.\");\n        } catch (ArrayIndexOutOfBoundsException e) {\n            System.out.println(\"Missing data in line command.\");\n        }\n\n    }\n\n    private void addNonResStudent(String details){\n        String[] studentInfo = details.split(\"\\\\s+\");\n\n        try {\n            Date date = new Date(studentInfo[3]);\n            int credits;\n\n            if (!isNumeric(studentInfo[5])) {\n                System.out.println(\"Credits completed invalid: not an integer!\");\n                return;\n            } else {\n                credits = Integer.parseInt(studentInfo[5]);\n            }\n            if ( !isPositive(credits) ) {\n                System.out.println(\"Credits completed invalid: cannot be negative!\");\n                return;\n            } else if (!dateCheck(date)) {\n                return;\n            } else if (!validMajor(studentInfo[4])) {\n                return;\n            }\n            String major = studentInfo[4].toUpperCase();\n            Profile nResProfile = new Profile ( studentInfo[2], studentInfo[1], date );\n            NonResident nResStudent = new NonResident (nResProfile, Major.valueOf(major), credits);\n            if (studentRoster.contains(nResStudent)) {\n                System.out.println( nResProfile.toString() + \" is already in the roster.\");\n                return;\n            }\n            studentRoster.add(nResStudent);\n            EnrollStudent newEnroll = new EnrollStudent(nResProfile, credits);\n            System.out.println( nResProfile.toString() + \" added to the roster.\");\n        } catch (ArrayIndexOutOfBoundsException e) {\n            System.out.println(\"Missing data in line command.\");\n        }\n\n    }\n\n\n\n    private boolean validState(String state) {\n        if ( state.equals(\"NY\") || state.equals(\"CT\") ) {\n\n            return true;\n        }\n        System.out.println(state + \": Invalid state code.\");\n        return false;\n    }\n\n    private boolean triStateError(String details) {\n        String[] studentInfo = details.split(\"\\\\s+\");\n        String state;\n        String lName;\n        String fName;\n        Date date;\n        String major;\n        String credits;\n\n\n        try {\n            lName = studentInfo[2];\n            fName = studentInfo[1];\n            date = new Date(studentInfo[3]);\n            credits = studentInfo[5];\n            major = studentInfo[4];\n        } catch ( ArrayIndexOutOfBoundsException e ) {\n            System.out.println(\"Missing data in command line.\");\n            return true;\n        }\n        try {\n            state = studentInfo[6];\n        } catch (ArrayIndexOutOfBoundsException e) {\n            System.out.println(\"Missing the state code.\");\n            return true;\n        }\n        return false;\n    }\n\n    private void addTriStateStudent(String details){\n        String[] studentInfo = details.split(\"\\\\s+\");\n\n            if( triStateError(details) ) {\n                return;\n            }\n            int creditsTaken;\n            String state = studentInfo[6].toUpperCase();\n            String major = studentInfo[4];\n            Date date = new Date(studentInfo[3]);\n            if (!isNumeric(studentInfo[5])) {\n                System.out.println(\"Credits completed invalid: not an integer!\");\n                return;\n            } else {\n                creditsTaken = Integer.parseInt(studentInfo[5]);\n            }\n            if ( !isPositive(creditsTaken) ) {\n                System.out.println(\"Credits completed invalid: cannot be negative!\");\n                return;\n            } else if (!dateCheck(new Date(studentInfo[3]))) {\n                return;\n            } else if (!validMajor(studentInfo[4])) {\n                return;\n            } else if ( !validState(state) ) {\n                return;\n            }\n            major = studentInfo[4].toUpperCase();\n            Profile triProfile = new Profile ( studentInfo[2], studentInfo[1], date );\n            TriState triStudent = new TriState ( triProfile, Major.valueOf(major), creditsTaken, state );\n            if (studentRoster.contains(triStudent)) {\n                System.out.println( triProfile.toString() + \" is already in the roster.\");\n                return;\n            }\n            studentRoster.add(triStudent);\n            EnrollStudent newEnroll = new EnrollStudent(triProfile, creditsTaken);\n            System.out.println( triProfile.toString() + \" added to the roster.\");\n    }\n\n    public boolean isStudyAbroad(String[] studentInfo) {\n\n        try {\n            if ( studentInfo[6].equals(\"true\") ){\n                return true;\n            } else if ( studentInfo[6].equals(\"false\") ) {\n                return false;\n            }\n            return false;\n        } catch (ArrayIndexOutOfBoundsException e) {\n            return false;\n        }\n\n    }\n\n    public void addInternationalStudent(String details) {\n        String[] studentInfo = details.split(\"\\\\s+\");\n        boolean studyAbroad;\n        try {\n            Date date = new Date(studentInfo[3]);\n            int credits;\n            if (!isNumeric(studentInfo[5])) {\n                System.out.println(\"Credits completed invalid: not an integer!\");\n                return;\n            } else {\n                credits = Integer.parseInt(studentInfo[5]);\n            }\n            if ( !isPositive(credits) ) {\n                System.out.println(\"Credits completed invalid: cannot be negative!\");\n                return;\n            } else if (!dateCheck(date)) {\n                return;\n            } else if (!validMajor(studentInfo[4])) {\n                return;\n            }\n            studyAbroad = isStudyAbroad(studentInfo);\n            String major = studentInfo[4].toUpperCase();\n            Profile interProfile = new Profile ( studentInfo[2], studentInfo[1], date );\n            International interStudent = new International ( interProfile, Major.valueOf(major), credits,\n                    studyAbroad );\n            if (studentRoster.contains(interStudent)) {\n                System.out.println( interProfile.toString() + \" is already in the roster.\");\n                return;\n            }\n            studentRoster.add(interStudent);\n            EnrollStudent newEnroll = new EnrollStudent(interProfile, credits);\n            System.out.println( interProfile.toString() + \" added to the roster.\");\n        } catch ( ArrayIndexOutOfBoundsException e ) {\n            System.out.println(\"Missing data in line command.\");\n        }\n    }\n\n    /**\n     * Modifies the student major if the new major that has been entered exists and is an appropriate valid value.\n     *\n     * @param details a line of text entered by user in terminal that contain student info along with other details.\n     */\n    private void changeStudentHelper(String details) {\n\n        String[] studentInfo = details.split(\"\\\\s+\");\n        Profile profile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));\n        String major = studentInfo[4];\n\n        if (studentRoster.containsProfile(profile) == null) {\n            System.out.println(profile.toString() + \" \" + \"is not in the roster.\");\n\n        } else if (validMajor(studentInfo[4])) {\n            studentRoster.changeMajor(profile, major);\n            System.out.println(profile.toString() + \" major changed to \" + major);\n\n        } else {\n            System.out.println(\"Major code invalid:\" + \" \" + major);\n        }\n    }\n\n\n    private void listStudent(File textFile) throws FileNotFoundException {\n\n        Scanner scanner = new Scanner(textFile);\n        scanner.useDelimiter(\",\");\n        while ( scanner.hasNextLine() ){\n            String inputText = scanner.nextLine();\n            String[] studentInfo = inputText.split(\",\");\n            if ( studentInfo[0].equals(\"R\") ) {\n                String major = studentInfo[4].toUpperCase();\n                Profile resProfile = new Profile ( studentInfo[2], studentInfo[1], new Date(studentInfo[3]) );\n                Resident resStudent = new Resident (resProfile, Major.valueOf(major),\n                        Integer.parseInt(studentInfo[5]), 0);\n                EnrollStudent resEnroll = new EnrollStudent(resProfile, Integer.parseInt(studentInfo[5]));\n                studentRoster.add(resStudent);\n            } else if ( studentInfo[0].equals(\"N\") ) {\n                String major = studentInfo[4].toUpperCase();\n                Profile nResProfile = new Profile ( studentInfo[2], studentInfo[1], new Date(studentInfo[3]) );\n                NonResident nresStudent = new NonResident (nResProfile, Major.valueOf(major),\n                        Integer.parseInt(studentInfo[5]));\n                EnrollStudent nResEnroll = new EnrollStudent(nResProfile, Integer.parseInt(studentInfo[5]));\n                studentRoster.add(nresStudent);\n            } else if ( studentInfo[0].equals(\"T\") ) {\n                String major = studentInfo[4].toUpperCase();\n                Profile triProfile = new Profile ( studentInfo[2], studentInfo[1], new Date(studentInfo[3]) );\n                TriState triStudent = new TriState (triProfile, Major.valueOf(major),\n                        Integer.parseInt(studentInfo[5]), studentInfo[6]);\n                EnrollStudent triEnroll = new EnrollStudent(triProfile, Integer.parseInt(studentInfo[5]));\n                studentRoster.add(triStudent);\n            } else if ( studentInfo[0].equals(\"I\") ) {\n                String major = studentInfo[4].toUpperCase();\n                Profile interProfile = new Profile ( studentInfo[2], studentInfo[1], new Date(studentInfo[3]) );\n                International interStudent = new International (interProfile, Major.valueOf(major),\n                        Integer.parseInt(studentInfo[5]), Boolean.parseBoolean(studentInfo[6]) );\n                EnrollStudent interEnroll = new EnrollStudent(interProfile, Integer.parseInt(studentInfo[5]));\n                studentRoster.add(interStudent);\n            }\n        }\n    }\n\n\n    /**\n     * User interactive method that takes input from the user and passes it to input helper method that processes it.\n     */\n    public void run() {\n        System.out.println(\"Tuition Manager running...\");\n        Scanner input = new Scanner(System.in);\n\n        while (input.hasNextLine()) {\n\n            String inputText = input.nextLine();\n\n            try {\n                if (inputText.equals(\"\")) {\n                    continue;\n                } else if (inputText.substring(ZERO, ONE).equals(\"Q\")) {\n                    System.out.println(\"Tuition Manager terminated.\");\n                    System.exit(ZERO);\n                } else if (inputText.substring(ZERO, ONE).equals(\"R\") || inputText.substring(ZERO, ONE).equals(\"D\") ||\n                        inputText.equals(\"P\") || inputText.equals(\"PS\") ||  inputText.equals(\"SE\") || inputText.substring(ZERO, ONE).equals(\"E\") ||\n                        inputText.substring(ZERO, ONE).equals(\"S\") || inputText.equals(\"PC\") || inputText.substring(ZERO, TWO).equals(\"LS\") ||\n                        inputText.substring(ZERO, ONE).equals(\"C\") || inputText.substring(ZERO, TWO).equals(\"AR\") ||\n                        inputText.substring(ZERO, TWO).equals(\"AN\") || inputText.substring(ZERO, TWO).equals(\"AT\") ||\n                        inputText.substring(ZERO, TWO).equals(\"AI\") || inputText.substring(ZERO, TWO).equals(\"PT\") ||\n                        inputText.substring(ZERO, TWO).equals(\"PE\")\n                ) {\n                    input(inputText);\n                } else {\n                    System.out.println(inputText + \" \" + \"is an invalid command!\");\n                }\n            } catch (StringIndexOutOfBoundsException e) {\n                System.out.println(inputText + \" \" + \"is an invalid command!\");\n            }\n\n\n        }\n    }\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/manager/TutionManager.java b/src/manager/TutionManager.java
+--- a/src/manager/TutionManager.java	(revision 8f6312ad4a3ebeb1bfdb4464c1a162fd0377a1e7)
++++ b/src/manager/TutionManager.java	(date 1677535715279)
+@@ -438,11 +438,13 @@
+         if ( state.equals("NY") || state.equals("CT") ) {
+ 
+             return true;
+-        }
+-        System.out.println(state + ": Invalid state code.");
+-        return false;
+-    }
++        } else {
++            System.out.println(state + ": Invalid state code.");
++            return false;
++        }
+ 
++    }
++
+     private boolean triStateError(String details) {
+         String[] studentInfo = details.split("\\s+");
+         String state;
+Index: src/manager/DateTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package manager;\nimport org.junit.Test;\n\nimport static org.junit.Assert.*;\n\npublic class DateTest {\n\n    @Test\n    public void test_isValid_invalid() {\n        Date dateTest1 = new Date(\"11/21/800\");\n        assertFalse(dateTest1.isValid());\n    }\n\n    @Test\n    public void test_isValid_notleap() {\n        Date dateTest2 = new Date(\"2/29/2003\");\n        assertFalse(dateTest2.isValid());\n    }\n\n    @Test\n    public void test_isValid_invalidMonth() {\n        Date dateTest3 = new Date(\"13/31/2003\");\n        assertFalse(dateTest3.isValid());\n    }\n\n    @Test\n    public void test_isValid_notThirtyOne() {\n        Date dateTest4 = new Date(\"4/31/2003\");\n        assertFalse(dateTest4.isValid());\n    }\n\n    @Test\n    public void test_isValid_notNegative() {\n        Date dateTest5 = new Date(\"-1/2/2007\");\n        assertFalse(dateTest5.isValid());\n    }\n\n    @Test\n    public void test_isValid_correctDate() {\n        Date dateTest6 = new Date(\"1/2/2007\");\n        assertTrue(dateTest6.isValid());\n    }\n\n    @Test\n    public void test_isValid_correctDate2() {\n        Date dateTest7 = new Date(\"5/1/1996\");\n        assertTrue(dateTest7.isValid());\n    }\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/manager/DateTest.java b/src/manager/DateTest.java
+--- a/src/manager/DateTest.java	(revision 8f6312ad4a3ebeb1bfdb4464c1a162fd0377a1e7)
++++ b/src/manager/DateTest.java	(date 1677535715270)
+@@ -1,46 +1,71 @@
+ package manager;
+ import org.junit.Test;
+-
+ import static org.junit.Assert.*;
+ 
++/**
++ * This class is a test class that tests isValid() method in date class.
++ * @author Raghunandan Wable
++ * @author Srikumar Avirneni
++ */
+ public class DateTest {
+ 
++    /**
++     * Test condition that tests isValid() method for an invalid year.
++     */
+     @Test
+     public void test_isValid_invalid() {
+         Date dateTest1 = new Date("11/21/800");
+         assertFalse(dateTest1.isValid());
+     }
+ 
++    /**
++     * Test condition that tests isValid() method for a non leap year day entered.
++     */
+     @Test
+     public void test_isValid_notleap() {
+         Date dateTest2 = new Date("2/29/2003");
+         assertFalse(dateTest2.isValid());
+     }
+ 
++    /**
++     * Test condition that tests isValid() method for invalid month entered.
++     */
+     @Test
+     public void test_isValid_invalidMonth() {
+         Date dateTest3 = new Date("13/31/2003");
+         assertFalse(dateTest3.isValid());
+     }
+ 
++    /**
++     * Test condition that tests isValid() method for not thirty-one days month.
++     */
+     @Test
+     public void test_isValid_notThirtyOne() {
+         Date dateTest4 = new Date("4/31/2003");
+         assertFalse(dateTest4.isValid());
+     }
+ 
++    /**
++     * Test condition that tests isValid() method for negative date entered.
++     */
+     @Test
+     public void test_isValid_notNegative() {
+         Date dateTest5 = new Date("-1/2/2007");
+         assertFalse(dateTest5.isValid());
+     }
+ 
++    /**
++     * Test condition that tests isValid() method for correct date entered.
++     */
+     @Test
+     public void test_isValid_correctDate() {
+         Date dateTest6 = new Date("1/2/2007");
+         assertTrue(dateTest6.isValid());
+     }
+ 
++    /**
++     * Test condition that tests isValid() method for correct date entered.
++     */
+     @Test
+     public void test_isValid_correctDate2() {
+         Date dateTest7 = new Date("5/1/1996");
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"295bd0f1-267f-424b-95be-ded08e7e91b6\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/manager/Enrollment.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/manager/Enrollment.java\" afterDir=\"false\" />\n    </list>\n    <list id=\"18efc3ee-9cb2-4d5c-bd8d-3da227eef93e\" name=\"Changes by Raghu\" comment=\"\" />\n    <list id=\"9ef76fca-2f20-4472-a93e-d81279b1a739\" name=\"Changes by srikumaravirneni\" comment=\"\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Enum\" />\n        <option value=\"Class\" />\n        <option value=\"JUnit4 Test Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2LnvYdze3F3YBf8XEeNGXXJvMi2\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,\n    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,\n    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,\n    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,\n    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,\n    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,\n    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,\n    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,\n    &quot;last_opened_file_path&quot;: &quot;/Users/srikumaravirneni/IdeaProjects/Project2_CS211/src&quot;,\n    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/src\" />\n    </key>\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/src\" />\n    </key>\n    <key name=\"CreateTestDialog.Recents.Supers\">\n      <recent name=\"\" />\n    </key>\n    <key name=\"CreateTestDialog.RecentsKey\">\n      <recent name=\"student\" />\n      <recent name=\"manager\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Application.Project2Runner\">\n    <configuration name=\"Project2Runner\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"manager.Project2Runner\" />\n      <module name=\"Project2_CS211\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"manager.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"DateTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Project2_CS211\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"manager.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <option name=\"PACKAGE_NAME\" value=\"manager\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"manager.DateTest\" />\n      <option name=\"TEST_OBJECT\" value=\"class\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"InternationalTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Project2_CS211\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"student.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <option name=\"PACKAGE_NAME\" value=\"student\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"student.InternationalTest\" />\n      <option name=\"TEST_OBJECT\" value=\"class\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"InternationalTest.test_tuition_isStudyAbroad\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Project2_CS211\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"student.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <option name=\"PACKAGE_NAME\" value=\"student\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"student.InternationalTest\" />\n      <option name=\"METHOD_NAME\" value=\"test_tuition_isStudyAbroad\" />\n      <option name=\"TEST_OBJECT\" value=\"method\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"InternationalTest.test_tuition_notStudyAbroad\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Project2_CS211\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"student.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <option name=\"PACKAGE_NAME\" value=\"student\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"student.InternationalTest\" />\n      <option name=\"METHOD_NAME\" value=\"test_tuition_notStudyAbroad\" />\n      <option name=\"TEST_OBJECT\" value=\"method\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.Project2Runner\" />\n        <item itemvalue=\"JUnit.InternationalTest\" />\n        <item itemvalue=\"JUnit.InternationalTest.test_tuition_notStudyAbroad\" />\n        <item itemvalue=\"JUnit.InternationalTest.test_tuition_isStudyAbroad\" />\n        <item itemvalue=\"JUnit.DateTest\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"295bd0f1-267f-424b-95be-ded08e7e91b6\" name=\"Changes\" comment=\"\" />\n      <created>1676519710054</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1676519710054</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Added Project2 project files\">\n      <created>1676519840527</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676519840527</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Added files from project 1\">\n      <created>1676520609591</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676520609591</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Added files from project 1 again\">\n      <created>1676520897895</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676520897895</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Fixed project 1 import errors\">\n      <created>1676521829428</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676521829428</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"Added resident subclass methods\">\n      <created>1676675555767</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676675555767</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"fixes to nonresident\">\n      <created>1676694147215</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676694147215</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"Major code additions v1\">\n      <created>1676698913322</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676698913323</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"Major Code additions v1\">\n      <created>1676698935384</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676698935384</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"Major code additions v1\">\n      <created>1676931569311</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676931569311</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"Major code additions v2\">\n      <created>1676947246672</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676947246672</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"Major code / file additions v3\">\n      <created>1676964874172</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676964874172</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"Major code / file additions v3\">\n      <created>1676964909648</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676964909648</updated>\n    </task>\n    <task id=\"LOCAL-00013\" summary=\"Major code additions v4\">\n      <created>1676968210794</created>\n      <option name=\"number\" value=\"00013\" />\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1676968210794</updated>\n    </task>\n    <task id=\"LOCAL-00014\" summary=\"Changes to scholarship setter method\">\n      <created>1677201218948</created>\n      <option name=\"number\" value=\"00014\" />\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1677201218948</updated>\n    </task>\n    <task id=\"LOCAL-00015\" summary=\"updates and fixes.\">\n      <created>1677201724992</created>\n      <option name=\"number\" value=\"00015\" />\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1677201724992</updated>\n    </task>\n    <task id=\"LOCAL-00016\" summary=\"Major testing revamp\">\n      <created>1677475145968</created>\n      <option name=\"number\" value=\"00016\" />\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1677475145968</updated>\n    </task>\n    <task id=\"LOCAL-00017\" summary=\"My bad G\">\n      <created>1677533987007</created>\n      <option name=\"number\" value=\"00017\" />\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1677533987007</updated>\n    </task>\n    <task id=\"LOCAL-00018\" summary=\"fixed output issues\">\n      <created>1677534766180</created>\n      <option name=\"number\" value=\"00018\" />\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1677534766180</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"19\" />\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Added Project2 project files\" />\n    <MESSAGE value=\"Added files from project 1\" />\n    <MESSAGE value=\"Added files from project 1 again\" />\n    <MESSAGE value=\"Fixed project 1 import errors\" />\n    <MESSAGE value=\"Added resident subclass methods\" />\n    <MESSAGE value=\"fixes to nonresident\" />\n    <MESSAGE value=\"Major Code additions v1\" />\n    <MESSAGE value=\"Major code additions v1\" />\n    <MESSAGE value=\"Major code additions v2\" />\n    <MESSAGE value=\"Major code / file additions v3\" />\n    <MESSAGE value=\"Major code additions v4\" />\n    <MESSAGE value=\"Changes to scholarship setter method\" />\n    <MESSAGE value=\"updates and fixes.\" />\n    <MESSAGE value=\"Added get methods\" />\n    <MESSAGE value=\"Major testing revamp\" />\n    <MESSAGE value=\"My bad G\" />\n    <MESSAGE value=\"fixed output issues\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"fixed output issues\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <line-breakpoint enabled=\"true\" type=\"java-method\">\n          <url>file://$PROJECT_DIR$/src/manager/TutionManager.java</url>\n          <line>77</line>\n          <properties class=\"manager.TutionManager\" method=\"finalAddPrint\">\n            <option name=\"EMULATED\" value=\"true\" />\n            <option name=\"WATCH_EXIT\" value=\"false\" />\n          </properties>\n          <option name=\"timeStamp\" value=\"48\" />\n        </line-breakpoint>\n        <line-breakpoint enabled=\"true\" type=\"java-method\">\n          <url>file://$PROJECT_DIR$/src/student/Resident.java</url>\n          <line>33</line>\n          <properties class=\"student.Resident\" method=\"tuitionDue\">\n            <option name=\"EMULATED\" value=\"true\" />\n            <option name=\"WATCH_EXIT\" value=\"false\" />\n          </properties>\n          <option name=\"timeStamp\" value=\"49\" />\n        </line-breakpoint>\n        <line-breakpoint enabled=\"true\" type=\"java-method\">\n          <url>file://$PROJECT_DIR$/src/manager/Enrollment.java</url>\n          <line>111</line>\n          <properties class=\"manager.Enrollment\" method=\"remove\">\n            <option name=\"EMULATED\" value=\"true\" />\n            <option name=\"WATCH_EXIT\" value=\"false\" />\n          </properties>\n          <option name=\"timeStamp\" value=\"50\" />\n        </line-breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 8f6312ad4a3ebeb1bfdb4464c1a162fd0377a1e7)
++++ b/.idea/workspace.xml	(date 1677537097010)
+@@ -6,7 +6,12 @@
+   <component name="ChangeListManager">
+     <list default="true" id="295bd0f1-267f-424b-95be-ded08e7e91b6" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/manager/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Date.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/manager/DateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/DateTest.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/manager/Enrollment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Enrollment.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/manager/Roster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Roster.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/manager/RosterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/RosterTest.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/manager/TutionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TutionManager.java" afterDir="false" />
+     </list>
+     <list id="18efc3ee-9cb2-4d5c-bd8d-3da227eef93e" name="Changes by Raghu" comment="" />
+     <list id="9ef76fca-2f20-4472-a93e-d81279b1a739" name="Changes by srikumaravirneni" comment="" />
+@@ -275,21 +280,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1677475145968</updated>
+     </task>
+-    <task id="LOCAL-00017" summary="My bad G">
+-      <created>1677533987007</created>
+-      <option name="number" value="00017" />
+-      <option name="presentableId" value="LOCAL-00017" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1677533987007</updated>
+-    </task>
+-    <task id="LOCAL-00018" summary="fixed output issues">
+-      <created>1677534766180</created>
+-      <option name="number" value="00018" />
+-      <option name="presentableId" value="LOCAL-00018" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1677534766180</updated>
+-    </task>
+-    <option name="localTasksCounter" value="19" />
++    <option name="localTasksCounter" value="17" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -319,9 +310,7 @@
+     <MESSAGE value="updates and fixes." />
+     <MESSAGE value="Added get methods" />
+     <MESSAGE value="Major testing revamp" />
+-    <MESSAGE value="My bad G" />
+-    <MESSAGE value="fixed output issues" />
+-    <option name="LAST_COMMIT_MESSAGE" value="fixed output issues" />
++    <option name="LAST_COMMIT_MESSAGE" value="Major testing revamp" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
+@@ -334,24 +323,6 @@
+             <option name="WATCH_EXIT" value="false" />
+           </properties>
+           <option name="timeStamp" value="48" />
+-        </line-breakpoint>
+-        <line-breakpoint enabled="true" type="java-method">
+-          <url>file://$PROJECT_DIR$/src/student/Resident.java</url>
+-          <line>33</line>
+-          <properties class="student.Resident" method="tuitionDue">
+-            <option name="EMULATED" value="true" />
+-            <option name="WATCH_EXIT" value="false" />
+-          </properties>
+-          <option name="timeStamp" value="49" />
+-        </line-breakpoint>
+-        <line-breakpoint enabled="true" type="java-method">
+-          <url>file://$PROJECT_DIR$/src/manager/Enrollment.java</url>
+-          <line>111</line>
+-          <properties class="manager.Enrollment" method="remove">
+-            <option name="EMULATED" value="true" />
+-            <option name="WATCH_EXIT" value="false" />
+-          </properties>
+-          <option name="timeStamp" value="50" />
+         </line-breakpoint>
+       </breakpoints>
+     </breakpoint-manager>
+Index: src/manager/Date.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package manager;\nimport java.util.Calendar;\n\n/**\n * This class handles the Date object which contains day month and year fields and acts as the birthday parameter for\n * a student.\n *\n * @author Raghunandan Wable\n * @author Srikumar Avirneni\n */\npublic class Date implements Comparable<Date> {\n    public static final int QUADRENNIAL = 4;\n    public static final int CENTENNIAL = 100;\n    public static final int QUATERCENTENNIAL = 400;\n    private static final int ZERO = 0;\n    private static final int ONE = 1;\n    private static final int NEGATIVE_ONE = -1;\n    private int year;\n    private int month;\n    private int day;\n\n    /**\n     * This method creates a date object that contains parameters for the today's date.\n     * This method is a no parameter constructor for the date object.\n     */\n    public Date() {\n        Calendar currentDate = Calendar.getInstance();\n        this.day = currentDate.get(Calendar.DATE);\n        this.year = currentDate.get(Calendar.YEAR);\n        this.month = currentDate.get(Calendar.MONTH);\n    }\n\n    /**\n     * This method creates a date object with a string input that contains the date month and year.\n     *\n     * @param date the date in mm/dd/yyyy format as a string.\n     */\n    public Date(String date) {\n        String[] dateSplit = date.split(\"/\");\n        this.month = Integer.parseInt(dateSplit[0]);\n        this.day = Integer.parseInt(dateSplit[1]);\n        this.year = Integer.parseInt(dateSplit[2]);\n    }\n\n    /*\n\n     * This main method is serving as a testBed to test the isValid() class.\n     *\n     * @param args\n\n    public static void main(String[] args) {\n        System.out.println(\"Date isValid() Testbed running... \\n\");\n        boolean expectedOutput;\n        boolean actualOutput;\n        Date dateTest1 = new Date(\"11/21/800\");\n        expectedOutput = false;\n        actualOutput = dateTest1.isValid();\n        testResult(dateTest1, expectedOutput, actualOutput);\n        Date dateTest2 = new Date(\"2/29/2003\");\n        expectedOutput = false;\n        actualOutput = dateTest2.isValid();\n        testResult(dateTest2, expectedOutput, actualOutput);\n        Date dateTest3 = new Date(\"13/31/2003\");\n        expectedOutput = false;\n        actualOutput = dateTest3.isValid();\n        testResult(dateTest3, expectedOutput, actualOutput);\n        Date dateTest4 = new Date(\"4/31/2003\");\n        expectedOutput = false;\n        actualOutput = dateTest4.isValid();\n        testResult(dateTest4, expectedOutput, actualOutput);\n        Date dateTest5 = new Date(\"-1/2/2007\");\n        expectedOutput = false;\n        actualOutput = dateTest5.isValid();\n        testResult(dateTest5, expectedOutput, actualOutput);\n        Date dateTest6 = new Date(\"1/2/2007\");\n        expectedOutput = true;\n        actualOutput = dateTest6.isValid();\n        testResult(dateTest6, expectedOutput, actualOutput);\n        Date dateTest7 = new Date(\"5/1/1996\");\n        expectedOutput = true;\n        actualOutput = dateTest7.isValid();\n        testResult(dateTest7, expectedOutput, actualOutput);\n    }\n\n\n     * This is a helper method for the testBed to help determine whether the expected output matches the expected input.\n     *\n     * @param date           date object to test.\n     * @param expectedOutput the output the user expects to see.\n     * @param actualOutput   the output returned.\n\n    private static void testResult(Date date, boolean expectedOutput, boolean actualOutput) {\n        System.out.println(date.toString());\n        System.out.println(\"Date isValid() method returns \" + actualOutput);\n\n        if (actualOutput == expectedOutput) {\n            System.out.println(\"PASS.\\n\");\n        } else {\n            System.out.println(\"FAIL.\\n\");\n        }\n    }\n    */\n    /**\n     * This method calculates whether the objects year is a leap year or not.\n     *\n     * @return boolean true for leap year and false for not a leap year.\n     */\n    private boolean isLeap() {\n        if (this.year % QUADRENNIAL == ZERO) {\n            if (this.year % CENTENNIAL == ZERO) {\n                return this.year % QUATERCENTENNIAL == ZERO;\n            } else {\n                return true;\n            }\n        } else {\n            return false;\n        }\n    }\n\n    /**\n     * This method calculates whether the given day in the date field is within the bounds of the number of days in the\n     * given month.\n     *\n     * @param monthLength the amount of days in a given month.\n     * @return boolean indicates true if the objects day field is within limits or returns false otherwise.\n     */\n    public boolean rightLength(int monthLength) {\n\n        return this.day <= monthLength && this.month >= ONE;\n    }\n\n    /**\n     * This method checks whether the given year is greater than 1900 and whether the objects month is correct, if the\n     * month is correct, the method checks whether day parameter is within bounds for the given month.\n     *\n     * @return boolean true if the date is valid and false otherwise\n     */\n    public boolean isValid() {\n        boolean yearType = isLeap();\n        int longMonth = 31;\n        int shortMonth = 30;\n        int leapMonth = 29;\n        int nonLeap = 28;\n        int minYear = 1900;\n\n\n        if (this.year < minYear) {\n            return false;\n        }\n\n        if (this.month == Calendar.JANUARY + 1 || this.month == Calendar.MARCH + 1 || this.month == Calendar.MAY + 1 ||\n                this.month == Calendar.JULY + 1 || this.month == Calendar.AUGUST + 1 || this.month == Calendar.OCTOBER\n                + 1 || this.month == Calendar.DECEMBER + 1) {\n            return rightLength(longMonth);\n        } else if (this.month == Calendar.APRIL + 1 || this.month == Calendar.JUNE + 1 ||\n                this.month == Calendar.SEPTEMBER + 1 || this.month == Calendar.NOVEMBER + 1) {\n            return rightLength(shortMonth);\n        }\n        if (isLeap() && this.month == Calendar.FEBRUARY + 1) {\n            return rightLength(leapMonth);\n        } else if (!isLeap() && this.month == Calendar.FEBRUARY + 1) {\n            return rightLength(nonLeap);\n        }\n        return false;\n    }\n\n    /**\n     * Returns the year parameter for the object.\n     *\n     * @return int representing the year.\n     */\n    public int getYear() {\n        return year;\n    }\n\n    /**\n     * This method is used to set the year parameter in the date object.\n     *\n     * @param year the year that the user wants to set.\n     */\n    public void setYear(int year) {\n        this.year = year;\n    }\n\n    /**\n     * Returns the day parameter of the date object.\n     *\n     * @return int returns the day parameter.\n     */\n    public int getDay() {\n        return day;\n    }\n\n    /**\n     * This object sets the day parameter of the date object.\n     *\n     * @param day the value to set in the date object.\n     */\n    public void setDay(int day) {\n        this.day = day;\n    }\n\n    /**\n     * Returns the month parameter of the date object.\n     *\n     * @return int returns the month parameter.\n     */\n    public int getMonth() {\n        return month;\n    }\n\n    /**\n     * This object sets the month parameter of the date object.\n     *\n     * @param month the value to set in the date object.\n     */\n    public void setMonth(int month) {\n        this.month = month;\n    }\n\n    /**\n     * This method overrides the compareTo method in the object superclass and is used to compare two date objects.\n     *\n     * @param other the object to be compared.\n     * @return 0 for equal to, -1 for less than, 1 for greater than.\n     */\n    @Override\n    public int compareTo(Date other) {\n        int lessThan = -1;\n        int greaterThan = 1;\n        int equal = 0;\n\n        if (this.year == other.getYear()) {\n            if (this.month == other.getMonth()) {\n                if (this.day == other.getDay()) {\n                    return equal;\n                } else if (this.day < other.getDay()) {\n                    return lessThan;\n                } else {\n                    return greaterThan;\n                }\n            } else if (this.month < other.getMonth()) {\n                return lessThan;\n            } else {\n                return greaterThan;\n            }\n        } else if (this.year < other.getYear()) {\n            return lessThan;\n        } else {\n            return greaterThan;\n        }\n    }\n\n    /**\n     * This method checks whether the given date is less than 16 years old.\n     *\n     * @param other the entered date that will be compared with the date object with no parameters since it represents\n     *              the current date.\n     * @return boolean true if the student is too young and false otherwise.\n     */\n    public boolean tooYoung(Date other) {\n\n        int ageLimit = 16;\n\n        if (this.year - other.getYear() == ageLimit) {\n            if (this.month == other.getMonth()) {\n                return this.day < other.getDay();\n            } else return this.month <= other.getMonth();\n        } else return this.year - other.getYear() < ageLimit;\n    }\n\n    /**\n     * This method overrides the superclass equals() methods and returns whether the given two date objects are equal.\n     *\n     * @param dateToCompare the date that needs to be compared.\n     * @return boolean true if equal false otherwise.\n     */\n    @Override\n    public boolean equals(Object dateToCompare) {\n\n        if (!(dateToCompare instanceof Date date)) {\n            return false;\n        }\n\n        return this.day == date.getDay() && this.month == date.getMonth() && this.year == date.getYear();\n    }\n\n    /**\n     * This method overrides the superclass toString() method and prints the string representation of the date object.\n     *\n     * @return string representation of date object\n     */\n    @Override\n    public String toString() {\n        return month + \"/\" + day + \"/\" + year;\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/manager/Date.java b/src/manager/Date.java
+--- a/src/manager/Date.java	(revision 8f6312ad4a3ebeb1bfdb4464c1a162fd0377a1e7)
++++ b/src/manager/Date.java	(date 1677535715275)
+@@ -42,72 +42,14 @@
+         this.year = Integer.parseInt(dateSplit[2]);
+     }
+ 
+-    /*
+-
+-     * This main method is serving as a testBed to test the isValid() class.
+-     *
+-     * @param args
+-
+-    public static void main(String[] args) {
+-        System.out.println("Date isValid() Testbed running... \n");
+-        boolean expectedOutput;
+-        boolean actualOutput;
+-        Date dateTest1 = new Date("11/21/800");
+-        expectedOutput = false;
+-        actualOutput = dateTest1.isValid();
+-        testResult(dateTest1, expectedOutput, actualOutput);
+-        Date dateTest2 = new Date("2/29/2003");
+-        expectedOutput = false;
+-        actualOutput = dateTest2.isValid();
+-        testResult(dateTest2, expectedOutput, actualOutput);
+-        Date dateTest3 = new Date("13/31/2003");
+-        expectedOutput = false;
+-        actualOutput = dateTest3.isValid();
+-        testResult(dateTest3, expectedOutput, actualOutput);
+-        Date dateTest4 = new Date("4/31/2003");
+-        expectedOutput = false;
+-        actualOutput = dateTest4.isValid();
+-        testResult(dateTest4, expectedOutput, actualOutput);
+-        Date dateTest5 = new Date("-1/2/2007");
+-        expectedOutput = false;
+-        actualOutput = dateTest5.isValid();
+-        testResult(dateTest5, expectedOutput, actualOutput);
+-        Date dateTest6 = new Date("1/2/2007");
+-        expectedOutput = true;
+-        actualOutput = dateTest6.isValid();
+-        testResult(dateTest6, expectedOutput, actualOutput);
+-        Date dateTest7 = new Date("5/1/1996");
+-        expectedOutput = true;
+-        actualOutput = dateTest7.isValid();
+-        testResult(dateTest7, expectedOutput, actualOutput);
+-    }
+-
+-
+-     * This is a helper method for the testBed to help determine whether the expected output matches the expected input.
+-     *
+-     * @param date           date object to test.
+-     * @param expectedOutput the output the user expects to see.
+-     * @param actualOutput   the output returned.
+-
+-    private static void testResult(Date date, boolean expectedOutput, boolean actualOutput) {
+-        System.out.println(date.toString());
+-        System.out.println("Date isValid() method returns " + actualOutput);
+-
+-        if (actualOutput == expectedOutput) {
+-            System.out.println("PASS.\n");
+-        } else {
+-            System.out.println("FAIL.\n");
+-        }
+-    }
+-    */
+     /**
+      * This method calculates whether the objects year is a leap year or not.
+      *
+      * @return boolean true for leap year and false for not a leap year.
+      */
+     private boolean isLeap() {
+-        if (this.year % QUADRENNIAL == ZERO) {
+-            if (this.year % CENTENNIAL == ZERO) {
++        if ( this.year % QUADRENNIAL == ZERO ) {
++            if ( this.year % CENTENNIAL == ZERO ) {
+                 return this.year % QUATERCENTENNIAL == ZERO;
+             } else {
+                 return true;
+@@ -125,7 +67,6 @@
+      * @return boolean indicates true if the objects day field is within limits or returns false otherwise.
+      */
+     public boolean rightLength(int monthLength) {
+-
+         return this.day <= monthLength && this.month >= ONE;
+     }
+ 
+@@ -144,21 +85,21 @@
+         int minYear = 1900;
+ 
+ 
+-        if (this.year < minYear) {
++        if ( this.year < minYear ) {
+             return false;
+         }
+ 
+-        if (this.month == Calendar.JANUARY + 1 || this.month == Calendar.MARCH + 1 || this.month == Calendar.MAY + 1 ||
++        if ( this.month == Calendar.JANUARY + 1 || this.month == Calendar.MARCH + 1 || this.month == Calendar.MAY + 1 ||
+                 this.month == Calendar.JULY + 1 || this.month == Calendar.AUGUST + 1 || this.month == Calendar.OCTOBER
+-                + 1 || this.month == Calendar.DECEMBER + 1) {
++                + 1 || this.month == Calendar.DECEMBER + 1 ) {
+             return rightLength(longMonth);
+-        } else if (this.month == Calendar.APRIL + 1 || this.month == Calendar.JUNE + 1 ||
+-                this.month == Calendar.SEPTEMBER + 1 || this.month == Calendar.NOVEMBER + 1) {
++        } else if ( this.month == Calendar.APRIL + 1 || this.month == Calendar.JUNE + 1 ||
++                this.month == Calendar.SEPTEMBER + 1 || this.month == Calendar.NOVEMBER + 1 ) {
+             return rightLength(shortMonth);
+         }
+-        if (isLeap() && this.month == Calendar.FEBRUARY + 1) {
++        if ( isLeap() && this.month == Calendar.FEBRUARY + 1 ) {
+             return rightLength(leapMonth);
+-        } else if (!isLeap() && this.month == Calendar.FEBRUARY + 1) {
++        } else if ( !isLeap() && this.month == Calendar.FEBRUARY + 1 ) {
+             return rightLength(nonLeap);
+         }
+         return false;
+@@ -230,21 +171,21 @@
+         int greaterThan = 1;
+         int equal = 0;
+ 
+-        if (this.year == other.getYear()) {
+-            if (this.month == other.getMonth()) {
+-                if (this.day == other.getDay()) {
++        if ( this.year == other.getYear() ) {
++            if ( this.month == other.getMonth() ) {
++                if ( this.day == other.getDay() ) {
+                     return equal;
+-                } else if (this.day < other.getDay()) {
++                } else if ( this.day < other.getDay() ) {
+                     return lessThan;
+                 } else {
+                     return greaterThan;
+                 }
+-            } else if (this.month < other.getMonth()) {
++            } else if ( this.month < other.getMonth() ) {
+                 return lessThan;
+             } else {
+                 return greaterThan;
+             }
+-        } else if (this.year < other.getYear()) {
++        } else if ( this.year < other.getYear() ) {
+             return lessThan;
+         } else {
+             return greaterThan;
+@@ -262,8 +203,8 @@
+ 
+         int ageLimit = 16;
+ 
+-        if (this.year - other.getYear() == ageLimit) {
+-            if (this.month == other.getMonth()) {
++        if ( this.year - other.getYear() == ageLimit ) {
++            if ( this.month == other.getMonth() ) {
+                 return this.day < other.getDay();
+             } else return this.month <= other.getMonth();
+         } else return this.year - other.getYear() < ageLimit;
+@@ -278,7 +219,7 @@
+     @Override
+     public boolean equals(Object dateToCompare) {
+ 
+-        if (!(dateToCompare instanceof Date date)) {
++        if ( !( dateToCompare instanceof Date date ) ) {
+             return false;
+         }
+ 
+Index: src/manager/RosterTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package manager;\n\nimport org.junit.Test;\n\nimport static org.junit.Assert.*;\n\npublic class RosterTest {\n\n    @Test\n    public void add() {\n\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/manager/RosterTest.java b/src/manager/RosterTest.java
+--- a/src/manager/RosterTest.java	(revision 8f6312ad4a3ebeb1bfdb4464c1a162fd0377a1e7)
++++ b/src/manager/RosterTest.java	(date 1677535724960)
+@@ -1,13 +1,60 @@
+ package manager;
+-
+ import org.junit.Test;
+-
++import student.*;
+ import static org.junit.Assert.*;
+ 
++/**
++ * This class is a test class that tests add() method in roster class for international and tristate student.
++ * @author Raghunandan Wable
++ * @author Srikumar Avirneni
++ */
+ public class RosterTest {
+ 
++    /**
++     * Test condition that tests add() method for valid international student.
++     */
++    @Test
++    public void testAddValidInternational() {
++        Roster roster = new Roster();
++        Student student = new International(new Profile("Mill", "Doctor", new Date("5/1/1996")),
++                Major.CS, 30, false);
++        boolean added = roster.add(student);
++        assertTrue(added);
++    }
++
++    /**
++     * Test condition that tests add() method for invalid international student.
++     */
+     @Test
+-    public void add() {
++    public void testAddInvalidInternational() {
++        Roster roster = new Roster();
++        Student student = new International(new Profile("Mill", "Doctor", new Date("-5/1/1996")),
++                Major.CS, -30, false);
++        boolean added = roster.add(student);
++        assertFalse(added);
++    }
+ 
++    /**
++     * Test condition that tests add() method for valid tristate student.
++     */
++    @Test
++    public void testAddValidTriState() {
++        Roster roster = new Roster();
++        Student student = new TriState(new Profile("John", "Deal", new Date("5/1/1996")),
++                Major.BAIT, 64, "NY");
++        boolean added = roster.add(student);
++        assertTrue(added);
++    }
++
++    /**
++     * Test condition that tests add() method for invalid tristate student.
++     */
++    @Test
++    public void testAddInvalidTriState() {
++        Roster roster = new Roster();
++        Student student = new TriState(new Profile("Jane", "Miller", new Date("5/1/1996")),
++                Major.BAIT, 60, "TX");
++        boolean added = roster.add(student);
++        assertFalse(added);
+     }
+ }
+\ No newline at end of file
+Index: src/manager/Roster.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package manager;\nimport student.Profile;\nimport student.Student;\nimport student.Major;\nimport student.Resident;\n\n/**\n * Creates a Student roster object and implements all the major functionalities like add, remove, modify and sorting.\n *\n * @author Raghunandan Wable\n * @author Srikumar Avirneni\n */\npublic class Roster {\n\n    private Student[] roster; //student roster array\n    private int size; //size of student roster array\n    private static final int NOT_FOUND = -1;\n\n    private static final int ONE = 1;\n    private static final int NEGATIVE_ONE = -1;\n    private static final int ZERO = 0;\n\n    public boolean empty() {\n        return this.size < ONE;\n    }\n\n    public Student[] getRoster() {\n        return this.roster;\n    }\n\n    /**\n     * Searches for the given student in the roster and returns its index in the array if present.\n     *\n     * @param student the student that needs to be searched for\n     * @return if student is found will return the position of the student, returns NOT_FOUND otherwise.\n     */\n    private int find(Student student) {\n\n        for (int i = ZERO; i < size; i++) {\n            if (roster[i] == null) {\n                break;\n            }\n            if (roster[i].equals(student)) {\n                return i;\n            }\n        }\n        return NOT_FOUND;\n    }\n\n    public int getSize(){\n        return this.size;\n    }\n\n\n    public boolean updateScholarshipStudent( Student rStudent, int scholarship ){\n        for (int i = 0; i < roster.length; i++) {\n            if ( roster[i] == null ) {\n                break;\n            }\n            if (roster[i].equals(rStudent)) {\n                Resident resStudent = (Resident) roster[i]; // cast the object to Subclass\n                resStudent.setScholarship(scholarship); // call the subclass method\n                return true;\n            }\n        }\n        return false;\n    }\n\n\n\n/**\n * Method increases the array capacity by 4 if the array is full.\n */\n    private void grow() {\n        if (this.size == ZERO) {\n            Student[] rosterIncrease = new Student[4];\n            this.size += 4;\n            this.roster = rosterIncrease;\n\n        } else {\n            Student[] rosterIncrease = new Student[this.size + 4];\n            if (this.size >= 0) System.arraycopy(this.roster, 0, rosterIncrease, 0, this.size);\n            this.size += 4;\n            this.roster = rosterIncrease;\n\n        }\n\n    }\n\n    /**\n     * helper method to add student after last student object in roster array\n     *\n     * @param student student that needs to be added.\n     */\n    private void addStudent(Student student) {\n        for (int i = ZERO; i < size; i++) {\n            if (roster[i] == null) {\n                roster[i] = student;\n                break;\n            }\n        }\n    }\n\n    /**\n     * Checks for the size of the roster array and calls the add student method for adding the student after\n     * last student.\n     *\n     * @param student the student that needs to be added.\n     * @return true if student has been added, false otherwise.\n     */\n    public boolean add(Student student) {\n\n        if (this.size <= ZERO || this.roster == null || roster[size - 1] != null) {\n            grow();\n            addStudent(student);\n            return true;\n        } else {\n            addStudent(student);\n            return true;\n        }\n    }\n\n    /**\n     * Rearranges the roster when a student has been removed.\n     *\n     * @param position the position from which rearrangement of roster must be done.\n     */\n    private void rearrangeRoster(int position) {\n        for (int i = position; i < size - 1; i++) {\n            roster[i] = roster[i + 1];\n        }\n    }\n\n    /**\n     * Removes the student from the roster and calls rearrangeRoster method so that the roster is rearranged without\n     * empty space.\n     *\n     * @param student the student that needs to be removed\n     * @return true if the student has been found and removed, false otherwise.\n     */\n    public boolean remove(Student student) {\n        if (this.size < ONE) {\n            return false;\n        }\n        int i = find(student);\n        if (i != NOT_FOUND) {\n            roster[i] = null;\n            rearrangeRoster(i);\n            return true;\n        }\n        return false;\n    }\n\n    /**\n     * This method creates an array that contains all the students from a given school.\n     *\n     * @param schoolName the school name from which the student names must be listed.\n     * @return a Student array of students from that school.\n     */\n    public Student[] listBySchool(String schoolName) {\n\n        Student[] schoolList = new Student[this.size];\n        int counter = ZERO;\n\n        for (int i = ZERO; i < this.size; i++) {\n\n            if (roster[i] == null) {\n                break;\n            }\n\n            String currentSchoolName = roster[i].getMajor().getSchoolName();\n\n            if (currentSchoolName.equals(schoolName)) {\n                schoolList[counter] = roster[i];\n                counter++;\n            }\n\n        }\n        return schoolList;\n    }\n\n    /**\n     * Changes the major of student that has been entered.\n     *\n     * @param profile The profile for which major needs to be changed.\n     * @param major   The new major that should be replaced with the existing major.\n     */\n    public void changeMajor(Profile profile, String major) {\n        if (containsProfile(profile) == null) {\n            return;\n        }\n        Student toChange = containsProfile(profile);\n        int index = find(toChange);\n        roster[index].setMajor(Major.valueOf(major));\n    }\n\n    /**\n     * Checks if the student exists in the roster array.\n     * @param student the student that needs to be checked for in the roster.\n     * @return true if student exists in the roster, false otherwise.\n     */\n    public boolean contains(Student student) {\n        if (this.size < ONE) {\n            return false;\n        }\n        int i = ZERO;\n        while (i < size) {\n            if (this.roster[i] == null) {\n                break;\n            }\n            if (roster[i].equals(student)) {\n                return true;\n            }\n            i++;\n        }\n        return false;\n    }\n\n    /**\n     * Checks if the given profile exists in the student roster.\n     *\n     * @param profile the profile that needs to be searched for the roster.\n     * @return true if profile exists, false otherwise.\n     */\n    public Student containsProfile(Profile profile) {\n\n        if (this.size < ONE) {\n            return null;\n        }\n\n        int i = ZERO;\n        while (i < size) {\n\n            if (this.roster[i] == null) {\n                break;\n            }\n\n            if (roster[i].getProfile().equals(profile)) {\n                return roster[i];\n            }\n            i++;\n        }\n        return null;\n    }\n\n    /**\n     * Sorts the roster array by student last name, first name and DOB.\n     *\n     * @param students    the array that needs to be sorted.\n     * @param arrayLength length of the array that is being sorted.\n     * @return sorted array of students.\n     */\n    public Student[] sortByName(Student[] students, int arrayLength) {\n\n        for (int i = ZERO; i < arrayLength - 1; i++) {\n\n            if (students[i] == null) {\n                break;\n            }\n\n            int pointer = i;\n\n            for (int j = i + 1; j < arrayLength; j++) {\n                if (students[j] == null) {\n                    break;\n                }\n                Profile pointerProfile = students[pointer].getProfile();\n                Profile studentProfile = students[j].getProfile();\n                int compare = studentProfile.compareTo(pointerProfile);\n                if (compare < ZERO) {\n                    pointer = j;\n                }\n            }\n            Student tempValue = students[pointer];\n            students[pointer] = students[i];\n            students[i] = tempValue;\n        }\n        return students;\n    }\n\n    /**\n     * Sorts the roster array students first name, last name and dob using sortByName helper method\n     */\n    public void print() {\n\n        if (this.size < ONE) {\n            System.out.println(\"Student roster is empty!\");\n            return;\n        }\n        if (this.roster[1] == null) {\n            System.out.println(this.roster[ZERO].toString());\n            return;\n        }\n\n        System.out.println(\"** Student roster sorted by last name, first name, DOB **\");\n        Student[] sortedArray = sortByName(this.roster, size);\n\n        for (Student student : sortedArray) {\n            if (student == null) {\n                break;\n            }\n\n            System.out.println(student);\n        }\n        System.out.println(\"* end of roster *\");\n    }\n\n    /**\n     * Compare one major enum with other one.\n     *\n     * @param major1 first major that is being compared.\n     * @param major2 second major that is being compared with first one.\n     * @return value less than 0 if major 1 is less than major 2, value greater than 0 if major 1 is greater than\n     * major 2 and zero if major 1 and major 2 are same.\n     */\n    public int compareMajor(Major major1, Major major2) {\n        String schoolName1 = major1.getSchoolName();\n        String schoolName2 = major2.getSchoolName();\n\n        int schoolCompare = schoolName1.compareTo(schoolName2);\n\n        if (schoolCompare == ZERO) {\n            return major1.toString().compareTo(major2.toString());\n        }\n        return schoolCompare;\n    }\n\n    /**\n     * print roster sorted by school, major\n     */\n    public void printBySchoolMajor() {\n\n        if (this.size < ONE) {\n            System.out.println(\"Student roster is empty!\");\n            return;\n        }\n        if (this.roster[ONE] == null) {\n            System.out.println(this.roster[0].toString());\n            return;\n        }\n\n\n        System.out.println(\"** Student roster sorted by school, major **\");\n        if (this.size < ONE) {\n            System.out.println(\"Student roster is empty!\");\n            return;\n        }\n        if (roster[ONE] == null) {\n            System.out.println(roster[ZERO].toString());\n            return;\n        }\n        for (int i = ZERO; i < size - 1; i++) {\n            if (roster[i] == null) {\n                break;\n            }\n            int pointer = i;\n            for (int j = i + 1; j < size; j++) {\n                if (roster[j] == null) {\n                    break;\n                }\n                Major tempMajor = roster[pointer].getMajor();\n                Major iterateMajor = roster[j].getMajor();\n                if (compareMajor(iterateMajor, tempMajor) < ZERO) {\n                    pointer = j;\n                }\n            }\n            Student tempStudent = roster[pointer];\n            roster[pointer] = roster[i];\n            roster[i] = tempStudent;\n        }\n        for (Student student : roster) {\n            if (student == null) {\n                break;\n            }\n            System.out.println(student);\n        }\n        System.out.println(\"* end of roster *\");\n    }\n\n    public void updateStudentCreds(Profile profile, int credits) {\n        for ( int i = 0; i < this.size; i++ ) {\n            if ( roster[i] == null ) {\n                break;\n            }\n            if( roster[i].getProfile().equals(profile)) {\n                roster[i].setCreditCompleted(credits);\n            }\n        }\n    }\n\n\n    /**\n     * prints roster by standing.\n     */\n    public void printByStanding() {\n        if (this.size < ONE) {\n            System.out.println(\"Student roster is empty!\");\n            return;\n        }\n        if (roster[ONE] == null) {\n            System.out.println(roster[0].toString());\n            return;\n        }\n        System.out.println(\"** Student roster sorted by standing **\");\n        for (int i = ZERO; i < size - 1; i++) {\n            if (roster[i] == null) {\n                break;\n            }\n            int pointer = i;\n            for (int j = i + 1; j < size; j++) {\n                if (roster[j] == null) {\n                    break;\n                }\n                String currentStanding = roster[j].standing(roster[j].getCreditCompleted());\n                String tempStanding = roster[pointer].standing(roster[pointer].getCreditCompleted());\n                if (currentStanding.compareTo(tempStanding) < ZERO) {\n                    pointer = j;\n                }\n            }\n            Student tempStudent = roster[pointer];\n            roster[pointer] = roster[i];\n            roster[i] = tempStudent;\n        }\n\n\n        for (Student student : roster) {\n            if (student == null) {\n                break;\n            }\n\n            System.out.println(student);\n        }\n        System.out.println(\"* end of roster *\");\n    }\n\n    public String getStatus(Profile profile) {\n        for ( int i = 0; i < size; i++) {\n            if ( roster[i].getProfile().equals(profile) ) {\n                return roster[i].getStatus();\n            }\n        }\n        return null;\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/manager/Roster.java b/src/manager/Roster.java
+--- a/src/manager/Roster.java	(revision 8f6312ad4a3ebeb1bfdb4464c1a162fd0377a1e7)
++++ b/src/manager/Roster.java	(date 1677535724964)
+@@ -101,6 +101,23 @@
+         }
+     }
+ 
++    public boolean statusChecker( String status) {
++        if ( status.equals("Resident") ) {
++            return true;
++        } else if (status.equals("Non-Resident")) {
++            return true;
++        } else if ( status.equals("International student study abroad") ) {
++            return true;
++        } else if (  status.equals("International student") ) {
++            return true;
++        } else if ( status.equals("Tri-state NY") ) {
++            return true;
++        } else if ( status.equals("Tri-state CT") ) {
++            return true;
++        }
++        return false;
++    }
++
+     /**
+      * Checks for the size of the roster array and calls the add student method for adding the student after
+      * last student.
+@@ -110,6 +127,16 @@
+      */
+     public boolean add(Student student) {
+ 
++        String status = student.getStatus();
++
++        if ( !(student.getProfile().getDob()).isValid() ) {
++            return false;
++        } else if ( !statusChecker(status) ) {
++            return false;
++        } else if (student.getCreditCompleted() < 0) {
++            return false;
++        }
++
+         if (this.size <= ZERO || this.roster == null || roster[size - 1] != null) {
+             grow();
+             addStudent(student);

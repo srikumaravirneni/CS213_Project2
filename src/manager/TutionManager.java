@@ -1,15 +1,13 @@
 package manager;
 import student.*;
 import java.io.File;
-
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * Roster manager class is the class that takes commands from the user and performs the necessary action on the roster
- * object based on the command entered.
+ * Tuition manager class is the class that takes commands from the user and performs the necessary action on the roster
+ * and enrollment object based on the command entered.
  * This class calls necessary methods from different classes to perform its operations.
  *
  * @author Raghunandan Wable
@@ -62,7 +60,7 @@ public class TutionManager {
             studentRoster.printByStanding();
         } else if (inputText.equals("PC")) {
             studentRoster.printBySchoolMajor();
-        }  else if ((inputText.substring(ZERO, TWO)).equals("LS")) {
+        }  else if ( (inputText.substring(ZERO, TWO)).equals("LS") ) {
             String[] input = inputText.split("\\s+");
             try {
                 File textFile = new File(input[1]);
@@ -74,7 +72,9 @@ public class TutionManager {
         }
     }
 
-
+    /**
+     * The method prints the students in the enrollment array after adding thee enrolled credits to total credits.
+     */
     public void finalAddPrint() {
         EnrollStudent[] tempArray = enrollment.getEnrollStudents();
         int size = enrollment.getSize();
@@ -101,9 +101,12 @@ public class TutionManager {
         }
     }
 
+    /**
+     * Prints student enrollment array along with tuition
+     */
     public void printWithTuition(){
         DecimalFormat dFormat = new DecimalFormat("#,###.00");
-        if (studentRoster.empty() ) {
+        if ( studentRoster.empty() ) {
             System.out.println("Student roster is empty!");
             return;
         }
@@ -119,12 +122,17 @@ public class TutionManager {
             int enrolledCred = studentArr[i].getCreditsEnrolled();
             double tuitionDue = studentRoster.containsProfile(tempProfile).tuitionDue(enrolledCred);
             System.out.println( tempProfile.toString() + " (" + status + ")" + " enrolled " + enrolledCred +
-                    " credits: "  + "tuition due: $" + dFormat.format(tuitionDue));
+                    " credits: "  + "tuition due: $" + dFormat.format(tuitionDue) );
         }
         System.out.println("* end of tuition due *");
 
     }
 
+    /**
+     * The method checks if the amount entered is valid or not and returns true or false.
+     * @param userInput the amount entered by user.
+     * @return false if the amount entered is not valid otherwise true.
+     */
     public boolean validAmount(String userInput){
         int maxAmount = 10000;
         String[] studentInfo = userInput.split("\\s+");
@@ -135,15 +143,19 @@ public class TutionManager {
                 return false;
             }
             return true;
-        } catch (NumberFormatException e) {
+        } catch ( NumberFormatException e ) {
             System.out.println("Amount is not an integer.");
             return false;
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch ( ArrayIndexOutOfBoundsException e ) {
             System.out.println ("0: invalid amount.");
             return false;
         }
     }
 
+    /**
+     * The method updates scholarship for the enrolled student.
+     * @param inputText the value that needs to be added to the scholarship.
+     */
     public void updateScholarship(String inputText){
 
         String[] studentInfo = inputText.split("\\s+");
@@ -181,6 +193,11 @@ public class TutionManager {
         }
     }
 
+    /**
+     *
+     * @param student the credits of student that needs to be verified if they are valid or not.
+     * @return true if number of credits is valid otherwise false.
+     */
     public boolean correctCredits(EnrollStudent student){
         int minCredits = 3;
         int maxCredits = 24;
@@ -220,7 +237,10 @@ public class TutionManager {
         return true;
     }
 
-
+    /**
+     * Method enrolls the student into enrollment array if it is valid and doesn't preexist.
+     * @param inputText The input value of a student that needs to be added.
+     */
     public void enrollStudent( String inputText ){
         String[] studentInfo = inputText.split("\\s+");
 
@@ -251,10 +271,9 @@ public class TutionManager {
             System.out.println(tempProfile.toString() + " enrolled " + credits + " credits");
             return;
         }
-
         enrollment.add(student);
         System.out.println(tempProfile.toString() + " enrolled " + credits + " credits");
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch ( ArrayIndexOutOfBoundsException e ) {
             System.out.println("Missing data in line command.");
         }
     }
@@ -268,10 +287,10 @@ public class TutionManager {
     private boolean dateCheck(Date date) {
         Date currentDate = new Date();
 
-        if (date.compareTo(currentDate) >= ZERO || !date.isValid()) {
+        if ( date.compareTo(currentDate) >= ZERO || !date.isValid() ) {
             System.out.println("DOB invalid: " + date.toString() + " not a valid calendar date!");
             return false;
-        } else if (currentDate.tooYoung(date)) {
+        } else if ( currentDate.tooYoung(date) ) {
             System.out.println("DOB invalid: " + date.toString() + " younger than 16 years old.");
             return false;
         } else {
@@ -279,6 +298,10 @@ public class TutionManager {
         }
     }
 
+    /**
+     * The student that needs to be dropped from enrollment array.
+     * @param inputText the student entered by user that needs to be removed from enrollment if it exists.
+     */
     public void dropEnrollment(String inputText) {
         String[] studentInfo = inputText.split("\\s+");
 
@@ -297,6 +320,10 @@ public class TutionManager {
         System.out.println(tempProfile.toString() + " dropped.");
     }
 
+    /**
+     * The student that needs to be removed from roster if it exists.
+     * @param inputText The student that needs to be removed from roster if it exists.
+     */
     public void dropRoster(String inputText) {
         String[] studentInfo = inputText.split("\\s+");
 
@@ -335,6 +362,11 @@ public class TutionManager {
 
     }
 
+    /**
+     * Checks if the credits entered is valid or not.
+     * @param credits credits value that needs to be checked.
+     * @return true if credits value is true otherwise false.
+     */
     private boolean isPositive( int credits ) {
         if ( credits < ZERO ) {
             return false;
@@ -349,15 +381,18 @@ public class TutionManager {
      * @return true if the major is valid, false otherwise.
      */
     private boolean validMajor(String major) {
-        for (Major majorTypes : Major.values()) {
-            if (majorTypes.name().equals(major.toUpperCase())) {
+        for ( Major majorTypes : Major.values() ) {
+            if ( majorTypes.name().equals(major.toUpperCase()) ) {
                 return true;
             }
         }
         return false;
     }
 
-
+    /**
+     * Adding a resident student to the roster if it doesn't exist.
+     * @param details the student details entered by user that needs to be added.
+     */
     private void addResStudent(String details) {
         String[] studentInfo = details.split("\\s+");
 
@@ -365,7 +400,7 @@ public class TutionManager {
             Date date = new Date(studentInfo[3]);
             int credits;
 
-            if (!isNumeric(studentInfo[5])) {
+            if ( !isNumeric(studentInfo[5]) ) {
                 System.out.println("Credits completed invalid: not an integer!");
                 return;
             } else {
@@ -374,35 +409,37 @@ public class TutionManager {
             if ( !isPositive(credits) ) {
                 System.out.println("Credits completed invalid: cannot be negative!");
                 return;
-            } else if (!dateCheck(date)) {
+            } else if ( !dateCheck(date) ) {
                 return;
-            } else if (!validMajor(studentInfo[4])) {
+            } else if ( !validMajor(studentInfo[4]) ) {
                 return;
             }
             String major = studentInfo[4].toUpperCase();
             Profile resProfile = new Profile ( studentInfo[2], studentInfo[1], date );
             student.Resident resStudent = new student.Resident (resProfile, Major.valueOf(major), credits, 0);
-            if (studentRoster.contains(resStudent)) {
+            if ( studentRoster.contains(resStudent) ) {
                 System.out.println( resProfile.toString() + " is already in the roster.");
                 return;
             }
             studentRoster.add(resStudent);
             EnrollStudent newEnroll = new EnrollStudent(resProfile, credits);
             System.out.println( resProfile.toString() + " added to the roster.");
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch ( ArrayIndexOutOfBoundsException e ) {
             System.out.println("Missing data in line command.");
         }
-
     }
 
+    /**
+     * Adding a non-resident student to the roster if it doesn't exist.
+     * @param details the student details entered by user that needs to be added.
+     */
     private void addNonResStudent(String details){
         String[] studentInfo = details.split("\\s+");
-
         try {
             Date date = new Date(studentInfo[3]);
             int credits;
 
-            if (!isNumeric(studentInfo[5])) {
+            if ( !isNumeric(studentInfo[5]) ) {
                 System.out.println("Credits completed invalid: not an integer!");
                 return;
             } else {
@@ -411,38 +448,49 @@ public class TutionManager {
             if ( !isPositive(credits) ) {
                 System.out.println("Credits completed invalid: cannot be negative!");
                 return;
-            } else if (!dateCheck(date)) {
+            } else if ( !dateCheck(date) ) {
                 return;
-            } else if (!validMajor(studentInfo[4])) {
+            } else if ( !validMajor(studentInfo[4]) ) {
                 return;
             }
             String major = studentInfo[4].toUpperCase();
             Profile nResProfile = new Profile ( studentInfo[2], studentInfo[1], date );
             NonResident nResStudent = new NonResident (nResProfile, Major.valueOf(major), credits);
-            if (studentRoster.contains(nResStudent)) {
+            if ( studentRoster.contains(nResStudent) ) {
                 System.out.println( nResProfile.toString() + " is already in the roster.");
                 return;
             }
             studentRoster.add(nResStudent);
             EnrollStudent newEnroll = new EnrollStudent(nResProfile, credits);
             System.out.println( nResProfile.toString() + " added to the roster.");
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch ( ArrayIndexOutOfBoundsException e ) {
             System.out.println("Missing data in line command.");
         }
 
     }
 
 
-
+    /**
+     * Helper method to check if the tristate entered is valid or not.
+     * @param state the state entered by user that needs to be checked.
+     * @return true if state is valid, otherwise false.
+     */
     private boolean validState(String state) {
         if ( state.equals("NY") || state.equals("CT") ) {
 
             return true;
+        } else {
+            System.out.println(state + ": Invalid state code.");
+            return false;
         }
-        System.out.println(state + ": Invalid state code.");
-        return false;
+
     }
 
+    /**
+     * Checks if all the parameters are present in details when adding a tristate student.
+     * @param details the details od student that needs to be checked.
+     * @return true if all parameters exist in details otherwise false.
+     */
     private boolean triStateError(String details) {
         String[] studentInfo = details.split("\\s+");
         String state;
@@ -451,7 +499,6 @@ public class TutionManager {
         Date date;
         String major;
         String credits;
-
 
         try {
             lName = studentInfo[2];
@@ -465,13 +512,17 @@ public class TutionManager {
         }
         try {
             state = studentInfo[6];
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch ( ArrayIndexOutOfBoundsException e ) {
             System.out.println("Missing the state code.");
             return true;
         }
         return false;
     }
 
+    /**
+     * Adding a tristate student to the roster
+     * @param details the student details entered by user that needs to be added.
+     */
     private void addTriStateStudent(String details){
         String[] studentInfo = details.split("\\s+");
 
@@ -482,7 +533,7 @@ public class TutionManager {
             String state = studentInfo[6].toUpperCase();
             String major = studentInfo[4];
             Date date = new Date(studentInfo[3]);
-            if (!isNumeric(studentInfo[5])) {
+            if ( !isNumeric(studentInfo[5]) ) {
                 System.out.println("Credits completed invalid: not an integer!");
                 return;
             } else {
@@ -491,9 +542,9 @@ public class TutionManager {
             if ( !isPositive(creditsTaken) ) {
                 System.out.println("Credits completed invalid: cannot be negative!");
                 return;
-            } else if (!dateCheck(new Date(studentInfo[3]))) {
+            } else if ( !dateCheck(new Date(studentInfo[3])) ) {
                 return;
-            } else if (!validMajor(studentInfo[4])) {
+            } else if ( !validMajor(studentInfo[4]) ) {
                 return;
             } else if ( !validState(state) ) {
                 return;
@@ -501,7 +552,7 @@ public class TutionManager {
             major = studentInfo[4].toUpperCase();
             Profile triProfile = new Profile ( studentInfo[2], studentInfo[1], date );
             TriState triStudent = new TriState ( triProfile, Major.valueOf(major), creditsTaken, state );
-            if (studentRoster.contains(triStudent)) {
+            if ( studentRoster.contains(triStudent) ) {
                 System.out.println( triProfile.toString() + " is already in the roster.");
                 return;
             }
@@ -510,6 +561,11 @@ public class TutionManager {
             System.out.println( triProfile.toString() + " added to the roster.");
     }
 
+    /**
+     * Checks if the student is study abroad international student or not.
+     * @param studentInfo the student that needs to be checked.
+     * @return true if student is a study abroad student otherwise false.
+     */
     public boolean isStudyAbroad(String[] studentInfo) {
 
         try {
@@ -519,19 +575,23 @@ public class TutionManager {
                 return false;
             }
             return false;
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch ( ArrayIndexOutOfBoundsException e ) {
             return false;
         }
 
     }
 
+    /**
+     * Adding an international student to the roster
+     * @param details the student details entered by user that needs to be added.
+     */
     public void addInternationalStudent(String details) {
         String[] studentInfo = details.split("\\s+");
         boolean studyAbroad;
         try {
             Date date = new Date(studentInfo[3]);
             int credits;
-            if (!isNumeric(studentInfo[5])) {
+            if ( !isNumeric(studentInfo[5]) ) {
                 System.out.println("Credits completed invalid: not an integer!");
                 return;
             } else {
@@ -540,9 +600,9 @@ public class TutionManager {
             if ( !isPositive(credits) ) {
                 System.out.println("Credits completed invalid: cannot be negative!");
                 return;
-            } else if (!dateCheck(date)) {
+            } else if ( !dateCheck(date) ) {
                 return;
-            } else if (!validMajor(studentInfo[4])) {
+            } else if ( !validMajor(studentInfo[4]) ) {
                 return;
             }
             studyAbroad = isStudyAbroad(studentInfo);
@@ -550,7 +610,7 @@ public class TutionManager {
             Profile interProfile = new Profile ( studentInfo[2], studentInfo[1], date );
             International interStudent = new International ( interProfile, Major.valueOf(major), credits,
                     studyAbroad );
-            if (studentRoster.contains(interStudent)) {
+            if ( studentRoster.contains(interStudent) ) {
                 System.out.println( interProfile.toString() + " is already in the roster.");
                 return;
             }
@@ -573,10 +633,10 @@ public class TutionManager {
         Profile profile = new Profile(studentInfo[2], studentInfo[1], new Date(studentInfo[3]));
         String major = studentInfo[4];
 
-        if (studentRoster.containsProfile(profile) == null) {
+        if ( studentRoster.containsProfile(profile) == null ) {
             System.out.println(profile.toString() + " " + "is not in the roster.");
 
-        } else if (validMajor(studentInfo[4])) {
+        } else if ( validMajor(studentInfo[4]) ) {
             studentRoster.changeMajor(profile, major);
             System.out.println(profile.toString() + " major changed to " + major);
 
@@ -585,7 +645,11 @@ public class TutionManager {
         }
     }
 
-
+    /**
+     * The method reads student from a text file and adds them to roster.
+     * @param textFile the file that has the list of students that is being added to roster.
+     * @throws FileNotFoundException if the file doesn't exist.
+     */
     private void listStudent(File textFile) throws FileNotFoundException {
 
         Scanner scanner = new Scanner(textFile);
@@ -633,29 +697,28 @@ public class TutionManager {
         System.out.println("Tuition Manager running...");
         Scanner input = new Scanner(System.in);
 
-        while (input.hasNextLine()) {
+        while ( input.hasNextLine() ) {
 
             String inputText = input.nextLine();
 
             try {
-                if (inputText.equals("")) {
+                if ( inputText.equals("") ) {
                     continue;
-                } else if (inputText.substring(ZERO, ONE).equals("Q")) {
+                } else if ( inputText.substring(ZERO, ONE).equals("Q")  ) {
                     System.out.println("Tuition Manager terminated.");
                     System.exit(ZERO);
-                } else if (inputText.substring(ZERO, ONE).equals("R") || inputText.substring(ZERO, ONE).equals("D") ||
+                } else if ( inputText.substring(ZERO, ONE).equals("R") || inputText.substring(ZERO, ONE).equals("D") ||
                         inputText.equals("P") || inputText.equals("PS") ||  inputText.equals("SE") || inputText.substring(ZERO, ONE).equals("E") ||
                         inputText.substring(ZERO, ONE).equals("S") || inputText.equals("PC") || inputText.substring(ZERO, TWO).equals("LS") ||
                         inputText.substring(ZERO, ONE).equals("C") || inputText.substring(ZERO, TWO).equals("AR") ||
                         inputText.substring(ZERO, TWO).equals("AN") || inputText.substring(ZERO, TWO).equals("AT") ||
                         inputText.substring(ZERO, TWO).equals("AI") || inputText.substring(ZERO, TWO).equals("PT") ||
-                        inputText.substring(ZERO, TWO).equals("PE")
-                ) {
+                        inputText.substring(ZERO, TWO).equals("PE") ) {
                     input(inputText);
                 } else {
                     System.out.println(inputText + " " + "is an invalid command!");
                 }
-            } catch (StringIndexOutOfBoundsException e) {
+            } catch ( StringIndexOutOfBoundsException e ) {
                 System.out.println(inputText + " " + "is an invalid command!");
             }
 
